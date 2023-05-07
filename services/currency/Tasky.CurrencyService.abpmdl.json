@@ -1,0 +1,79 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {},
+      "host": {}
+    }
+  },
+  "packages": {
+    "Tasky.CurrencyService.Domain.Shared": {
+      "path": "src/Tasky.CurrencyService.Domain.Shared/Tasky.CurrencyService.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "Tasky.CurrencyService.Domain": {
+      "path": "src/Tasky.CurrencyService.Domain/Tasky.CurrencyService.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "Tasky.CurrencyService.Application.Contracts": {
+      "path": "src/Tasky.CurrencyService.Application.Contracts/Tasky.CurrencyService.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "Tasky.CurrencyService.Application": {
+      "path": "src/Tasky.CurrencyService.Application/Tasky.CurrencyService.Application.abppkg.json",
+      "folder": "src"
+    },
+    "Tasky.CurrencyService.EntityFrameworkCore": {
+      "path": "src/Tasky.CurrencyService.EntityFrameworkCore/Tasky.CurrencyService.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "Tasky.CurrencyService.MongoDB": {
+      "path": "src/Tasky.CurrencyService.MongoDB/Tasky.CurrencyService.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "Tasky.CurrencyService.HttpApi": {
+      "path": "src/Tasky.CurrencyService.HttpApi/Tasky.CurrencyService.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "Tasky.CurrencyService.HttpApi.Client": {
+      "path": "src/Tasky.CurrencyService.HttpApi.Client/Tasky.CurrencyService.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "Tasky.CurrencyService.TestBase": {
+      "path": "test/Tasky.CurrencyService.TestBase/Tasky.CurrencyService.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "Tasky.CurrencyService.EntityFrameworkCore.Tests": {
+      "path": "test/Tasky.CurrencyService.EntityFrameworkCore.Tests/Tasky.CurrencyService.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Tasky.CurrencyService.MongoDB.Tests": {
+      "path": "test/Tasky.CurrencyService.MongoDB.Tests/Tasky.CurrencyService.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Tasky.CurrencyService.Domain.Tests": {
+      "path": "test/Tasky.CurrencyService.Domain.Tests/Tasky.CurrencyService.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Tasky.CurrencyService.Application.Tests": {
+      "path": "test/Tasky.CurrencyService.Application.Tests/Tasky.CurrencyService.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Tasky.CurrencyService.HttpApi.Host": {
+      "path": "host/Tasky.CurrencyService.HttpApi.Host/Tasky.CurrencyService.HttpApi.Host.abppkg.json",
+      "folder": "host"
+    },
+    "Tasky.CurrencyService.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/Tasky.CurrencyService.HttpApi.Client.ConsoleTestApp/Tasky.CurrencyService.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    },
+    "Tasky.CurrencyService.AuthServer": {
+      "path": "host/Tasky.CurrencyService.AuthServer/Tasky.CurrencyService.AuthServer.abppkg.json",
+      "folder": "host"
+    },
+    "Tasky.CurrencyService.Host.Shared": {
+      "path": "host/Tasky.CurrencyService.Host.Shared/Tasky.CurrencyService.Host.Shared.abppkg.json",
+      "folder": "host"
+    }
+  }
+}

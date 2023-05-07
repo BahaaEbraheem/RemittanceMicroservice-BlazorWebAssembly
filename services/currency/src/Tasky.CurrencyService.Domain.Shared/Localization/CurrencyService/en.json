@@ -1,0 +1,107 @@
+{
+  "culture": "en",
+  "texts": {
+    "MyAccount": "My account",
+    "SamplePageMessage": "A sample page for the CurrencyService module",
+
+    "Currencies": "Currencies",
+
+    "RMS:00001": "There is already an Currency with the same name: {name}",
+    "RMS:00002": "There is already an Customer with the same name: {name}",
+    "RMS:00003": "The customer's date of birth should not be greater than today's date: {birthDate}",
+    "RMS:00004": "The Remittance has been approved, so it cannot be modified",
+    "RMS:00005": "This Currency Already Used In Remittance : {remittanceSerial} ",
+    "RMS:00006": "This Customer ( {customerName} ) Already Used In Remittance ",
+    "RMS:00007": "Customer Dont Pass Because His Age Smaller Than 18 ",
+
+
+
+
+    "CurrencyDeletionConfirmationMessage": "Are you sure to delete the Currency '{0}'?",
+    "CustomerDeletionConfirmationMessage": "Are you sure to delete the Customer '{0}'?",
+    "RemittanceDeletionConfirmationMessage": "Are you sure to delete the Remittance '{0}'?",
+    "AmessageConfirmingThatTheRemittanceIsReady": "Are you sure to Ready the Remittance '{0}'?",
+
+    "CurrencyService:Default": "Currencies",
+    "CurrencyService": "Currency Service",
+    "CurrencyService:Create": "Create",
+    "CurrencyService:Update": "Update",
+    "CurrencyService:Delete": "Delete",
+
+
+
+    "Menu:CurrencyManagment": "Currencies",
+
+
+
+    "Actions": "Actions",
+    "Close": "Close",
+    "Delete": "Delete",
+    "Edit": "Edit",
+    "Name": "Name",
+    "NewCurrency": "New Currency",
+    "Code": "Code",
+    "Type": "Type",
+    "Symbol": "Symbol",
+    "CreationTime": "Creation time",
+    "AreYouSure": "Are you sure?",
+    "AreYouSureToDelete": "Are you sure you want to delete this item?",
+
+
+    "Enum:RemittanceType:1": "Internal",
+    "Enum:RemittanceType:2": "External",
+
+
+    "Enum:Gender:1": "Male",
+    "Enum:Gender:2": "Female",
+
+
+    "Enum:Remittance_Status:1": "Draft",
+    "Enum:Remittance_Status:2": "Ready",
+    "Enum:Remittance_Status:3": "CheckedAML",
+    "Enum:Remittance_Status:4": "Approved",
+    "Enum:Remittance_Status:5": "Release",
+
+    //Customers
+    "FirstName": "FirstName",
+    "LastName": "LastName",
+    "FatherName": "FatherName",
+    "MotherName": "MotherName",
+    "BirthDate": "BirthDate",
+    "Phone": "Phone",
+    "Gender": "Gender",
+    "NewCustomer": "New Customer",
+
+    //Remittances
+    "Remittance": "Remittance",
+    "Remittances": "Remittances",
+    "NewRemittance": "New Remittance",
+    "CreatrorName": "Creatror Name",
+    "PickAnTypeOfRemittance": "Pick An Type Of Remittance",
+    "PickAnCurrency": "Pick An Currency",
+    //Currency
+    "ChooseInternalOrExternal?": "Choose Internal Or External ?",
+
+
+    "Menu:RemittancesStatus": "Remittances Status",
+
+
+
+
+
+    "Amount": "Amount",
+    "TotalAmount": "Total Amount",
+    "SerialNumber": "Serial Number",
+    "SenderName": "Sender Name",
+    "ReceiverFullName": "Receiver Full Name",
+    "CurrencyName": "Currency Name",
+    "State": "State",
+    "StatusDate": "Status Date",
+
+
+    "Currency": "Currency",
+    "SenderBy": "Sender By",
+    "Address": "Address",
+    "ReceiverBy": "Receiver By"
+  }
+}
