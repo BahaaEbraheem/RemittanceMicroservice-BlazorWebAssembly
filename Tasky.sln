@@ -90,6 +90,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8D0555B6-9418-4373-AAD5-74BC25768D9D}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		newservice.ps1 = newservice.ps1
 		tye.yaml = tye.yaml
 	EndProjectSection
 EndProject
@@ -118,6 +119,28 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tasky.CurrencyService.HttpApi", "services\currency\src\Tasky.CurrencyService.HttpApi\Tasky.CurrencyService.HttpApi.csproj", "{85329908-35E0-4C8D-8682-35AA7A2503F1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tasky.CurrencyService.HttpApi.Client", "services\currency\src\Tasky.CurrencyService.HttpApi.Client\Tasky.CurrencyService.HttpApi.Client.csproj", "{F15AD8B8-A9D7-498B-96FD-A6FA338D82DB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "customer", "customer", "{3C690CA4-173A-4CF7-BBBF-2A67F130827C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "host", "host", "{6F9CB717-01CC-4546-B1BA-8C31F0A0E034}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tasky.CustomerService.HttpApi.Host", "services\customer\host\Tasky.CustomerService.HttpApi.Host\Tasky.CustomerService.HttpApi.Host.csproj", "{38D985CB-34B6-478D-B41A-9F71671CAAB4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C3718BB5-7264-4ACB-A466-5A8D17CA44C3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tasky.CustomerService.Application", "services\customer\src\Tasky.CustomerService.Application\Tasky.CustomerService.Application.csproj", "{5D0815CE-EF31-4ADD-B5C3-650CDAAFE747}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tasky.CustomerService.Application.Contracts", "services\customer\src\Tasky.CustomerService.Application.Contracts\Tasky.CustomerService.Application.Contracts.csproj", "{1D86784F-C45A-451A-8259-D85FD114531D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tasky.CustomerService.Domain", "services\customer\src\Tasky.CustomerService.Domain\Tasky.CustomerService.Domain.csproj", "{BD2CE357-BEFD-415E-9DF7-623D5D8E836B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tasky.CustomerService.Domain.Shared", "services\customer\src\Tasky.CustomerService.Domain.Shared\Tasky.CustomerService.Domain.Shared.csproj", "{766B888C-B4EE-4D47-B91A-255AF53A6B8E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tasky.CustomerService.EntityFrameworkCore", "services\customer\src\Tasky.CustomerService.EntityFrameworkCore\Tasky.CustomerService.EntityFrameworkCore.csproj", "{A74BD060-D372-4A57-A1DF-78BE390920A5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tasky.CustomerService.HttpApi", "services\customer\src\Tasky.CustomerService.HttpApi\Tasky.CustomerService.HttpApi.csproj", "{04F05A3B-9599-4642-A0B6-2FDA29164E42}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tasky.CustomerService.HttpApi.Client", "services\customer\src\Tasky.CustomerService.HttpApi.Client\Tasky.CustomerService.HttpApi.Client.csproj", "{C290AA1A-3FB8-4097-A6D8-6E0855A1EA17}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -309,6 +332,38 @@ Global
 		{F15AD8B8-A9D7-498B-96FD-A6FA338D82DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F15AD8B8-A9D7-498B-96FD-A6FA338D82DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F15AD8B8-A9D7-498B-96FD-A6FA338D82DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38D985CB-34B6-478D-B41A-9F71671CAAB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38D985CB-34B6-478D-B41A-9F71671CAAB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38D985CB-34B6-478D-B41A-9F71671CAAB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38D985CB-34B6-478D-B41A-9F71671CAAB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D0815CE-EF31-4ADD-B5C3-650CDAAFE747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D0815CE-EF31-4ADD-B5C3-650CDAAFE747}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D0815CE-EF31-4ADD-B5C3-650CDAAFE747}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D0815CE-EF31-4ADD-B5C3-650CDAAFE747}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D86784F-C45A-451A-8259-D85FD114531D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D86784F-C45A-451A-8259-D85FD114531D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D86784F-C45A-451A-8259-D85FD114531D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D86784F-C45A-451A-8259-D85FD114531D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD2CE357-BEFD-415E-9DF7-623D5D8E836B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD2CE357-BEFD-415E-9DF7-623D5D8E836B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD2CE357-BEFD-415E-9DF7-623D5D8E836B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD2CE357-BEFD-415E-9DF7-623D5D8E836B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{766B888C-B4EE-4D47-B91A-255AF53A6B8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{766B888C-B4EE-4D47-B91A-255AF53A6B8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{766B888C-B4EE-4D47-B91A-255AF53A6B8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{766B888C-B4EE-4D47-B91A-255AF53A6B8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A74BD060-D372-4A57-A1DF-78BE390920A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A74BD060-D372-4A57-A1DF-78BE390920A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A74BD060-D372-4A57-A1DF-78BE390920A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A74BD060-D372-4A57-A1DF-78BE390920A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04F05A3B-9599-4642-A0B6-2FDA29164E42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04F05A3B-9599-4642-A0B6-2FDA29164E42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04F05A3B-9599-4642-A0B6-2FDA29164E42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04F05A3B-9599-4642-A0B6-2FDA29164E42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C290AA1A-3FB8-4097-A6D8-6E0855A1EA17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C290AA1A-3FB8-4097-A6D8-6E0855A1EA17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C290AA1A-3FB8-4097-A6D8-6E0855A1EA17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C290AA1A-3FB8-4097-A6D8-6E0855A1EA17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -365,6 +420,17 @@ Global
 		{764B8675-819F-4344-A00D-2D06E759AFD8} = {B8A2688E-A26B-4C29-BCDF-A538ECC53A60}
 		{85329908-35E0-4C8D-8682-35AA7A2503F1} = {B8A2688E-A26B-4C29-BCDF-A538ECC53A60}
 		{F15AD8B8-A9D7-498B-96FD-A6FA338D82DB} = {B8A2688E-A26B-4C29-BCDF-A538ECC53A60}
+		{3C690CA4-173A-4CF7-BBBF-2A67F130827C} = {ED0A7918-04FA-4040-B641-4CA249074083}
+		{6F9CB717-01CC-4546-B1BA-8C31F0A0E034} = {3C690CA4-173A-4CF7-BBBF-2A67F130827C}
+		{38D985CB-34B6-478D-B41A-9F71671CAAB4} = {6F9CB717-01CC-4546-B1BA-8C31F0A0E034}
+		{C3718BB5-7264-4ACB-A466-5A8D17CA44C3} = {3C690CA4-173A-4CF7-BBBF-2A67F130827C}
+		{5D0815CE-EF31-4ADD-B5C3-650CDAAFE747} = {C3718BB5-7264-4ACB-A466-5A8D17CA44C3}
+		{1D86784F-C45A-451A-8259-D85FD114531D} = {C3718BB5-7264-4ACB-A466-5A8D17CA44C3}
+		{BD2CE357-BEFD-415E-9DF7-623D5D8E836B} = {C3718BB5-7264-4ACB-A466-5A8D17CA44C3}
+		{766B888C-B4EE-4D47-B91A-255AF53A6B8E} = {C3718BB5-7264-4ACB-A466-5A8D17CA44C3}
+		{A74BD060-D372-4A57-A1DF-78BE390920A5} = {C3718BB5-7264-4ACB-A466-5A8D17CA44C3}
+		{04F05A3B-9599-4642-A0B6-2FDA29164E42} = {C3718BB5-7264-4ACB-A466-5A8D17CA44C3}
+		{C290AA1A-3FB8-4097-A6D8-6E0855A1EA17} = {C3718BB5-7264-4ACB-A466-5A8D17CA44C3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ECFA44F4-824C-4405-82F5-F62F2DCBCD5E}

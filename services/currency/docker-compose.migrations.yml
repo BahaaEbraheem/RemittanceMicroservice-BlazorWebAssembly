@@ -8,6 +8,6 @@ services:
     depends_on:
       - sqlserver
     environment:
-      - IdentityServer_DB=CurrencyService_Identity
-      - CurrencyService_DB=CurrencyService_ModuleDb
+      - IdentityServer_DB=currencyService_Identity
+      - currencyService_DB=currencyService_ModuleDb
       - SA_PASSWORD=yourStrong(!)Password

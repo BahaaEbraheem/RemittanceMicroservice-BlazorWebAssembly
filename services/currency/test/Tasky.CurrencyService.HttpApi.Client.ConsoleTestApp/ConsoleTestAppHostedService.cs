@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp;
 
-namespace Tasky.CurrencyService.HttpApi.Client.ConsoleTestApp;
+namespace Tasky.currencyService.HttpApi.Client.ConsoleTestApp;
 
 public class ConsoleTestAppHostedService : IHostedService
 {
@@ -18,7 +18,7 @@ public class ConsoleTestAppHostedService : IHostedService
 
     public async Task StartAsync(CancellationToken cancellationToken)
     {
-        using (var application = await AbpApplicationFactory.CreateAsync<CurrencyServiceConsoleApiClientModule>(options =>
+        using (var application = await AbpApplicationFactory.CreateAsync<currencyServiceConsoleApiClientModule>(options =>
         {
            options.Services.ReplaceConfiguration(_configuration);
            options.UseAutofac();

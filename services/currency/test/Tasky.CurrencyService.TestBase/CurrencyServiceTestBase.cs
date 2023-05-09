@@ -6,10 +6,10 @@ using Volo.Abp.Modularity;
 using Volo.Abp.Uow;
 using Volo.Abp.Testing;
 
-namespace Tasky.CurrencyService;
+namespace Tasky.currencyService;
 
 /* All test classes are derived from this class, directly or indirectly. */
-public abstract class CurrencyServiceTestBase<TStartupModule> : AbpIntegratedTest<TStartupModule>
+public abstract class currencyServiceTestBase<TStartupModule> : AbpIntegratedTest<TStartupModule>
     where TStartupModule : IAbpModule
 {
     protected override void SetAbpApplicationCreationOptions(AbpApplicationCreationOptions options)

@@ -1,8 +1,8 @@
-﻿using Tasky.CurrencyService.Samples;
+﻿using Tasky.currencyService.Samples;
 
-namespace Tasky.CurrencyService.EntityFrameworkCore.Samples;
+namespace Tasky.currencyService.EntityFrameworkCore.Samples;
 
-public class SampleRepository_Tests : SampleRepository_Tests<CurrencyServiceEntityFrameworkCoreTestModule>
+public class SampleRepository_Tests : SampleRepository_Tests<currencyServiceEntityFrameworkCoreTestModule>
 {
     /* Don't write custom repository tests here, instead write to
      * the base class.

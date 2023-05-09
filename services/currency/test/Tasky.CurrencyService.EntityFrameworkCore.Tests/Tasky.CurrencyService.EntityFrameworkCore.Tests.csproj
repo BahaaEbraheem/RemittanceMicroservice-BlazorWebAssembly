@@ -5,15 +5,15 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <RootNamespace>Tasky.CurrencyService</RootNamespace>
+    <RootNamespace>Tasky.currencyService</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.0" />
-    <ProjectReference Include="..\..\src\Tasky.CurrencyService.EntityFrameworkCore\Tasky.CurrencyService.EntityFrameworkCore.csproj" />
-    <ProjectReference Include="..\Tasky.CurrencyService.TestBase\Tasky.CurrencyService.TestBase.csproj" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="7.1.1" />
+    <ProjectReference Include="..\..\src\Tasky.currencyService.EntityFrameworkCore\Tasky.currencyService.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\Tasky.currencyService.TestBase\Tasky.currencyService.TestBase.csproj" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="7.2.1" />
   </ItemGroup>
 
 </Project>

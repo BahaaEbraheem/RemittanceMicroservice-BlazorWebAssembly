@@ -2,7 +2,7 @@
 
 public static class CurrencyServiceDbProperties
 {
-    public static string DbTablePrefix { get; set; } = "CurrencyService";
+    public static string DbTablePrefix { get; set; } = null;
 
     public static string? DbSchema { get; set; } = null;
 

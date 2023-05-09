@@ -2,7 +2,7 @@
 
 public class CurrencyServiceRemoteServiceConsts
 {
-    public const string RemoteServiceName = "CurrencyService";
+    public const string RemoteServiceName = "currencyService";
 
-    public const string ModuleName = "currencyService";
+    public const string ModuleName = "CurrencyService";
 }

@@ -2,14 +2,14 @@
 using Volo.Abp.Http.Client.IdentityModel;
 using Volo.Abp.Modularity;
 
-namespace Tasky.CurrencyService;
+namespace Tasky.currencyService;
 
 [DependsOn(
     typeof(AbpAutofacModule),
-    typeof(CurrencyServiceHttpApiClientModule),
+    typeof(currencyServiceHttpApiClientModule),
     typeof(AbpHttpClientIdentityModelModule)
     )]
-public class CurrencyServiceConsoleApiClientModule : AbpModule
+public class currencyServiceConsoleApiClientModule : AbpModule
 {
 
 }

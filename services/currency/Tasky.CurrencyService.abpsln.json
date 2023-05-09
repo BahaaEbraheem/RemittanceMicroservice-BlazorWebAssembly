@@ -1,7 +1,7 @@
 {
   "modules": {
-    "Tasky.CurrencyService": {
-      "path": "Tasky.CurrencyService.abpmdl.json"
+    "Tasky.currencyService": {
+      "path": "Tasky.currencyService.abpmdl.json"
     }
   }
 }

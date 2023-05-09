@@ -1,16 +1,16 @@
-﻿using Tasky.CurrencyService.EntityFrameworkCore;
+﻿using Tasky.currencyService.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 
-namespace Tasky.CurrencyService;
+namespace Tasky.currencyService;
 
 /* Domain tests are configured to use the EF Core provider.
  * You can switch to MongoDB, however your domain tests should be
  * database independent anyway.
  */
 [DependsOn(
-    typeof(CurrencyServiceEntityFrameworkCoreTestModule)
+    typeof(currencyServiceEntityFrameworkCoreTestModule)
     )]
-public class CurrencyServiceDomainTestModule : AbpModule
+public class currencyServiceDomainTestModule : AbpModule
 {
 
 }

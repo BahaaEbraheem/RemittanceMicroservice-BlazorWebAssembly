@@ -3,11 +3,11 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using IdentityModel.Client;
 using Microsoft.Extensions.Configuration;
-using Tasky.CurrencyService.Samples;
+using Tasky.currencyService.Samples;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.IdentityModel;
 
-namespace Tasky.CurrencyService;
+namespace Tasky.currencyService;
 
 public class ClientDemoService : ITransientDependency
 {
@@ -76,8 +76,8 @@ public class ClientDemoService : ITransientDependency
         {
             httpClient.SetBearerToken(accessToken);
 
-            var url = _configuration["RemoteServices:CurrencyService:BaseUrl"] +
-                      "api/CurrencyService/sample/authorized";
+            var url = _configuration["RemoteServices:currencyService:BaseUrl"] +
+                      "api/currencyService/sample/authorized";
 
             var responseMessage = await httpClient.GetAsync(url);
             if (responseMessage.IsSuccessStatusCode)
@@ -135,8 +135,8 @@ public class ClientDemoService : ITransientDependency
         {
             httpClient.SetBearerToken(tokenResponse.AccessToken);
 
-            var url = _configuration["RemoteServices:CurrencyService:BaseUrl"] +
-                      "api/CurrencyService/sample/authorized";
+            var url = _configuration["RemoteServices:currencyService:BaseUrl"] +
+                      "api/currencyService/sample/authorized";
 
             var responseMessage = await httpClient.GetAsync(url);
             if (responseMessage.IsSuccessStatusCode)

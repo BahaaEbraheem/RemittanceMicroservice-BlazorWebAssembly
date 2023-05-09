@@ -1,7 +1,7 @@
 {
   "modules": {
-    "currencyService": {
-      "rootPath": "currencyService",
+    "CurrencyService": {
+      "rootPath": "CurrencyService",
       "remoteServiceName": "CurrencyService",
       "controllers": {
         "Tasky.CurrencyService.Samples.SampleController": {

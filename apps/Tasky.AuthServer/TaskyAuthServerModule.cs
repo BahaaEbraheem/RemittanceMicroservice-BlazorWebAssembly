@@ -79,6 +79,7 @@ public class TaskyAuthServerModule : AbpModule
                     bundle.AddFiles("/global-styles.css");
                 }
             );
+           
         });
 
         Configure<AbpAuditingOptions>(options =>

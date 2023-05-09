@@ -5,12 +5,12 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <RootNamespace>Tasky.CurrencyService</RootNamespace>
+    <RootNamespace>Tasky.currencyService</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
-    <ProjectReference Include="..\Tasky.CurrencyService.EntityFrameworkCore.Tests\Tasky.CurrencyService.EntityFrameworkCore.Tests.csproj" />
+    <ProjectReference Include="..\Tasky.currencyService.EntityFrameworkCore.Tests\Tasky.currencyService.EntityFrameworkCore.Tests.csproj" />
   </ItemGroup>
 
 </Project>

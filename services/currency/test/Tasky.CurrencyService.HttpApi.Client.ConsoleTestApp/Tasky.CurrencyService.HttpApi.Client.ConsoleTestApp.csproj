@@ -4,13 +4,13 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <RootNamespace>Tasky.CurrencyService</RootNamespace>
+    <RootNamespace>Tasky.currencyService</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Http.Client.IdentityModel" Version="7.1.1" />
-    <PackageReference Include="Volo.Abp.Autofac" Version="7.1.1" />
-    <ProjectReference Include="..\..\src\Tasky.CurrencyService.HttpApi.Client\Tasky.CurrencyService.HttpApi.Client.csproj" />
+    <PackageReference Include="Volo.Abp.Http.Client.IdentityModel" Version="7.2.1" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="7.2.1" />
+    <ProjectReference Include="..\..\src\Tasky.currencyService.HttpApi.Client\Tasky.currencyService.HttpApi.Client.csproj" />
   </ItemGroup>
 
   <ItemGroup>

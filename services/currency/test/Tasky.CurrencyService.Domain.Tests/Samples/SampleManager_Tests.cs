@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Xunit;
 
-namespace Tasky.CurrencyService.Samples;
+namespace Tasky.currencyService.Samples;
 
-public class SampleManager_Tests : CurrencyServiceDomainTestBase
+public class SampleManager_Tests : currencyServiceDomainTestBase
 {
     //private readonly SampleManager _sampleManager;
 

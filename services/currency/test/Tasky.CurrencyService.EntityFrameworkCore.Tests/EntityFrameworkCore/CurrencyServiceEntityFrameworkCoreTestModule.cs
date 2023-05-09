@@ -7,14 +7,14 @@ using Volo.Abp.EntityFrameworkCore.Sqlite;
 using Volo.Abp.Modularity;
 using Volo.Abp.Uow;
 
-namespace Tasky.CurrencyService.EntityFrameworkCore;
+namespace Tasky.currencyService.EntityFrameworkCore;
 
 [DependsOn(
-    typeof(CurrencyServiceTestBaseModule),
-    typeof(CurrencyServiceEntityFrameworkCoreModule),
+    typeof(currencyServiceTestBaseModule),
+    typeof(currencyServiceEntityFrameworkCoreModule),
     typeof(AbpEntityFrameworkCoreSqliteModule)
     )]
-public class CurrencyServiceEntityFrameworkCoreTestModule : AbpModule
+public class currencyServiceEntityFrameworkCoreTestModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
@@ -36,8 +36,8 @@ public class CurrencyServiceEntityFrameworkCoreTestModule : AbpModule
         var connection = new SqliteConnection("Data Source=:memory:");
         connection.Open();
 
-        new CurrencyServiceDbContext(
-            new DbContextOptionsBuilder<CurrencyServiceDbContext>().UseSqlite(connection).Options
+        new currencyServiceDbContext(
+            new DbContextOptionsBuilder<currencyServiceDbContext>().UseSqlite(connection).Options
         ).GetService<IRelationalDatabaseCreator>().CreateTables();
 
         return connection;

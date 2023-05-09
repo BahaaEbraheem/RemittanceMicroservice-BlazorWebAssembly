@@ -7,9 +7,6 @@ public class CurrencyServiceApplicationAutoMapperProfile : Profile
 {
     public CurrencyServiceApplicationAutoMapperProfile()
     {
-        /* You can configure your AutoMapper mapping configuration here.
-   * Alternatively, you can split your mapping configurations
-   * into multiple profile classes for a better organization. */
         CreateMap<CurrencyDto, Currency>()
                 .ForMember(model => model.ExtraProperties, option => option.Ignore())
              .ForMember(model => model.ConcurrencyStamp, option => option.Ignore())

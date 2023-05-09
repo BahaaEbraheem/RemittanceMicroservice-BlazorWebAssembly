@@ -2,9 +2,9 @@
 using Shouldly;
 using Xunit;
 
-namespace Tasky.CurrencyService.Samples;
+namespace Tasky.currencyService.Samples;
 
-public class SampleAppService_Tests : CurrencyServiceApplicationTestBase
+public class SampleAppService_Tests : currencyServiceApplicationTestBase
 {
     private readonly ISampleAppService _sampleAppService;
 

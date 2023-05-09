@@ -16,7 +16,7 @@ services:
   currency-service:
     build:
       context: ../../
-      dockerfile: templates/service/host/Tasky.CurrencyService.Host/Dockerfile
+      dockerfile: templates/service/host/Tasky.currencyService.Host/Dockerfile
     depends_on:
       - sqlserver
       - identity-server

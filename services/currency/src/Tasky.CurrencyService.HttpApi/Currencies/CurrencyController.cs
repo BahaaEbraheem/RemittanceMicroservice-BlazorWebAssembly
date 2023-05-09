@@ -13,7 +13,7 @@ namespace Tasky.CurrencyService.Currencies
 {
    [Area(CurrencyServiceRemoteServiceConsts.ModuleName)]
     [RemoteService(Name = CurrencyServiceRemoteServiceConsts.RemoteServiceName)]
-    [Route("api/CurrencyService/currency")]
+    [Route("api/currencyService/currency")]
     public class CurrencyController : CurrencyServiceController, ICurrencyAppService
     {
         private readonly ICurrencyAppService _currencyAppService;

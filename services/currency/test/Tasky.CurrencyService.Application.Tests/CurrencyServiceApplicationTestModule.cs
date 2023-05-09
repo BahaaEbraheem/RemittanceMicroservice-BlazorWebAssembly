@@ -1,12 +1,12 @@
 ﻿using Volo.Abp.Modularity;
 
-namespace Tasky.CurrencyService;
+namespace Tasky.currencyService;
 
 [DependsOn(
-    typeof(CurrencyServiceApplicationModule),
-    typeof(CurrencyServiceDomainTestModule)
+    typeof(currencyServiceApplicationModule),
+    typeof(currencyServiceDomainTestModule)
     )]
-public class CurrencyServiceApplicationTestModule : AbpModule
+public class currencyServiceApplicationTestModule : AbpModule
 {
 
 }

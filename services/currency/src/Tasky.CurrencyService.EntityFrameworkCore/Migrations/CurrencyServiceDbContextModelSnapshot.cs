@@ -19,12 +19,12 @@ namespace Tasky.CurrencyService.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.SqlServer)
-                .HasAnnotation("ProductVersion", "7.0.2")
+                .HasAnnotation("ProductVersion", "7.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Tasky.CurrencyService.Currency", b =>
+            modelBuilder.Entity("Tasky.CurrencyService.Currencies.Currency", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
@@ -56,7 +56,7 @@ namespace Tasky.CurrencyService.Migrations
                     b.HasIndex("Name", "Symbol")
                         .IsUnique();
 
-                    b.ToTable("CurrencyServiceCurrencies", (string)null);
+                    b.ToTable("Currencies", (string)null);
                 });
 #pragma warning restore 612, 618
         }

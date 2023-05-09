@@ -15,8 +15,8 @@ public class CurrencyServiceEntityFrameworkCoreModule : AbpModule
     {
         context.Services.AddAbpDbContext<CurrencyServiceDbContext>(options =>
         {
-         
-                options.AddDefaultRepositories(true);
+
+            options.AddDefaultRepositories(true);
             options.AddRepository<Currency, EfCoreCurrencyRepository>();
             /* Add custom repositories here. Example:
              * options.AddRepository<Question, EfCoreQuestionRepository>();

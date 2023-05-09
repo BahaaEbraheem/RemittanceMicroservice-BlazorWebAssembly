@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@abp/ng.theme.lepton-x": "^2.1.1"
+  }
+}

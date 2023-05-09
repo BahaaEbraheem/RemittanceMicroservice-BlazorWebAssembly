@@ -6,15 +6,15 @@ using Volo.Abp.Data;
 using Volo.Abp.Modularity;
 using Volo.Abp.Threading;
 
-namespace Tasky.CurrencyService;
+namespace Tasky.currencyService;
 
 [DependsOn(
     typeof(AbpAutofacModule),
     typeof(AbpTestBaseModule),
     typeof(AbpAuthorizationModule),
-    typeof(CurrencyServiceDomainModule)
+    typeof(currencyServiceDomainModule)
     )]
-public class CurrencyServiceTestBaseModule : AbpModule
+public class currencyServiceTestBaseModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {

@@ -4,14 +4,14 @@ using Volo.Abp.DependencyInjection;
 using Volo.Abp.Guids;
 using Volo.Abp.MultiTenancy;
 
-namespace Tasky.CurrencyService;
+namespace Tasky.currencyService;
 
-public class CurrencyServiceDataSeedContributor : IDataSeedContributor, ITransientDependency
+public class currencyServiceDataSeedContributor : IDataSeedContributor, ITransientDependency
 {
     private readonly IGuidGenerator _guidGenerator;
     private readonly ICurrentTenant _currentTenant;
 
-    public CurrencyServiceDataSeedContributor(
+    public currencyServiceDataSeedContributor(
         IGuidGenerator guidGenerator, ICurrentTenant currentTenant)
     {
         _guidGenerator = guidGenerator;

@@ -5,7 +5,6 @@ namespace Tasky.CurrencyService.Permissions;
 public class CurrencyServicePermissions
 {
     public const string GroupName = "CurrencyService";
-
     public static class Currencies
     {
         public const string Default = GroupName + ".Currencies";

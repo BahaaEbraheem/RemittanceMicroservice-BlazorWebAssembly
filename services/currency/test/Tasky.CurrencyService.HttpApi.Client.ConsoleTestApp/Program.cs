@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Tasky.CurrencyService.HttpApi.Client.ConsoleTestApp;
+namespace Tasky.currencyService.HttpApi.Client.ConsoleTestApp;
 
 class Program
 {
