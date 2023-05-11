@@ -17,6 +17,8 @@ public class CustomerServiceEntityFrameworkCoreModule : AbpModule
         {
             options.AddDefaultRepositories(true);
             options.AddRepository<Customer, EfCoreCustomerRepository>();
+
+
         });
 
     }

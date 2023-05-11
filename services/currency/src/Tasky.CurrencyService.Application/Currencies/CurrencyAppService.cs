@@ -153,9 +153,8 @@ namespace Tasky.CurrencyService.Currencies
 
       public async Task<List<CurrencyDto>> GetFromReposListAsync(int skipCount, int maxResultCount, string sorting, CurrencyDto filter)
         {
-            var currencies = new List<Currency>();
             var filter_ = ObjectMapper.Map<CurrencyDto, Currency>(filter);
-            currencies =await _currencyRepository.GetFromReposListAsync(skipCount, maxResultCount, sorting, filter_);
+           var currencies =await _currencyRepository.GetFromReposListAsync(skipCount, maxResultCount, sorting, filter_);
            return  ObjectMapper.Map<List<Currency>, List<CurrencyDto>>(currencies);
         }
     }

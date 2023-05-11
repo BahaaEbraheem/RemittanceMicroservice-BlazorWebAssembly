@@ -13,6 +13,7 @@ using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
 using Tasky.Administration.EntityFrameworkCore;
 using Tasky.CurrencyService.EntityFrameworkCore;
+using Tasky.CustomerService.EntityFrameworkCore;
 using Tasky.Hosting.Shared;
 using Tasky.IdentityService.EntityFrameworkCore;
 using Tasky.SaaS.EntityFrameworkCore;
@@ -28,6 +29,7 @@ namespace Tasky.IdentityService;
     typeof(IdentityServiceApplicationModule),
     typeof(IdentityServiceEntityFrameworkCoreModule),
     typeof(CurrencyServiceEntityFrameworkCoreModule),
+    typeof(CustomerServiceEntityFrameworkCoreModule),
     typeof(IdentityServiceHttpApiModule),
     typeof(AdministrationEntityFrameworkCoreModule),
     typeof(SaaSEntityFrameworkCoreModule)

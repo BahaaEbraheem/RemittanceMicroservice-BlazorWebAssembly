@@ -1,5 +1,7 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Tasky.Blazor;
 
@@ -13,7 +15,7 @@ public class Program
         {
             options.UseAutofac();
         });
-
+     
         var host = builder.Build();
 
         await application.InitializeApplicationAsync(host.Services);

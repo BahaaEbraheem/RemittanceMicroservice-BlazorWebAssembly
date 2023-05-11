@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Domain.Entities.Auditing;
-using static Tasky.Microservice.Shared.Enums.Enums;
+using static Tasky.CustomerService.Customers.Enums.Enums;
 
 namespace Tasky.CustomerService.Customers
 {
@@ -45,7 +45,10 @@ namespace Tasky.CustomerService.Customers
          [NotNull] DateTime birthDate, [NotNull] string phone, [NotNull] Gender gender) : base(id)
         {
             Id = id;
-            SetName(firstName, lastName, fatherName, motherName);
+            FirstName = firstName;
+            FatherName = fatherName;
+            LastName = lastName;
+            MotherName = motherName;
             BirthDate = SetBirthdate(birthDate);
             Phone = phone;
             Gender = gender;

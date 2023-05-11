@@ -46,6 +46,7 @@ public class TaskyMenuContributor : IMenuContributor
             )
         );
         context.Menu.AddItem(new ApplicationMenuItem(TaskyMenus.Currencies, displayName: "Currencies",url: "/currencies"));
+        context.Menu.AddItem(new ApplicationMenuItem(TaskyMenus.Customers, displayName: "Customers", url: "/customers"));
 
         var administration = context.Menu.GetAdministration();
         Console.WriteLine(administration);

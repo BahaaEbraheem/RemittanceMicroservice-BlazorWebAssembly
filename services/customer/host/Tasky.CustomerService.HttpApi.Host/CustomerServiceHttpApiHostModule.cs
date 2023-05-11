@@ -32,12 +32,14 @@ using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
 using Volo.Abp.VirtualFileSystem;
+using Tasky.CustomerService.Customers;
 
 namespace Tasky.CustomerService;
 
 [DependsOn(
     typeof(CustomerServiceApplicationModule),
     typeof(CustomerServiceHttpApiModule),
+     typeof(CustomerServiceEntityFrameworkCoreModule),
     typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
     typeof(AbpAutofacModule),
     typeof(AbpCachingStackExchangeRedisModule),
@@ -61,11 +63,7 @@ public class CustomerServiceHttpApiHostModule : AbpModule
         {
             options.UseSqlServer();
         });
-      
-        //Configure<AbpMultiTenancyOptions>(options =>
-        //{
-        //    options.IsEnabled = MultiTenancyConsts.IsEnabled;
-        //});
+
 
         if (hostingEnvironment.IsDevelopment())
         {

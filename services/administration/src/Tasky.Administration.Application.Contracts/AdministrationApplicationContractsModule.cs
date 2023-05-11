@@ -1,4 +1,5 @@
 using Tasky.CurrencyService;
+using Tasky.CustomerService;
 using Volo.Abp.Application;
 using Volo.Abp.Authorization;
 using Volo.Abp.FeatureManagement;
@@ -12,7 +13,8 @@ namespace Tasky.Administration;
     typeof(AdministrationDomainSharedModule),
     typeof(AbpDddApplicationContractsModule),
     typeof(AbpAuthorizationModule),
-    typeof(CurrencyServiceApplicationContractsModule)
+    typeof(CurrencyServiceApplicationContractsModule),
+    typeof(CustomerServiceApplicationContractsModule)
 )]
 [DependsOn(typeof(AbpPermissionManagementApplicationContractsModule))]
 [DependsOn(typeof(AbpSettingManagementApplicationContractsModule))]

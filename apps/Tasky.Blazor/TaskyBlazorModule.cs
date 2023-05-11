@@ -19,6 +19,7 @@ using Volo.Abp.SettingManagement.Blazor.WebAssembly;
 using Volo.Abp.TenantManagement.Blazor.WebAssembly;
 using Tasky.CurrencyService;
 using Volo.Abp.Http.Client.IdentityModel;
+using Tasky.CustomerService;
 
 namespace Tasky.Blazor;
 
@@ -28,7 +29,10 @@ namespace Tasky.Blazor;
     typeof(AbpIdentityBlazorWebAssemblyModule),
     typeof(AbpTenantManagementBlazorWebAssemblyModule),
     typeof(AbpSettingManagementBlazorWebAssemblyModule),
-     typeof(CurrencyServiceHttpApiClientModule),
+    typeof(CurrencyServiceApplicationContractsModule),
+    typeof(CustomerServiceApplicationContractsModule),
+      typeof(CurrencyServiceHttpApiClientModule),
+    typeof(CustomerServiceHttpApiClientModule),
     typeof(AbpHttpClientIdentityModelModule)
 
 
@@ -39,6 +43,16 @@ public class TaskyBlazorModule : AbpModule
     {
         var environment = context.Services.GetSingletonInstance<IWebAssemblyHostEnvironment>();
         var builder = context.Services.GetSingletonInstance<WebAssemblyHostBuilder>();
+
+
+
+
+        //builder.Services.AddHttpClient<ICustomerService, CustomerService>(client => {
+        //    client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
+        //});
+
+
+
 
         ConfigureAuthentication(builder);
         ConfigureHttpClient(context, environment);
@@ -88,6 +102,7 @@ public class TaskyBlazorModule : AbpModule
             options.ProviderOptions.DefaultScopes.Add("IdentityService");
             options.ProviderOptions.DefaultScopes.Add("AdministrationService");
             options.ProviderOptions.DefaultScopes.Add("CurrencyService");
+            options.ProviderOptions.DefaultScopes.Add("CustomerService");
         });
     }
 

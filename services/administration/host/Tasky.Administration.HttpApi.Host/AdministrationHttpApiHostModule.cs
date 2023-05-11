@@ -12,7 +12,7 @@ using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
 using Tasky.Administration.EntityFrameworkCore;
 using Tasky.CurrencyService;
-//using Tasky.CurrencyService.EntityFrameworkCore;
+using Tasky.CustomerService;
 using Tasky.Hosting.Shared;
 using Tasky.IdentityService;
 using Tasky.IdentityService.EntityFrameworkCore;
@@ -35,6 +35,7 @@ namespace Tasky.Administration;
     //typeof(CurrencyServiceApplicationContractsModule),
     //typeof(CurrencyServiceEntityFrameworkCoreModule),
     typeof(CurrencyServiceHttpApiModule),
+    typeof(CustomerServiceHttpApiModule),
     typeof(AbpIdentityDomainModule),
     typeof(SaaSApplicationContractsModule),
     typeof(AbpHttpClientIdentityModelModule)

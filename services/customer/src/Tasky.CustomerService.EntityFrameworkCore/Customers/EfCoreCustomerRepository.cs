@@ -37,7 +37,7 @@ namespace Tasky.CustomerService.Customers
             var customers = await dbSet.ToListAsync();
             return customers;
         }
-        public async Task<List<CustomerDto>> GetFromReposListAsync(int skipCount, int maxResultCount, string sorting, CustomerDto filter)
+        public async Task<List<Customer>> GetFromReposListAsync(int skipCount, int maxResultCount, string sorting, Customer filter)
         {
             var dbSet = await GetDbSetAsync();
 
@@ -47,13 +47,13 @@ namespace Tasky.CustomerService.Customers
                 .WhereIf(!filter.FatherName.IsNullOrWhiteSpace(), x => x.FatherName.Contains(filter.FatherName))
                 .WhereIf(!filter.MotherName.IsNullOrWhiteSpace(), x => x.MotherName.Contains(filter.MotherName))
                 .OrderBy(sorting).Skip(skipCount).Take(maxResultCount).ToListAsync();
-            return _ObjectMapper.Map<List<Customer>, List<CustomerDto>>(customers);
+            return customers/* _ObjectMapper.Map<List<Customer>, List<Customer>>(customers)*/;
 
         }
 
 
 
-        public async Task<int> GetTotalCountAsync(CustomerDto filter)
+        public async Task<int> GetTotalCountAsync(Customer filter)
         {
             var dbSet = await GetDbSetAsync();
             var customers = await dbSet

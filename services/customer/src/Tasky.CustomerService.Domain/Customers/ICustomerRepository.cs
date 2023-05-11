@@ -9,18 +9,18 @@ using Volo.Abp.Domain.Services;
 
 namespace Tasky.CustomerService.Customers
 {
-    public interface ICustomerRepository : IRepository<Customer, Guid>, IDomainService
+    public interface ICustomerRepository : IRepository<Customer, Guid>
     {
         Task<List<Customer>> GetAllAsync();
 
         //Task<Customer> FindByFullNameAsync(string firstName, string lastName,string fatherName,string motherName);
 
-        Task<List<CustomerDto>> GetFromReposListAsync(
+        Task<List<Customer>> GetFromReposListAsync(
      int skipCount,
      int maxResultCount,
      string sorting,
-     CustomerDto filter
+     Customer filter
  );
-        Task<int> GetTotalCountAsync(CustomerDto filter);
+        Task<int> GetTotalCountAsync(Customer filter);
     }
 }

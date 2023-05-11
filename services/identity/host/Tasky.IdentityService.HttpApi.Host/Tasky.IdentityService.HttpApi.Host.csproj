@@ -19,6 +19,7 @@
         <ProjectReference Include="..\..\..\..\shared\Tasky.Hosting.Shared\Tasky.Hosting.Shared.csproj" />
         <ProjectReference Include="..\..\..\administration\src\Tasky.Administration.EntityFrameworkCore\Tasky.Administration.EntityFrameworkCore.csproj" />
         <ProjectReference Include="..\..\..\currency\src\Tasky.CurrencyService.EntityFrameworkCore\Tasky.CurrencyService.EntityFrameworkCore.csproj" />
+        <ProjectReference Include="..\..\..\customer\src\Tasky.CustomerService.EntityFrameworkCore\Tasky.CustomerService.EntityFrameworkCore.csproj" />
         <ProjectReference Include="..\..\..\saas\src\Tasky.SaaS.EntityFrameworkCore\Tasky.SaaS.EntityFrameworkCore.csproj" />
         <ProjectReference Include="..\..\src\Tasky.IdentityService.HttpApi\Tasky.IdentityService.HttpApi.csproj" />
         <ProjectReference Include="..\..\src\Tasky.IdentityService.Application\Tasky.IdentityService.Application.csproj" />

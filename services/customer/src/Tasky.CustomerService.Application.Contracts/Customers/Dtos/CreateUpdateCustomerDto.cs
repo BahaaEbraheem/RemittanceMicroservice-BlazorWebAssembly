@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
-using static Tasky.Microservice.Shared.Enums.Enums;
+using static Tasky.CustomerService.Customers.Enums.Enums;
 //using static MsDemo.Shared.Enums.Enums;
 
 namespace Tasky.CustomerService.Customers.Dtos

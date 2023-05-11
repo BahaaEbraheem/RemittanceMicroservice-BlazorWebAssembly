@@ -2,6 +2,8 @@
 using Tasky.Administration.EntityFrameworkCore;
 using Tasky.CurrencyService;
 using Tasky.CurrencyService.EntityFrameworkCore;
+using Tasky.CustomerService;
+using Tasky.CustomerService.EntityFrameworkCore;
 using Tasky.IdentityService;
 using Tasky.IdentityService.EntityFrameworkCore;
 using Tasky.Microservice.Shared;
@@ -21,7 +23,9 @@ namespace Tasky.DbMigrator;
     typeof(SaaSEntityFrameworkCoreModule),
     typeof(SaaSApplicationContractsModule),
     typeof(CurrencyServiceEntityFrameworkCoreModule),
-    typeof(CurrencyServiceApplicationContractsModule)
+    typeof(CurrencyServiceApplicationContractsModule),
+    typeof(CustomerServiceEntityFrameworkCoreModule),
+    typeof(CustomerServiceApplicationContractsModule)
 )]
 public class TaskyDbMigratorModule : AbpModule
 {

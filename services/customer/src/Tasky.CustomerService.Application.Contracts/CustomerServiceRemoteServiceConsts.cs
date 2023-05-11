@@ -2,7 +2,7 @@
 
 public class CustomerServiceRemoteServiceConsts
 {
-    public const string RemoteServiceName = "CustomerService";
+    public const string RemoteServiceName = "customerService";
 
-    public const string ModuleName = "customerService";
+    public const string ModuleName = "CustomerService";
 }

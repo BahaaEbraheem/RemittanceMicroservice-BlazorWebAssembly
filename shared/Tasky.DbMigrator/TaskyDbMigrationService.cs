@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Tasky.Administration.EntityFrameworkCore;
 using Tasky.CurrencyService.EntityFrameworkCore;
+using Tasky.CustomerService.EntityFrameworkCore;
 using Tasky.IdentityService.EntityFrameworkCore;
 using Tasky.SaaS.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -98,6 +99,7 @@ public class TaskyDbMigrationService : ITransientDependency
             await MigrateDatabaseAsync<AdministrationDbContext>(cancellationToken);
             await MigrateDatabaseAsync<IdentityServiceDbContext>(cancellationToken);
             await MigrateDatabaseAsync<CurrencyServiceDbContext>(cancellationToken);
+            await MigrateDatabaseAsync<CustomerServiceDbContext>(cancellationToken);
 
             await uow.CompleteAsync(cancellationToken);
         }

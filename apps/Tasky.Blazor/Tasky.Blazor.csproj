@@ -4,6 +4,7 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
+
     <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
     <UserSecretsId>542122a3-33dc-4ba5-b115-1ec20694b784</UserSecretsId>
   </PropertyGroup>
@@ -34,6 +35,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\services\currency\src\Tasky.CurrencyService.Application.Contracts\Tasky.CurrencyService.Application.Contracts.csproj" />
     <ProjectReference Include="..\..\services\currency\src\Tasky.CurrencyService.HttpApi.Client\Tasky.CurrencyService.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\..\services\customer\src\Tasky.CustomerService.Application.Contracts\Tasky.CustomerService.Application.Contracts.csproj" />
+    <ProjectReference Include="..\..\services\customer\src\Tasky.CustomerService.HttpApi.Client\Tasky.CustomerService.HttpApi.Client.csproj" />
   </ItemGroup>
 
 

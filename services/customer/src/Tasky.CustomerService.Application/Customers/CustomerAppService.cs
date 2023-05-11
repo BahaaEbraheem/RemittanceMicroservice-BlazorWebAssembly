@@ -18,7 +18,7 @@ namespace Tasky.CustomerService.Customers
 {
     [Authorize(CustomerServicePermissions.Customers.Default)]
 
-    public class CustomerAppService :
+    public class CustomerAppService : 
          CrudAppService<
                 Customer, //The customer entity
              CustomerDto, //Used to show customers
@@ -27,26 +27,26 @@ namespace Tasky.CustomerService.Customers
              CreateUpdateCustomerDto>, //Used to create/update a customer
          ICustomerAppService //implement the IcustomerAppService
     {
-        private readonly ICustomerRepository _customerRepository;
         private readonly CustomerManager _customerManager;
-        public CustomerAppService(
-            CustomerManager customerManager,
-            ICustomerRepository customerRepository)
-            : base(customerRepository)
+        private static IRepository<Customer, Guid>? _customerRepository;
+
+        public CustomerAppService(CustomerManager customerManager, IRepository<Customer, Guid> customerRepository) : base(customerRepository)
         {
             _customerManager = customerManager;
             _customerRepository = customerRepository;
         }
 
-
-
+        //public CustomerAppService(CustomerManager customerManager) :base((IRepository<Customer, Guid>)customerManager)
+        //{
+        //    _customerManager = customerManager;
+        //}
 
         public override async Task<PagedResultDto<CustomerDto>> GetListAsync(CustomerPagedAndSortedResultRequestDto input)
         {
             var filter = ObjectMapper.Map<CustomerPagedAndSortedResultRequestDto, CustomerDto>(input);
             var sorting = (string.IsNullOrEmpty(input.Sorting) ? "FirstName DESC" : input.Sorting).Replace("ShortName", "FirstName");
-            var customers = await GetFromReposListAsync(input.SkipCount, input.MaxResultCount, sorting, filter);
-            var totalCount = await GetTotalCountAsync(filter);
+            var customers = await _customerManager.GetFromReposListAsync(input.SkipCount, input.MaxResultCount, sorting, filter);
+            var totalCount = await _customerManager.GetTotalCountAsync(filter);
             return new PagedResultDto<CustomerDto>(totalCount, customers);
         }
 
@@ -116,21 +116,24 @@ namespace Tasky.CustomerService.Customers
 
 
 
-        public async Task<List<CustomerDto>> GetFromReposListAsync(int skipCount, int maxResultCount, string sorting, CustomerDto filter)
-        {
+        //public async Task<List<CustomerDto>> GetFromReposListAsync(int skipCount, int maxResultCount, string sorting, CustomerDto filter)
+        //{
+        //    var filter_ = ObjectMapper.Map<CustomerDto, Customer>(filter);
+        //    //var customers= await _customerRepository.GetFromReposListAsync(skipCount, maxResultCount, sorting, filter_);
+        //    var customers= await _customerManager.GetFromReposListAsync(skipCount, maxResultCount, sorting, filter_);
 
-            return await _customerRepository.GetFromReposListAsync(skipCount, maxResultCount, sorting, filter);
+        //    return ObjectMapper.Map<List<Customer>, List<CustomerDto>>(customers);
 
-        }
+        //}
 
-        public async Task<int> GetTotalCountAsync(CustomerDto filter)
-        {
-            return await _customerRepository.GetTotalCountAsync(filter);
-        }
+        //public async Task<int> GetTotalCountAsync(CustomerDto filter)
+        //{
+        //    return await _customerRepository.GetTotalCountAsync(ObjectMapper.Map<CustomerDto, Customer>(filter));
+        //}
 
-        public async Task<List<CustomerDto>> GetAllAsync()
-        {
-            return ObjectMapper.Map<List<Customer>, List<CustomerDto>>(await _customerRepository.GetAllAsync());
-        }
+        //public async Task<List<CustomerDto>> GetAllAsync()
+        //{
+        //    return ObjectMapper.Map<List<Customer>, List<CustomerDto>>(await _customerRepository.GetAllAsync());
+        //}
     }
 }

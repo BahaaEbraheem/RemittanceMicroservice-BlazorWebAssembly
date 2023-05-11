@@ -31,6 +31,7 @@ using Tasky.SaaS.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.SqlServer;
 using Microsoft.IdentityModel.Logging;
 using Tasky.CurrencyService.EntityFrameworkCore;
+using Tasky.CustomerService.EntityFrameworkCore;
 
 namespace Tasky;
 
@@ -47,6 +48,7 @@ namespace Tasky;
     typeof(SaaSEntityFrameworkCoreModule),
     typeof(IdentityServiceEntityFrameworkCoreModule),
     typeof(CurrencyServiceEntityFrameworkCoreModule),
+    typeof(CustomerServiceEntityFrameworkCoreModule),
     typeof(TaskyMicroserviceModule),
     typeof(AbpAspNetCoreSerilogModule)
     )]
