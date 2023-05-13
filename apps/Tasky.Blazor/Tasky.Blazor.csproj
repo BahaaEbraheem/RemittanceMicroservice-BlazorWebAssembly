@@ -34,8 +34,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\services\currency\src\Tasky.CurrencyService.Application.Contracts\Tasky.CurrencyService.Application.Contracts.csproj" />
+    <ProjectReference Include="..\..\services\currency\src\Tasky.CurrencyService.Domain\Tasky.CurrencyService.Domain.csproj" />
     <ProjectReference Include="..\..\services\currency\src\Tasky.CurrencyService.HttpApi.Client\Tasky.CurrencyService.HttpApi.Client.csproj" />
     <ProjectReference Include="..\..\services\customer\src\Tasky.CustomerService.Application.Contracts\Tasky.CustomerService.Application.Contracts.csproj" />
+    <ProjectReference Include="..\..\services\customer\src\Tasky.CustomerService.Domain\Tasky.CustomerService.Domain.csproj" />
     <ProjectReference Include="..\..\services\customer\src\Tasky.CustomerService.HttpApi.Client\Tasky.CustomerService.HttpApi.Client.csproj" />
   </ItemGroup>
 

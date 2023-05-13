@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Tasky.CurrencyService.Currenciess
+namespace Tasky.CurrencyService.Currencies
 {
     public class UpdateCurrencyDto
     {

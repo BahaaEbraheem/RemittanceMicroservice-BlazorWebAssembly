@@ -35,12 +35,6 @@ public class CustomerController : CustomerServiceController, ICustomerAppService
     {
         return _customerAppService.DeleteAsync(id);
     }
-    //[HttpGet]
-    //[Route("GetAllAsync")]
-    //public Task<List<CustomerDto>> GetAllAsync()
-    //{
-    //    return _customerAppService.GetAllAsync();
-    //}
 
     [HttpGet]
     [Route("GetAsync")]
@@ -56,19 +50,6 @@ public class CustomerController : CustomerServiceController, ICustomerAppService
     {
         return await _customerAppService.GetListAsync(input);
     }
-
-    //[HttpGet]
-    //[Route("GetFromReposListAsync")]
-    //public Task<List<CustomerDto>> GetFromReposListAsync(int skipCount, int maxResultCount, string sorting, CustomerDto filter)
-    //{
-    //    return _customerAppService.GetFromReposListAsync(skipCount, maxResultCount, sorting, filter);
-    //}
-    //[HttpGet]
-    //[Route("GetTotalCountAsync")]
-    //public Task<int> GetTotalCountAsync(CustomerDto filter)
-    //{
-    //    return _customerAppService.GetTotalCountAsync(filter);
-    //}
 
     [HttpGet]
     [Route("UpdateAsync")]

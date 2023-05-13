@@ -97,7 +97,7 @@ namespace Tasky.CurrencyService.Currencies
 
 
 
-        //[Authorize(CurrencyServicePermissions.Currencies.Update)]
+        [Authorize(CurrencyServicePermissions.Currencies.Update)]
         public override async Task<CurrencyDto> UpdateAsync(Guid id, CreateUpdateCurrencyDto input)
         {
 
@@ -118,7 +118,7 @@ namespace Tasky.CurrencyService.Currencies
 
 
 
-        //[Authorize(CurrencyServicePermissions.Currencies.Delete)]
+        [Authorize(CurrencyServicePermissions.Currencies.Delete)]
         public override async Task DeleteAsync(Guid id)
         {
             //check if this currency using by any remittance

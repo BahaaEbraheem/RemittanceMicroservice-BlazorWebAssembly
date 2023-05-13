@@ -35,12 +35,6 @@ namespace Tasky.CustomerService.Customers
             _customerManager = customerManager;
             _customerRepository = customerRepository;
         }
-
-        //public CustomerAppService(CustomerManager customerManager) :base((IRepository<Customer, Guid>)customerManager)
-        //{
-        //    _customerManager = customerManager;
-        //}
-
         public override async Task<PagedResultDto<CustomerDto>> GetListAsync(CustomerPagedAndSortedResultRequestDto input)
         {
             var filter = ObjectMapper.Map<CustomerPagedAndSortedResultRequestDto, CustomerDto>(input);
@@ -112,28 +106,5 @@ namespace Tasky.CustomerService.Customers
 
         }
 
-
-
-
-
-        //public async Task<List<CustomerDto>> GetFromReposListAsync(int skipCount, int maxResultCount, string sorting, CustomerDto filter)
-        //{
-        //    var filter_ = ObjectMapper.Map<CustomerDto, Customer>(filter);
-        //    //var customers= await _customerRepository.GetFromReposListAsync(skipCount, maxResultCount, sorting, filter_);
-        //    var customers= await _customerManager.GetFromReposListAsync(skipCount, maxResultCount, sorting, filter_);
-
-        //    return ObjectMapper.Map<List<Customer>, List<CustomerDto>>(customers);
-
-        //}
-
-        //public async Task<int> GetTotalCountAsync(CustomerDto filter)
-        //{
-        //    return await _customerRepository.GetTotalCountAsync(ObjectMapper.Map<CustomerDto, Customer>(filter));
-        //}
-
-        //public async Task<List<CustomerDto>> GetAllAsync()
-        //{
-        //    return ObjectMapper.Map<List<Customer>, List<CustomerDto>>(await _customerRepository.GetAllAsync());
-        //}
     }
 }

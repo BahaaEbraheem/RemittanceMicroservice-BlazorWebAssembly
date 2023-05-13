@@ -67,7 +67,6 @@ namespace Tasky.CurrencyService.Currencies
         [HttpGet]
         [Route("UpdateAsync")]
         public async Task<CurrencyDto> UpdateAsync(Guid id, CreateUpdateCurrencyDto input)
-
         {
             return await _currencyAppService.UpdateAsync(id, input);
         }

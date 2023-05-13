@@ -44,16 +44,6 @@ public class TaskyBlazorModule : AbpModule
         var environment = context.Services.GetSingletonInstance<IWebAssemblyHostEnvironment>();
         var builder = context.Services.GetSingletonInstance<WebAssemblyHostBuilder>();
 
-
-
-
-        //builder.Services.AddHttpClient<ICustomerService, CustomerService>(client => {
-        //    client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
-        //});
-
-
-
-
         ConfigureAuthentication(builder);
         ConfigureHttpClient(context, environment);
         ConfigureBlazorise(context);

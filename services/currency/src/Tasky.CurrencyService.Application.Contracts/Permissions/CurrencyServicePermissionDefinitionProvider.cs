@@ -8,12 +8,11 @@ public class CurrencyServicePermissionDefinitionProvider : PermissionDefinitionP
 {
     public override void Define(IPermissionDefinitionContext context)
     {
-        var currencyGroup = context.AddGroup(CurrencyServicePermissions.GroupName, L("CurrencyService"));
-        var currencyPermission = currencyGroup.AddPermission(CurrencyServicePermissions.Currencies.Default, L("CurrencyService:Default"));
-        currencyPermission.AddChild(CurrencyServicePermissions.Currencies.Create, L("CurrencyService:Create"));
-        currencyPermission.AddChild(CurrencyServicePermissions.Currencies.Update, L("CurrencyService:Update"));
-        currencyPermission.AddChild(CurrencyServicePermissions.Currencies.Delete, L("CurrencyService:Delete"));
-
+        var currencyGroup = context.AddGroup(CurrencyServicePermissions.GroupName, L("Permission:CurrencyService"));
+        var currencyPermission = currencyGroup.AddPermission(CurrencyServicePermissions.Currencies.Default, L("Permission:Currencies"));
+        currencyPermission.AddChild(CurrencyServicePermissions.Currencies.Create, L("Permission:Create"));
+        currencyPermission.AddChild(CurrencyServicePermissions.Currencies.Update, L("Permission:Update"));
+        currencyPermission.AddChild(CurrencyServicePermissions.Currencies.Delete, L("Permission:Delete"));
     }
 
     private static LocalizableString L(string name)
