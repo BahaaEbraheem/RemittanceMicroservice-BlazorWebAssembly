@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Tasky.CurrencyService;
 using Tasky.CustomerService;
+using Tasky.RemittanceService;
 using Volo.Abp.Application;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.FeatureManagement;
@@ -16,7 +17,9 @@ namespace Tasky.Administration;
     typeof(AbpDddApplicationModule),
     typeof(AbpAutoMapperModule),
    typeof(CurrencyServiceHttpApiClientModule),
-   typeof(CustomerServiceHttpApiClientModule)
+   typeof(CustomerServiceHttpApiClientModule),
+   typeof(RemittanceServiceHttpApiClientModule)
+
 )]
 [DependsOn(typeof(AbpPermissionManagementApplicationModule))]
 [DependsOn(typeof(AbpSettingManagementApplicationModule))]

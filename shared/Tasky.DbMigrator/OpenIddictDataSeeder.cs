@@ -14,6 +14,7 @@ using Volo.Abp.Uow;
 using Microsoft.Extensions.Localization;
 using Volo.Abp;
 using JetBrains.Annotations;
+using Tasky.CurrencyService.Permissions;
 
 namespace Tasky.DbMigrator;
 
@@ -187,6 +188,7 @@ public class OpenIddictDataSeeder : ITransientDependency
                 if (grantType == OpenIddictConstants.GrantTypes.AuthorizationCode || grantType == OpenIddictConstants.GrantTypes.Implicit)
                 {
                     application.Permissions.Add(OpenIddictConstants.Permissions.Endpoints.Authorization);
+
                 }
 
                 if (grantType == OpenIddictConstants.GrantTypes.AuthorizationCode ||

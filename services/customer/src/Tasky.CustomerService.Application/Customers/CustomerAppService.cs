@@ -106,5 +106,9 @@ namespace Tasky.CustomerService.Customers
 
         }
 
+        public Task<List<CustomerDto>> GetAllAsync()
+        {
+            return _customerManager.GetAllAsync();
+        }
     }
 }

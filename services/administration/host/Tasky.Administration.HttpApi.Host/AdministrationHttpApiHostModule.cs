@@ -16,6 +16,7 @@ using Tasky.CustomerService;
 using Tasky.Hosting.Shared;
 using Tasky.IdentityService;
 using Tasky.IdentityService.EntityFrameworkCore;
+using Tasky.RemittanceService;
 using Tasky.SaaS;
 using Volo.Abp;
 using Volo.Abp.Caching;
@@ -32,10 +33,9 @@ namespace Tasky.Administration;
     typeof(AdministrationHttpApiModule),
     typeof(IdentityServiceApplicationContractsModule),
     typeof(IdentityServiceEntityFrameworkCoreModule),
-    //typeof(CurrencyServiceApplicationContractsModule),
-    //typeof(CurrencyServiceEntityFrameworkCoreModule),
     typeof(CurrencyServiceHttpApiModule),
     typeof(CustomerServiceHttpApiModule),
+    typeof(RemittanceServiceHttpApiModule),
     typeof(AbpIdentityDomainModule),
     typeof(SaaSApplicationContractsModule),
     typeof(AbpHttpClientIdentityModelModule)

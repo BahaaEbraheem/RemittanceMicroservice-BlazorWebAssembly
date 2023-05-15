@@ -6,8 +6,9 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
+
     <ItemGroup>
-        <ProjectReference Include="..\..\services\administration\src\Tasky.Administration.EntityFrameworkCore\Tasky.Administration.EntityFrameworkCore.csproj" />
-        <ProjectReference Include="..\Tasky.Hosting.Shared\Tasky.Hosting.Shared.csproj" />
+      <PackageReference Include="Volo.Abp.Core" Version="7.0.2" />
+      <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="7.0.2" />
     </ItemGroup>
 </Project>

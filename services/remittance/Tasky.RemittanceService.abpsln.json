@@ -1,0 +1,7 @@
+{
+  "modules": {
+    "Tasky.RemittanceService": {
+      "path": "Tasky.RemittanceService.abpmdl.json"
+    }
+  }
+}

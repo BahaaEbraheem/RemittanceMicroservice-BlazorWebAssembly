@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Tasky.Administration.EntityFrameworkCore": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:50801;http://localhost:50802"
+    }
+  }
+}

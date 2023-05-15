@@ -20,6 +20,8 @@ using Volo.Abp.TenantManagement.Blazor.WebAssembly;
 using Tasky.CurrencyService;
 using Volo.Abp.Http.Client.IdentityModel;
 using Tasky.CustomerService;
+using Tasky.RemittanceService;
+using Autofac.Core;
 
 namespace Tasky.Blazor;
 
@@ -31,7 +33,9 @@ namespace Tasky.Blazor;
     typeof(AbpSettingManagementBlazorWebAssemblyModule),
     typeof(CurrencyServiceApplicationContractsModule),
     typeof(CustomerServiceApplicationContractsModule),
-      typeof(CurrencyServiceHttpApiClientModule),
+    typeof(RemittanceServiceApplicationContractsModule),
+    typeof(RemittanceServiceHttpApiClientModule),
+    typeof(CurrencyServiceHttpApiClientModule),
     typeof(CustomerServiceHttpApiClientModule),
     typeof(AbpHttpClientIdentityModelModule)
 
@@ -43,7 +47,6 @@ public class TaskyBlazorModule : AbpModule
     {
         var environment = context.Services.GetSingletonInstance<IWebAssemblyHostEnvironment>();
         var builder = context.Services.GetSingletonInstance<WebAssemblyHostBuilder>();
-
         ConfigureAuthentication(builder);
         ConfigureHttpClient(context, environment);
         ConfigureBlazorise(context);
@@ -78,6 +81,7 @@ public class TaskyBlazorModule : AbpModule
 
     private static void ConfigureAuthentication(WebAssemblyHostBuilder builder)
     {
+
         builder.Services.AddOidcAuthentication(options =>
         {
             builder.Configuration.Bind("AuthServer", options.ProviderOptions);
@@ -93,6 +97,7 @@ public class TaskyBlazorModule : AbpModule
             options.ProviderOptions.DefaultScopes.Add("AdministrationService");
             options.ProviderOptions.DefaultScopes.Add("CurrencyService");
             options.ProviderOptions.DefaultScopes.Add("CustomerService");
+            options.ProviderOptions.DefaultScopes.Add("RemittanceService");
         });
     }
 
@@ -104,6 +109,9 @@ public class TaskyBlazorModule : AbpModule
 
     private static void ConfigureHttpClient(ServiceConfigurationContext context, IWebAssemblyHostEnvironment environment)
     {
+      
+
+
         context.Services.AddTransient(sp => new HttpClient
         {
             BaseAddress = new Uri(environment.BaseAddress)

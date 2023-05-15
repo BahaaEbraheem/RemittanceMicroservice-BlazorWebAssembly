@@ -7,6 +7,8 @@ using Tasky.CustomerService.EntityFrameworkCore;
 using Tasky.IdentityService;
 using Tasky.IdentityService.EntityFrameworkCore;
 using Tasky.Microservice.Shared;
+using Tasky.RemittanceService;
+using Tasky.RemittanceService.EntityFrameworkCore;
 using Tasky.SaaS;
 using Tasky.SaaS.EntityFrameworkCore;
 using Volo.Abp.Autofac;
@@ -25,7 +27,9 @@ namespace Tasky.DbMigrator;
     typeof(CurrencyServiceEntityFrameworkCoreModule),
     typeof(CurrencyServiceApplicationContractsModule),
     typeof(CustomerServiceEntityFrameworkCoreModule),
-    typeof(CustomerServiceApplicationContractsModule)
+    typeof(CustomerServiceApplicationContractsModule),
+    typeof(RemittanceServiceEntityFrameworkCoreModule),
+    typeof(RemittanceServiceApplicationContractsModule)
 )]
 public class TaskyDbMigratorModule : AbpModule
 {

@@ -1,0 +1,79 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {},
+      "host": {}
+    }
+  },
+  "packages": {
+    "Tasky.RemittanceService.Domain.Shared": {
+      "path": "src/Tasky.RemittanceService.Domain.Shared/Tasky.RemittanceService.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "Tasky.RemittanceService.Domain": {
+      "path": "src/Tasky.RemittanceService.Domain/Tasky.RemittanceService.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "Tasky.RemittanceService.Application.Contracts": {
+      "path": "src/Tasky.RemittanceService.Application.Contracts/Tasky.RemittanceService.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "Tasky.RemittanceService.Application": {
+      "path": "src/Tasky.RemittanceService.Application/Tasky.RemittanceService.Application.abppkg.json",
+      "folder": "src"
+    },
+    "Tasky.RemittanceService.EntityFrameworkCore": {
+      "path": "src/Tasky.RemittanceService.EntityFrameworkCore/Tasky.RemittanceService.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "Tasky.RemittanceService.MongoDB": {
+      "path": "src/Tasky.RemittanceService.MongoDB/Tasky.RemittanceService.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "Tasky.RemittanceService.HttpApi": {
+      "path": "src/Tasky.RemittanceService.HttpApi/Tasky.RemittanceService.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "Tasky.RemittanceService.HttpApi.Client": {
+      "path": "src/Tasky.RemittanceService.HttpApi.Client/Tasky.RemittanceService.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "Tasky.RemittanceService.TestBase": {
+      "path": "test/Tasky.RemittanceService.TestBase/Tasky.RemittanceService.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "Tasky.RemittanceService.EntityFrameworkCore.Tests": {
+      "path": "test/Tasky.RemittanceService.EntityFrameworkCore.Tests/Tasky.RemittanceService.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Tasky.RemittanceService.MongoDB.Tests": {
+      "path": "test/Tasky.RemittanceService.MongoDB.Tests/Tasky.RemittanceService.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Tasky.RemittanceService.Domain.Tests": {
+      "path": "test/Tasky.RemittanceService.Domain.Tests/Tasky.RemittanceService.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Tasky.RemittanceService.Application.Tests": {
+      "path": "test/Tasky.RemittanceService.Application.Tests/Tasky.RemittanceService.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Tasky.RemittanceService.HttpApi.Host": {
+      "path": "host/Tasky.RemittanceService.HttpApi.Host/Tasky.RemittanceService.HttpApi.Host.abppkg.json",
+      "folder": "host"
+    },
+    "Tasky.RemittanceService.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/Tasky.RemittanceService.HttpApi.Client.ConsoleTestApp/Tasky.RemittanceService.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    },
+    "Tasky.RemittanceService.AuthServer": {
+      "path": "host/Tasky.RemittanceService.AuthServer/Tasky.RemittanceService.AuthServer.abppkg.json",
+      "folder": "host"
+    },
+    "Tasky.RemittanceService.Host.Shared": {
+      "path": "host/Tasky.RemittanceService.Host.Shared/Tasky.RemittanceService.Host.Shared.abppkg.json",
+      "folder": "host"
+    }
+  }
+}

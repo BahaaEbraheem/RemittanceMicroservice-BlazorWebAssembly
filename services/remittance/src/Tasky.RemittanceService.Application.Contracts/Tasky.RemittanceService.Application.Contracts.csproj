@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Tasky.RemittanceService</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="7.0.2" />
+    <PackageReference Include="Volo.Abp.Authorization" Version="7.0.2" />
+    <ProjectReference Include="..\..\..\..\shared\Tasky.Microservice.Shared\Tasky.Microservice.Shared.csproj" />
+    <ProjectReference Include="..\..\..\currency\src\Tasky.CurrencyService.Application.Contracts\Tasky.CurrencyService.Application.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\customer\src\Tasky.CustomerService.Application.Contracts\Tasky.CustomerService.Application.Contracts.csproj" />
+    <ProjectReference Include="..\Tasky.RemittanceService.Domain.Shared\Tasky.RemittanceService.Domain.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -16,7 +16,7 @@ namespace Tasky.CustomerService.Customers
              CustomerPagedAndSortedResultRequestDto, //Used for paging/sorting
              CreateUpdateCustomerDto> //Used to create/update a currency
     {
-        //Task<List<CustomerDto>> GetAllAsync();
+        Task<List<CustomerDto>> GetAllAsync();
 
         //Task<CustomerDto> FindByFullNameAsync(string firstName, string lastName, string fatherName, string motherName);
 

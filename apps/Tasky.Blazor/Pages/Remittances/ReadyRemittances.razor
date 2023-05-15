@@ -1,0 +1,109 @@
+﻿@page "/readyremittances"
+@using Tasky.CustomerService.Customers;
+@using Tasky.Microservice.Shared.Dtos;
+@using Tasky.RemittanceService.Localization;
+@using Tasky.RemittanceService.Remittances;
+@using Volo.Abp.AspNetCore.Components
+@using Volo.Abp.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Web
+@using Volo.Abp.Application.Dtos
+@using Microsoft.AspNetCore.Components.Forms
+@using Volo.Abp.Domain.Entities
+@using Blazorise
+@using Microsoft.JSInterop
+@using Microsoft.Extensions.Localization
+@using Volo.Abp.DependencyInjection
+@inherits TaskyComponentBase
+@attribute [Dependency(ReplaceServices = true)];
+@inject AbpBlazorMessageLocalizerHelper<RemittanceServiceResource> LH
+@inject IStringLocalizer<RemittanceServiceResource> L
+@inject IRemittanceAppService RemittanceAppService
+@inject ICustomerAppService CustomerAppService
+@inject NavigationManager NavigationManager
+
+
+<Card>
+        <CardHeader>
+        <Row Class="justify-content-between">
+            <Column ColumnSize="ColumnSize.IsAuto">
+                <h2>@L["ReadyRemittances"]</h2>
+            </Column>
+  
+        </Row>
+    </CardHeader>
+
+    <CardBody>
+        <DataGrid TItem="RemittanceDto"
+                  Data="RemittanceList"
+                  Filterable
+                  FilterMethod="DataGridFilterMethod.StartsWith"
+                  Responsive
+                  ReadData="OnDataGridReadAsync"
+                  TotalItems="TotalCount"
+                  ShowPager="true"
+                  PageSize="PageSize"
+                  Sortable="true">
+                  
+            <DataGridColumns>
+                <DataGridColumn Width="150px"
+                                TItem="RemittanceDto"
+                                Field="@nameof(RemittanceDto.Id)"
+                                Sortable="true"
+                                Caption="@L["Actions"]">
+                    <DisplayTemplate>
+                        <Dropdown>
+                            <DropdownToggle Color="Color.Primary">
+                                @L["Actions"]
+                            </DropdownToggle>
+                            <DropdownMenu>
+                                       <DropdownItem Clicked="() =>UpdateRemittanceToReadyAsync(context)">
+                                            @L["Approve"]
+                                           </DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="RemittanceDto"
+                                Field="@nameof(RemittanceDto.SerialNumber)"
+                                Caption="@L["SerialNumber"]"></DataGridColumn>
+                <DataGridColumn TItem="RemittanceDto"
+                                Field="@nameof(RemittanceDto.Amount)"
+                                Caption="@L["Amount"]"></DataGridColumn>
+                <DataGridColumn TItem="RemittanceDto"
+                                Field="@nameof(RemittanceDto.TotalAmount)"
+                                Caption="@L["TotalAmount"]"></DataGridColumn>
+                <DataGridColumn TItem="RemittanceDto"
+                                Field="@nameof(RemittanceDto.ReceiverFullName)"
+                                Caption="@L["ReceiverFullName"]"></DataGridColumn>
+                <DataGridColumn TItem="RemittanceDto"
+                Field="@nameof(RemittanceDto.CurrencyName)"
+                                Caption="@L["Currency"]"></DataGridColumn>
+                <DataGridColumn TItem="RemittanceDto"
+             Field="@nameof(RemittanceDto.SenderName)"
+                                Caption="@L["SenderName"]"></DataGridColumn>
+                <DataGridColumn TItem="RemittanceDto"
+                                Field="@nameof(RemittanceDto.CreationTime)"
+                                Caption="@L["CreationTime"]">
+    <DisplayTemplate>
+                        @context.CreationTime.ToString()
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="RemittanceDto"
+                Field="@nameof(RemittanceDto.State)"
+                                Caption="@L["State"]">
+                                <DisplayTemplate>
+              
+                        @L[$"Enum:Remittance_Status:{(int)context.State}"]
+                    </DisplayTemplate>
+                            </DataGridColumn>
+                <DataGridColumn TItem="RemittanceDto"
+                                Field="@nameof(RemittanceDto.StatusDate)"
+                                Caption="@L["StatusDate"]">
+                    <DisplayTemplate>
+                        @context.StatusDate.ToString()
+                    </DisplayTemplate>
+                </DataGridColumn>
+            </DataGridColumns>
+        </DataGrid>
+    </CardBody>
+</Card>

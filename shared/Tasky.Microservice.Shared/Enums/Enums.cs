@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Tasky.CustomerService.Customers.Enums
+namespace Tasky.Microservice.Shared.Enums
 {
     public class Enums
     {

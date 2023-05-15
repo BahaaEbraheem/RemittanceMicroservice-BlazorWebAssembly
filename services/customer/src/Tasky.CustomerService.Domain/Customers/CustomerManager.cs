@@ -1,4 +1,4 @@
-﻿//using RemittanceManagement.Remittances;
+﻿//using RemittanceService.Remittances;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -9,6 +9,7 @@ using Tasky.CustomerService.Customers.Dtos;
 using Volo.Abp;
 using Volo.Abp.Domain.Services;
 using Volo.Abp.ObjectMapping;
+using static Tasky.CustomerService.Permissions.CustomerServicePermissions;
 
 namespace Tasky.CustomerService.Customers
 {
@@ -27,6 +28,12 @@ namespace Tasky.CustomerService.Customers
             _customerRepository = customerRepository;
             //_remittanceRepository = remittanceRepository;
             _objectMapper = objectMapper;
+        }
+
+        public async Task<List<CustomerDto>> GetAllAsync()
+        {
+            return _objectMapper.Map<List<Customer>, List<CustomerDto>>(await _customerRepository.GetAllAsync());
+
         }
 
         public async Task<List<CustomerDto>> GetFromReposListAsync(int skipCount, int maxResultCount, string sorting, CustomerDto filter)
@@ -55,6 +62,8 @@ namespace Tasky.CustomerService.Customers
             //}
             await Task.CompletedTask;
         }
+
+
 
     }
 }

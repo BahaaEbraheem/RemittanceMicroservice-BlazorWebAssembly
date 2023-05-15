@@ -35,6 +35,11 @@ public class CustomerController : CustomerServiceController, ICustomerAppService
     {
         return _customerAppService.DeleteAsync(id);
     }
+    [HttpGet("GetAllAsync")]
+    public Task<List<CustomerDto>> GetAllAsync()
+    {
+        return _customerAppService.GetAllAsync();
+    }
 
     [HttpGet]
     [Route("GetAsync")]

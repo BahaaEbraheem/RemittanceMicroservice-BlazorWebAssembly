@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Domain.Entities.Auditing;
-using static Tasky.CustomerService.Customers.Enums.Enums;
+using static Tasky.Microservice.Shared.Enums.Enums;
 
 namespace Tasky.CustomerService.Customers
 {
