@@ -14,7 +14,7 @@ namespace Tasky.RemittanceService.Remittances
         Task<List<RemittanceDto>> GetAllAsync();
 
         Task<PagedResultDto<RemittanceDto>> GetListAsync(GetRemittanceListDto input);
-        Task<PagedResultDto<RemittanceDto>> GetListRemittancesForCreator(GetRemittanceListPagedAndSortedResultRequestDto input);
+        Task<PagedResultDto<RemittanceDto>> GetListRemittancesForCreatorAsync(GetRemittanceListPagedAndSortedResultRequestDto input);
         Task<PagedResultDto<RemittanceDto>> GetListRemittancesForSupervisor(GetRemittanceListPagedAndSortedResultRequestDto input);
 
         Task<PagedResultDto<RemittanceDto>> GetListRemittancesForReleaser(GetRemittanceListPagedAndSortedResultRequestDto input);

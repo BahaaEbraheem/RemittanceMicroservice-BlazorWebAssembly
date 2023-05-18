@@ -522,7 +522,7 @@ public class RemittanceAppService : RemittanceServiceAppService, IRemittanceAppS
         );
     }
 
-    public async Task<PagedResultDto<RemittanceDto>> GetListRemittancesForCreator(GetRemittanceListPagedAndSortedResultRequestDto input)
+    public async Task<PagedResultDto<RemittanceDto>> GetListRemittancesForCreatorAsync(GetRemittanceListPagedAndSortedResultRequestDto input)
     {
         bool CanCreateRemittance = await AuthorizationService
                  .IsGrantedAsync(RemittanceServicePermissions.Remittances.Create);
@@ -539,7 +539,7 @@ public class RemittanceAppService : RemittanceServiceAppService, IRemittanceAppS
         //var currencies = GetCurrencyLookupAsync().Result.Items.ToList();
         //var customers = GetCustomerLookupAsync().Result.Items.ToList();
         var currencyequeryable = GetCurrencyLookupAsync().Result.Items
-             .WhereIf(!input.CurrencyName.IsNullOrWhiteSpace(), x => x.Name.Contains(input.CurrencyName))
+             .WhereIf(!input.CurrencyName.IsNullOrWhiteSpace(), x => x.Name.Contains(value: input.CurrencyName))
             .ToList();
         var remittance_Statusqueryable = _remittanceStatusRepository.GetQueryableAsync().Result.ToList();
         var customerqueryable = GetCustomerLookupAsync().Result.Items

@@ -38,7 +38,7 @@ namespace Tasky.Blazor.Pages.Remittances
         private string SelectedCurrency { get; set; }
 
         private CreateRemittanceDto NewRemittance { get; set; }
-        private Guid EditingRemittanceId { get; set; }
+        private Guid? EditingRemittanceId { get; set; }
         private UpdateRemittanceDto EditingRemittance { get; set; }
         private CreateUpdateCustomerDto NewCustomer { get; set; }
         private Modal CreateSearchCustomerModal { get; set; }
@@ -46,10 +46,13 @@ namespace Tasky.Blazor.Pages.Remittances
         private Modal CreateCustomerModal { get; set; }
         private Modal CreateRemittanceModal { get; set; }
         private Modal EditRemittanceModal { get; set; }
+
+
         private Validations CreateCustomerValidationsRef;
         private Validations CreateValidationsRef;
-
         private Validations EditValidationsRef;
+
+
         GetRemittanceListPagedAndSortedResultRequestDto getRemittanceListPagedAndSortedResultRequestDto
            = new GetRemittanceListPagedAndSortedResultRequestDto();
         private bool CanCreateRemittance { get; set; }
@@ -87,7 +90,6 @@ namespace Tasky.Blazor.Pages.Remittances
             CanReadyRemittance = await AuthorizationService
              .IsGrantedAsync(RemittanceServicePermissions.Remittances.Ready);
         }
-
         private async Task OnDataGridReadAsync(DataGridReadDataEventArgs<RemittanceDto> e)
         {
             GetRemittanceListPagedAndSortedResultRequestDto getRemittanceListPagedAndSortedResultRequestDto =
@@ -136,9 +138,10 @@ namespace Tasky.Blazor.Pages.Remittances
         private async Task GetRemittancesAsync(GetRemittanceListPagedAndSortedResultRequestDto getRemittanceListPagedAndSortedResultRequestDto)
         {
 
-            PagedResultDto<RemittanceDto> result = new PagedResultDto<RemittanceDto>();
-
-            result = await RemittanceAppService.GetListRemittancesForCreator(
+            //PagedResultDto<RemittanceDto> result = new PagedResultDto<RemittanceDto>();
+            //EditingRemittance = ObjectMapper.Map<RemittanceDto, GetRemittanceListPagedAndSortedResultRequestDto>(remittance);
+            //var result = await RemittanceAppService.GetAllAsync();
+            var result =await RemittanceAppService.GetListRemittancesForCreatorAsync(
                new GetRemittanceListPagedAndSortedResultRequestDto
                {
                    ReceiverFullName = getRemittanceListPagedAndSortedResultRequestDto.ReceiverFullName,
@@ -155,6 +158,7 @@ namespace Tasky.Blazor.Pages.Remittances
            );
             RemittanceList = result.Items;
             TotalCount = (int)result.TotalCount;
+        
         }
         private async Task OnDataGridCustomersReadAsync(DataGridReadDataEventArgs<CustomerDto> e_Customer)
         {
@@ -229,8 +233,7 @@ namespace Tasky.Blazor.Pages.Remittances
 
         private async Task PassCustomer(CustomerDto customerDto, CreateRemittanceDto newRemittance, UpdateRemittanceDto editingRemittance)
         {
-            await CreateValidationsRef.ClearAll();
-            await EditValidationsRef.ClearAll();
+           
             var checkAge = DateTime.Now.Year - customerDto.BirthDate.Year;
             if ((customerDto.BirthDate > DateTime.Now) || (checkAge < 18))
             {
@@ -261,7 +264,7 @@ namespace Tasky.Blazor.Pages.Remittances
 
         private void OpenCreateCustomerModal()
         {
-            CreateCustomerValidationsRef.ClearAll();
+            //CreateCustomerValidationsRef.ClearAll();
 
             NewCustomer = new CreateUpdateCustomerDto();
             CreateCustomerModal.Show();
@@ -270,16 +273,17 @@ namespace Tasky.Blazor.Pages.Remittances
         }
 
 
-        private void OpenCreateSearchCustomerModal(string serialNum)
+        private async void OpenCreateSearchCustomerModal(string serialNum)
         {
+            //await GetCustomersAsync(customerPagedAndSortedResultRequestDto);
 
-            CreateCustomerValidationsRef.ClearAll();
+            //CreateCustomerValidationsRef.ClearAll();
             NewCustomer = new CreateUpdateCustomerDto();
             if (CanCreateRemittance || CanEditRemittance)
             {
-                CreateSearchCustomerModal.Show();
-                CreateRemittanceModal.Hide();
-                EditRemittanceModal.Hide();
+                await CreateSearchCustomerModal.Show();
+                await CreateRemittanceModal.Hide();
+                await EditRemittanceModal.Hide();
             }
         }
 
@@ -295,15 +299,15 @@ namespace Tasky.Blazor.Pages.Remittances
 
         private async Task CreateCustomerAsync()
         {
-            if (await CreateCustomerValidationsRef.ValidateAll())
-            {
+            //if (await CreateCustomerValidationsRef.ValidateAll())
+            //{
                 await CustomerAppService.CreateAsync(NewCustomer);
 
                 await CreateCustomerModal.Hide();
                 await GetCustomersAsync(customerPagedAndSortedResultRequestDto);
 
                 await CreateSearchCustomerModal.Show();
-            }
+            //}
         }
 
         private void OpenCreateRemittanceModal()
@@ -346,8 +350,8 @@ namespace Tasky.Blazor.Pages.Remittances
 
         private async Task CreateRemittanceAsync()
         {
-            if (await CreateValidationsRef.ValidateAll())
-            {
+            //if (await CreateValidationsRef.ValidateAll())
+            //{
                 if (NewRemittance.SenderBy.Equals(null))
                 {
                     await Message.Error(L["please Fill Sender Customer"]);
@@ -371,7 +375,7 @@ namespace Tasky.Blazor.Pages.Remittances
                 await RemittanceAppService.CreateAsync(NewRemittance);
                 await GetRemittancesAsync(getRemittanceListPagedAndSortedResultRequestDto);
                 await CreateRemittanceModal.Hide();
-            }
+            //}
         }
         private async Task UpdateRemittanceToReadyAsync(RemittanceDto Remittance)
         {
@@ -383,12 +387,12 @@ namespace Tasky.Blazor.Pages.Remittances
         private async Task UpdateRemittanceAsync(UpdateRemittanceDto editingRemittance)
         {
 
-            if (await EditValidationsRef.ValidateAll())
-            {
-                await RemittanceAppService.UpdateAsync(EditingRemittanceId, editingRemittance);
+            //if (await EditValidationsRef.ValidateAll())
+            //{
+            await RemittanceAppService.UpdateAsync((Guid)EditingRemittanceId, editingRemittance);
                 await GetRemittancesAsync(getRemittanceListPagedAndSortedResultRequestDto);
                 await EditRemittanceModal.Hide();
-            }
+            //}
         }
 
         private async void ChangeCurrencyByRemittanceType(ChangeEventArgs e)

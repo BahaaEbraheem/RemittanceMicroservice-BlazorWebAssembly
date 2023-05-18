@@ -78,7 +78,7 @@ public class TaskyMenuContributor : IMenuContributor
 
         var TaskyMenu = new ApplicationMenuItem(
        TaskyMenus.Home,
-        "Home",
+        "Statics",
         icon: "fa fa-book"
          );
 

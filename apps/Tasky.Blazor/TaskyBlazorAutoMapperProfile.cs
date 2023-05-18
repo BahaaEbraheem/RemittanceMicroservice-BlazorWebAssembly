@@ -24,6 +24,8 @@ public class TaskyBlazorAutoMapperProfile : Profile
         CreateMap<Customer, CustomerDto>();
         //CreateMap<CustomerDto, UpdateCustomerDto>();
         CreateMap<CustomerDto, CreateUpdateCustomerDto>();
+        CreateMap<CreateUpdateCustomerDto, CustomerDto>()
+         .ForMember(model => model.Id, option => option.Ignore());
         //CreateMap<RemittanceStatusDto, CreateUpdateRemittanceStatusDto>();
 
 
@@ -63,14 +65,21 @@ public class TaskyBlazorAutoMapperProfile : Profile
                .ForMember(model => model.LastModificationTime, option => option.Ignore());
 
         CreateMap<GetRemittanceListPagedAndSortedResultRequestDto, Remittance>()
+              .ForMember(model => model.Id, option => option.Ignore())
               .ForMember(model => model.ExtraProperties, option => option.Ignore())
                .ForMember(model => model.ConcurrencyStamp, option => option.Ignore())
                .ForMember(model => model.Status, option => option.Ignore());
+
+
+        CreateMap<GetRemittanceListPagedAndSortedResultRequestDto, RemittanceDto>()
+             .ForMember(model => model.Id, option => option.Ignore());
+
+        CreateMap<RemittanceDto, GetRemittanceListPagedAndSortedResultRequestDto>();
         /* You can configure your AutoMapper mapping configuration here.
          * Alternatively, you can split your mapping configurations
          * into multiple profile classes for a better organization. */
 
-       
+
 
     }
 }

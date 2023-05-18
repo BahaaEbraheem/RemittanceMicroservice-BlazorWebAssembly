@@ -1,4 +1,5 @@
 ﻿@page "/remittances"
+@namespace Tasky.Blazor.Pages.Remittances
 @using Tasky.CustomerService.Customers;
 @using Tasky.CustomerService.Customers.Dtos;
 @using Tasky.Microservice.Shared.Dtos;
@@ -15,6 +16,11 @@
 @using Microsoft.Extensions.Localization
 @using static Tasky.Microservice.Shared.Enums.Enums;
 @using Volo.Abp.DependencyInjection
+
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@using Microsoft.AspNetCore.Authorization
+@using Volo.Abp.BlazoriseUI;
+
 @inherits TaskyComponentBase
 @inject AbpBlazorMessageLocalizerHelper<RemittanceServiceResource> LH
 @inject IStringLocalizer<RemittanceServiceResource> L
@@ -23,18 +29,18 @@
 @inject NavigationManager NavigationManager
 
 <Card>
-        <CardHeader>
+    <CardHeader>
         <Row Class="justify-content-between">
             <Column ColumnSize="ColumnSize.IsAuto">
                 <h2>@L["CreatedRemittances"]</h2>
             </Column>
             <Column ColumnSize="ColumnSize.IsAuto">
-                  @if (CanCreateRemittance)
+                @if (CanCreateRemittance)
                 {
-                <Button Color="Color.Primary"
+                    <Button Color="Color.Primary"
                         Clicked="OpenCreateRemittanceModal">
-                    @L["NewRemittance"]
-                </Button>
+                        @L["NewRemittance"]
+                    </Button>
                 }
             </Column>
         </Row>
@@ -51,7 +57,7 @@
                   ShowPager="true"
                   PageSize="PageSize"
                   Sortable="true">
-                  
+
             <DataGridColumns>
                 <DataGridColumn Width="150px"
                                 TItem="RemittanceDto"
@@ -65,23 +71,23 @@
                             </DropdownToggle>
                             <DropdownMenu>
                                 @if (CanEditRemittance)
-                                  {
-                                 <DropdownItem Clicked="() => OpenEditRemittanceModal(context)">
+                                {
+                                    <DropdownItem Clicked="() => OpenEditRemittanceModal(context)">
                                         @L["Edit"]
                                     </DropdownItem>
 
-                                  }
+                                }
                                 @if (CanDeleteRemittance)
                                 {
                                     <DropdownItem Clicked="() => DeleteRemittanceAsync(context)">
                                         @L["Delete"]
                                     </DropdownItem>
                                 }
-                               @if (CanReadyRemittance)
+                                @if (CanReadyRemittance)
                                 {
-                                       <DropdownItem Clicked="() =>UpdateRemittanceToReadyAsync(context)">
-                                            @L["Ready"]
-                                            </DropdownItem>
+                                    <DropdownItem Clicked="() =>UpdateRemittanceToReadyAsync(context)">
+                                        @L["Ready"]
+                                    </DropdownItem>
                                 }
                             </DropdownMenu>
                         </Dropdown>
@@ -93,17 +99,17 @@
                 <DataGridColumn TItem="RemittanceDto"
                                 Field="@nameof(RemittanceDto.Amount)"
                                 Caption="@L["Amount"]"></DataGridColumn>
-                                   <DataGridColumn TItem="RemittanceDto"
+                <DataGridColumn TItem="RemittanceDto"
                                 Field="@nameof(RemittanceDto.TotalAmount)"
                                 Caption="@L["TotalAmount"]"></DataGridColumn>
                 <DataGridColumn TItem="RemittanceDto"
                                 Field="@nameof(RemittanceDto.ReceiverFullName)"
                                 Caption="@L["ReceiverFullName"]"></DataGridColumn>
                 <DataGridColumn TItem="RemittanceDto"
-                Field="@nameof(RemittanceDto.CurrencyName)"
+                                Field="@nameof(RemittanceDto.CurrencyName)"
                                 Caption="@L["Currency"]"></DataGridColumn>
                 <DataGridColumn TItem="RemittanceDto"
-             Field="@nameof(RemittanceDto.SenderName)"
+                                Field="@nameof(RemittanceDto.SenderName)"
                                 Caption="@L["SenderName"]"></DataGridColumn>
                 <DataGridColumn TItem="RemittanceDto"
                                 Field="@nameof(RemittanceDto.CreationTime)"
@@ -113,17 +119,17 @@
                     </DisplayTemplate>
                 </DataGridColumn>
                 <DataGridColumn TItem="RemittanceDto"
-                Field="@nameof(RemittanceDto.State)"
+                                Field="@nameof(RemittanceDto.State)"
                                 Caption="@L["State"]">
-                                <DisplayTemplate>
-              
+                    <DisplayTemplate>
+
                         @L[$"Enum:Remittance_Status:{(int)context.State}"]
                     </DisplayTemplate>
-                            </DataGridColumn>
-                                        <DataGridColumn TItem="RemittanceDto"
+                </DataGridColumn>
+                <DataGridColumn TItem="RemittanceDto"
                                 Field="@nameof(RemittanceDto.StatusDate)"
                                 Caption="@L["StatusDate"]">
-                     <DisplayTemplate>
+                    <DisplayTemplate>
                         @context.StatusDate.ToString()
                     </DisplayTemplate>
                 </DataGridColumn>
@@ -134,181 +140,172 @@
 
 
 <Modal @ref="CreateSearchCustomerModal">
-                                  
-          <ModalHeader>
 
-              <ModalTitle>@L["Customers"]</ModalTitle>
-                <CloseButton Clicked="CloseCreateSearchCustomerModal"/>
-                </ModalHeader>
-    <ModalContent>
+    <ModalHeader>
 
-        <Form>
-            
-<DataGrid TItem="CustomerDto"
+        <ModalTitle>@L["Customers"]</ModalTitle>
+        <CloseButton Clicked="CloseCreateSearchCustomerModal" />
+    </ModalHeader>
+            <DataGrid TItem="CustomerDto"
                       Data="CustomerList"
-                     ReadData="OnDataGridCustomersReadAsync" 
-                     Filterable
-                     FilterMethod="DataGridFilterMethod.StartsWith"
-                     Responsive
-                  TotalItems="TotalCount"
-                  ShowPager="true"
-                  PageSize="PageSize">
-            <DataGridColumns>
-        <DataGridColumn Width="150px"
-                                TItem="CustomerDto"
-                                Field="@nameof(CustomerDto.Id)"
-                                Sortable="true"
-                                Caption="@L["Actions"]">
-                    <DisplayTemplate>
-                        <Dropdown>
-                            <DropdownToggle Color="Color.Success">
-                                @L["Actions"]
-                            </DropdownToggle>
-                            <DropdownMenu>
-                                    <DropdownItem Clicked="
-                         () =>PassCustomer(context,NewRemittance,EditingRemittance)">
-                                        @L["Pass"]
-                                    </DropdownItem>
+                      Filterable
+                      FilterMethod="DataGridFilterMethod.StartsWith"
+                      Responsive
+                      ReadData="OnDataGridCustomersReadAsync"
+                      TotalItems="TotalCount"
+                      ShowPager="true"
+                      PageSize="PageSize"
+                      Sortable="true">
+                <DataGridColumns>
+                    <DataGridColumn Width="150px"
+                                    TItem="CustomerDto"
+                                    Field="@nameof(CustomerDto.Id)"
+                                    Sortable="true"
+                                    Caption="@L["Actions"]">
+                        <DisplayTemplate>
+                    <Button Color="Color.Success"
+                            Clicked="() =>PassCustomer(context,NewRemittance,EditingRemittance)">
+                                             @L["Pass"]
+                    </Button>
+                         @*   <Dropdown>
+                                <DropdownToggle >
+                                    @L["Actions"]
+                                </DropdownToggle>
+                                <DropdownMenu>
+                                         <DropdownItem  Clicked="() =>PassCustomer(context,NewRemittance,EditingRemittance)">
+                                             @L["Pass"]
+                                             </DropdownItem>
+                                </DropdownMenu>
+                            </Dropdown>*@
+                        </DisplayTemplate>
+                    </DataGridColumn>
 
+                    <DataGridColumn TItem="CustomerDto"
+                                    Field="@nameof(CustomerDto.FirstName)"
+                                    Caption="@L["FirstName"]"></DataGridColumn>
+                    <DataGridColumn TItem="CustomerDto"
+                                    Field="@nameof(CustomerDto.LastName)"
+                                    Caption="@L["LastName"]">
 
-                             
-                            </DropdownMenu>
-                        </Dropdown>
-                    </DisplayTemplate>
-                </DataGridColumn>
+                    </DataGridColumn>
+                    <DataGridColumn TItem="CustomerDto"
+                                    Field="@nameof(CustomerDto.FatherName)"
+                                    Caption="@L["FatherName"]">
 
-                <DataGridColumn TItem="CustomerDto"
-                                Field="@nameof(CustomerDto.FirstName)"
-                                Caption="@L["FirstName"]"></DataGridColumn>
-                <DataGridColumn TItem="CustomerDto"
-                                Field="@nameof(CustomerDto.LastName)"
-                                Caption="@L["LastName"]">
+                    </DataGridColumn>
+                    <DataGridColumn TItem="CustomerDto"
+                                    Field="@nameof(CustomerDto.MotherName)"
+                                    Caption="@L["MotherName"]">
 
-                </DataGridColumn>
-                <DataGridColumn TItem="CustomerDto"
-                                Field="@nameof(CustomerDto.FatherName)"
-                                Caption="@L["FatherName"]">
-
-                </DataGridColumn>
-                <DataGridColumn TItem="CustomerDto"
-                                Field="@nameof(CustomerDto.MotherName)"
-                                Caption="@L["MotherName"]">
-
-</DataGridColumn>
-</DataGridColumns>
-</DataGrid>
-
-    <ModalFooter>
+                    </DataGridColumn>
+                </DataGridColumns>
+            </DataGrid>
+            <ModalFooter>
                 <Button Color="Color.Secondary"
                         Clicked="CloseCreateSearchCustomerModal">
                     @L["Cancel"]
                 </Button>
-                <Button Color="Color.Primary"                     
+                <Button Color="Color.Primary"
                         Clicked="OpenCreateCustomerModal">
                     @L["NewCustomer"]
                 </Button>
             </ModalFooter>
-          </Form>
-    </ModalContent>
 
 </Modal>
-
-<Modal @ref="CreateCustomerModal" >
-    <ModalContent >
-        <Form>
+ <Modal @ref="CreateCustomerModal">
+            <ModalContent>
+            <Form>
             <ModalHeader>
                 <ModalTitle>@L["NewCustomer"]</ModalTitle>
                 <CloseButton Clicked="CloseCreateCustomerModal" />
             </ModalHeader>
             <ModalBody>
-                <Validations @ref="@CreateCustomerValidationsRef" Model="@NewCustomer" ValidateOnLoad="false">
-
-
-                    <Validation MessageLocalizer="@LH.Localize">
-                        <Field>
-                            <FieldLabel>@L["FirstName"]</FieldLabel>
-                            <TextEdit @bind-Text="@NewCustomer.FirstName">
-                                <Feedback>
-                                    <ValidationError />
-                                </Feedback>
-                            </TextEdit>
-                        </Field>
-                    </Validation>
-                    <Validation MessageLocalizer="@LH.Localize">
-                        <Field>
-                            <FieldLabel>@L["LastName"]</FieldLabel>
-                            <TextEdit @bind-Text="@NewCustomer.LastName">
-                                <Feedback>
-                                    <ValidationError />
-                                </Feedback>
-                            </TextEdit>
-                        </Field>
-                    </Validation>
-                    <Validation MessageLocalizer="@LH.Localize">
-                        <Field>
-                            <FieldLabel>@L["FatherName"]</FieldLabel>
-                            <TextEdit @bind-Text="@NewCustomer.FatherName">
-                                <Feedback>
-                                    <ValidationError />
-                                </Feedback>
-                            </TextEdit>
-                        </Field>
-                    </Validation>
-                    <Validation MessageLocalizer="@LH.Localize">
-                        <Field>
-                            <FieldLabel>@L["MotherName"]</FieldLabel>
-                            <TextEdit @bind-Text="@NewCustomer.MotherName">
-                                <Feedback>
-                                    <ValidationError />
-                                </Feedback>
-                            </TextEdit>
-                        </Field>
-                    </Validation>
-                    <Validation MessageLocalizer="@LH.Localize">
-                        <Field>
-                            <FieldLabel>@L["BirthDate"]</FieldLabel>
-                            <DatePicker @bind-Date="@NewCustomer.BirthDate">
-                                <Feedback>
-                                    <ValidationError />
-                                </Feedback>
-                            </DatePicker>
-                        </Field>
-                    </Validation>
-                    <Validation MessageLocalizer="@LH.Localize">
-                        <Field>
-                            <FieldLabel>@L["Phone"]</FieldLabel>
-                            <TextEdit @bind-Text="@NewCustomer.Phone">
-                                <Feedback>
-                                    <ValidationError />
-                                </Feedback>
-                            </TextEdit>
-                        </Field>
-                    </Validation>
-                    <Validation MessageLocalizer="@LH.Localize">
-                        <Field>
-                            <FieldLabel>@L["Address"]</FieldLabel>
-                            <TextEdit @bind-Text="@NewCustomer.Address">
-                                <Feedback>
-                                    <ValidationError />
-                                </Feedback>
-                            </TextEdit>
-                        </Field>
-                    </Validation>
-                    <Validation MessageLocalizer="@LH.Localize">
-                        <Field>
-                            <FieldLabel>@L["Gender"]</FieldLabel>
-                            <Select TValue="Gender" @bind-SelectedValue="@NewCustomer.Gender">
-                                <SelectItem TValue="Guid" Value="Guid.Empty">@L["What's your Gender"]</SelectItem>
-                                @foreach (int GenderValue in Enum.GetValues(typeof(Gender)))
-                                {
-                                    <SelectItem TValue="Gender" Value="@((Gender) GenderValue)">
-                                        @L[$"Enum:Gender:{GenderValue}"]
-                                    </SelectItem>
-                                }
-                            </Select>
-                        </Field>
-                    </Validation>
-                </Validations>
+                @*  <Validations @ref="@CreateCustomerValidationsRef" Model="@NewCustomer" ValidateOnLoad="false">
+                <Validation MessageLocalizer="@LH.Localize">*@
+                <Field>
+                    <FieldLabel>@L["FirstName"]</FieldLabel>
+                    <TextEdit @bind-Text="@NewCustomer.FirstName">
+                        <Feedback>
+                            <ValidationError />
+                        </Feedback>
+                    </TextEdit>
+                </Field>
+                @*  </Validation>
+                <Validation MessageLocalizer="@LH.Localize">*@
+                <Field>
+                    <FieldLabel>@L["LastName"]</FieldLabel>
+                    <TextEdit @bind-Text="@NewCustomer.LastName">
+                        <Feedback>
+                            <ValidationError />
+                        </Feedback>
+                    </TextEdit>
+                </Field>
+                @*                    </Validation>
+                <Validation MessageLocalizer="@LH.Localize">*@
+                <Field>
+                    <FieldLabel>@L["FatherName"]</FieldLabel>
+                    <TextEdit @bind-Text="@NewCustomer.FatherName">
+                        <Feedback>
+                            <ValidationError />
+                        </Feedback>
+                    </TextEdit>
+                </Field>
+                @*  </Validation>
+                <Validation MessageLocalizer="@LH.Localize">*@
+                <Field>
+                    <FieldLabel>@L["MotherName"]</FieldLabel>
+                    <TextEdit @bind-Text="@NewCustomer.MotherName">
+                        <Feedback>
+                            <ValidationError />
+                        </Feedback>
+                    </TextEdit>
+                </Field>
+                @*</Validation>*@
+                @*<Validation MessageLocalizer="@LH.Localize">*@
+                <Field>
+                    <FieldLabel>@L["BirthDate"]</FieldLabel>
+                    <DatePicker @bind-Date="@NewCustomer.BirthDate">
+                        <Feedback>
+                            <ValidationError />
+                        </Feedback>
+                    </DatePicker>
+                </Field>
+                @* </Validation>
+                <Validation MessageLocalizer="@LH.Localize">*@
+                <Field>
+                    <FieldLabel>@L["Phone"]</FieldLabel>
+                    <TextEdit @bind-Text="@NewCustomer.Phone">
+                        <Feedback>
+                            <ValidationError />
+                        </Feedback>
+                    </TextEdit>
+                </Field>
+                @*</Validation>
+                <Validation MessageLocalizer="@LH.Localize">*@
+                <Field>
+                    <FieldLabel>@L["Address"]</FieldLabel>
+                    <TextEdit @bind-Text="@NewCustomer.Address">
+                        <Feedback>
+                            <ValidationError />
+                        </Feedback>
+                    </TextEdit>
+                </Field>
+                @*    </Validation>
+                <Validation MessageLocalizer="@LH.Localize">*@
+                <Field>
+                    <FieldLabel>@L["Gender"]</FieldLabel>
+                    <Select TValue="Gender" @bind-SelectedValue="@NewCustomer.Gender">
+                        <SelectItem TValue="Guid" Value="Guid.Empty">@L["What's your Gender"]</SelectItem>
+                        @foreach (int GenderValue in Enum.GetValues(typeof(Gender)))
+                        {
+                            <SelectItem TValue="Gender" Value="@((Gender) GenderValue)">
+                                @L[$"Enum:Gender:{GenderValue}"]
+                            </SelectItem>
+                        }
+                    </Select>
+                </Field>
+                @*          </Validation>
+                </Validations>*@
             </ModalBody>
             <ModalFooter>
                 <Button Color="Color.Secondary"
@@ -326,80 +323,86 @@
     </ModalContent>
 </Modal>
 
-<Modal @ref="CreateRemittanceModal" >
-    <ModalContent >
+<Modal @ref="CreateRemittanceModal">
+    <ModalContent>
         <Form>
             <ModalHeader>
                 <ModalTitle>@L["NewRemittance"]</ModalTitle>
                 <CloseButton Clicked="CloseCreateRemittanceModal" />
             </ModalHeader>
             <ModalBody>
-                <Validations @ref="@CreateValidationsRef" Model="@NewRemittance" ValidateOnLoad="false">
-                       <Validation MessageLocalizer="@LH.Localize">
-                        <Field>
-                            <FieldLabel>@L["Amount"]</FieldLabel>
-                            <NumericEdit  TValue="double" @bind-Value="@NewRemittance.Amount">
-                                <Feedback>
-                                    <ValidationError/>
-                                </Feedback>
-                            </NumericEdit>
-                        </Field>
-                    </Validation>
-                        <Field>
-                            <FieldLabel>@L["SenderBy"]</FieldLabel>
-
-                        <TextEdit @bind-value="@NewRemittance.SenderName" Placeholder="Please choose Sender Customer" ReadOnly></TextEdit>
-                            <TextEdit hidden @bind-value="@NewRemittance.SenderBy">
-                            </TextEdit>
-                        <Button Color="Color.Primary" Clicked="()=>OpenCreateSearchCustomerModal(NewRemittance.SerialNumber)">.....</Button>
-                       </Field>
-                       <Validation MessageLocalizer="@LH.Localize">
-                        <Field>
-                            <FieldLabel>@L["Type"]</FieldLabel>
-
-
-                            <Select TValue="RemittanceType" @onchange="ChangeCurrencyByRemittanceType" @bind-SelectedValue="@NewRemittance.Type">
-                                <SelectItem TValue="Guid" Value="Guid.Empty">@L["ChooseInternalOrExternal?"]</SelectItem>
-
-                                @foreach (int RemittanceTypeValue in Enum.GetValues(typeof(RemittanceType)))
-                                {
-                                    <SelectItem TValue="RemittanceType"  Value="@((RemittanceType) RemittanceTypeValue)">
-                                        @L[$"Enum:RemittanceType:{RemittanceTypeValue}"]
-                                    </SelectItem>
-                                }
-                            </Select>
-                        </Field>
-                    </Validation>
-                       <Validation MessageLocalizer="@LH.Localize">
-                        <Field>
-                            <FieldLabel>@L["Currency"]</FieldLabel>
+                @*<Validations @ref="@CreateValidationsRef"  ValidateOnLoad="false" Model="@NewRemittance">*@
+                @*  <Validation MessageLocalizer="@LH.Localize">*@
+                <Field>
+                    <FieldLabel>@L["Amount"]</FieldLabel>
+                    <NumericEdit TValue="double" @bind-Value="@NewRemittance.Amount">
+                        <Feedback>
+                            <ValidationError />
+                        </Feedback>
+                    </NumericEdit>
+                </Field>
+                @*</Validation>*@
+                <Field>
+                    <FieldLabel>@L["SenderBy"]</FieldLabel>
+                    <TextEdit @bind-value="@NewRemittance.SenderName" Placeholder="Please choose Sender Customer" ReadOnly></TextEdit>
+                    <NumericEdit @bind-Value="@NewRemittance.SenderBy">
+                        <Feedback>
+                            <ValidationError />
+                        </Feedback>
+                    </NumericEdit>
+                    @*  <TextEdit  @bind-value="@NewRemittance.SenderBy">
+                    </TextEdit>*@
+                    <Button Color="Color.Primary" Clicked="()=>OpenCreateSearchCustomerModal(NewRemittance.SerialNumber)">.....</Button>
+                </Field>
+                @*                       <Validation MessageLocalizer="@LH.Localize">
+                *@ 
+                <Field>
+                    <FieldLabel>@L["Type"]</FieldLabel>
 
 
-                            <Select TValue="Guid" @bind-SelectedValue="@NewRemittance.CurrencyId">
-                                <SelectItem TValue="Guid" Value="Guid.Empty">@L["PickAnCurrency"]</SelectItem>
-                               
-                                         @foreach (var currency in currencyList)
-                                           {
-                                        <SelectItem TValue="Guid" Value="@currency.Id">
-                                            @currency.Name
-                                        </SelectItem>
-                                   
-                                           }
-                            </Select>
-                        </Field>
+                    <Select TValue="RemittanceType" @onchange="ChangeCurrencyByRemittanceType" @bind-SelectedValue="@NewRemittance.Type">
+                        <SelectItem TValue="Guid" Value="Guid.Empty">@L["ChooseInternalOrExternal?"]</SelectItem>
 
-                    </Validation>
-                       <Validation MessageLocalizer="@LH.Localize">
-                        <Field>
-                            <FieldLabel>@L["ReceiverFullName"]</FieldLabel>
-                            <TextEdit @bind-Text="@NewRemittance.ReceiverFullName">
-                                <Feedback>
-                                    <ValidationError/>
-                                </Feedback>
-                            </TextEdit>
-                        </Field>
-                    </Validation>
-                </Validations>
+                        @foreach (int RemittanceTypeValue in Enum.GetValues(typeof(RemittanceType)))
+                        {
+                            <SelectItem TValue="RemittanceType" Value="@((RemittanceType) RemittanceTypeValue)">
+                                @L[$"Enum:RemittanceType:{RemittanceTypeValue}"]
+                            </SelectItem>
+                        }
+                    </Select>
+                </Field>
+                @*  </Validation>*@
+                @*                       <Validation MessageLocalizer="@LH.Localize">
+                *@  
+                <Field>
+                    <FieldLabel>@L["Currency"]</FieldLabel>
+
+
+                    <Select TValue="Guid" @bind-SelectedValue="@NewRemittance.CurrencyId">
+                        <SelectItem TValue="Guid" Value="Guid.Empty">@L["PickAnCurrency"]</SelectItem>
+
+                        @foreach (var currency in currencyList)
+                        {
+                            <SelectItem TValue="Guid" Value="@currency.Id">
+                                @currency.Name
+                            </SelectItem>
+
+                        }
+                    </Select>
+                </Field>
+                @*                    </Validation>
+                <Validation MessageLocalizer="@LH.Localize">
+                *@   
+                <Field>
+                    <FieldLabel>@L["ReceiverFullName"]</FieldLabel>
+                    <TextEdit @bind-value="@NewRemittance.ReceiverFullName">
+                        <Feedback>
+                            <ValidationError />
+                        </Feedback>
+                    </TextEdit>
+                </Field>
+                @*  </Validation>*@
+                @*     </Validations>*@
             </ModalBody>
             <ModalFooter>
                 <Button Color="Color.Secondary"
@@ -418,34 +421,34 @@
 </Modal>
 
 <Modal @ref="EditRemittanceModal">
-  <ModalContent>
+    <ModalContent>
         <Form>
             <ModalHeader>
                 <ModalTitle>@L["EditRemittance"],@L["SerialNumber"]:@EditingRemittance.SerialNumber</ModalTitle>
-                        <CloseButton Clicked="CloseEditRemittanceModal" />
-                    </ModalHeader>
+                <CloseButton Clicked="CloseEditRemittanceModal" />
+            </ModalHeader>
             <ModalBody>
                 <Validations @ref="@EditValidationsRef" Model="@EditingRemittance" ValidateOnLoad="false">
-                     <Validation MessageLocalizer="@LH.Localize">
+                    <Validation MessageLocalizer="@LH.Localize">
                         <Field>
                             <FieldLabel>@L["Amount"]</FieldLabel>
-                                 <NumericEdit TValue="double" @bind-Value="@EditingRemittance.Amount">
+                            <NumericEdit TValue="double" @bind-Value="@EditingRemittance.Amount">
                                 <Feedback>
                                     <ValidationError />
                                 </Feedback>
                             </NumericEdit>
                         </Field>
-                          </Validation>
-                               <Field>
+                    </Validation>
+                    <Field>
                         <FieldLabel>@L["SenderBy"]</FieldLabel>
                         <TextEdit @bind-value="@EditingRemittance.SenderName" ReadOnly />
-                       
+
                         <TextEdit hidden @bind-value="@EditingRemittance.SenderBy">
                         </TextEdit>
                         <Button Color="Color.Primary" Clicked="()=>OpenCreateSearchCustomerModal(EditingRemittance.SerialNumber)">.....</Button>
                     </Field>
 
-                            <Validation MessageLocalizer="@LH.Localize">
+                    <Validation MessageLocalizer="@LH.Localize">
                         <Field>
                             <FieldLabel>@L["Type"]</FieldLabel>
                             <Select TValue="RemittanceType" @onchange="ChangeCurrencyByRemittanceType" @bind-SelectedValue="@EditingRemittance.Type">
@@ -463,39 +466,39 @@
                         <Field>
                             <FieldLabel>@L["Currency"]</FieldLabel>
 
-                                         <Select TValue="Guid" @bind-SelectedValue="@EditingRemittance.CurrencyId">
-                                              @foreach (var currency in currencyList)
-                                           {
-                                        <SelectItem TValue="Guid" Value="@currency.Id">
-                                            @currency.Name
-                                        </SelectItem>
-                                           }
-                                             </Select>
-
-
-
-                          @*      <SelectItem TValue="Guid" Value="Guid.Empty">@L["PickAnCurrency"]</SelectItem>
+                            <Select TValue="Guid" @bind-SelectedValue="@EditingRemittance.CurrencyId">
                                 @foreach (var currency in currencyList)
                                 {
                                     <SelectItem TValue="Guid" Value="@currency.Id">
                                         @currency.Name
                                     </SelectItem>
-                                }*@
+                                }
+                            </Select>
+
+
+
+                            @*      <SelectItem TValue="Guid" Value="Guid.Empty">@L["PickAnCurrency"]</SelectItem>
+                            @foreach (var currency in currencyList)
+                            {
+                            <SelectItem TValue="Guid" Value="@currency.Id">
+                            @currency.Name
+                            </SelectItem>
+                            }*@
 
 
                         </Field>
 
                     </Validation>
-            
+
                     <Validation MessageLocalizer="@LH.Localize">
                         <Field>
                             <FieldLabel>@L["ReceiverFullName"]</FieldLabel>
                             <TextEdit @bind-Text="@EditingRemittance.ReceiverFullName">
-                             
+
                             </TextEdit>
                         </Field>
                     </Validation>
-               
+
                 </Validations>
             </ModalBody>
             <ModalFooter>

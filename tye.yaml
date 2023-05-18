@@ -36,3 +36,18 @@ services:
   bindings:
     - protocol: https
       port: 5000
+- name: tasky-currencyservice-httpapi-host
+  project: services/currency/host/Tasky.CurrencyService.HttpApi.Host/Tasky.CurrencyService.HttpApi.Host.csproj
+  bindings:
+    - protocol: https
+      port: 7005
+- name: tasky-customerservice-httpapi-host
+  project: services/customer/host/Tasky.CustomerService.HttpApi.Host/Tasky.CustomerService.HttpApi.Host.csproj
+  bindings:
+    - protocol: https
+      port: 7006
+- name: tasky-remittanceservice-httpapi-host
+  project: services/remittance/host/Tasky.RemittanceService.HttpApi.Host/Tasky.RemittanceService.HttpApi.Host.csproj
+  bindings:
+    - protocol: https
+      port: 7007

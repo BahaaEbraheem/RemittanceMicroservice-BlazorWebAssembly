@@ -7,6 +7,6 @@ namespace Tasky.Microservice.Shared.Dtos
 {
     public class GetRemittanceListDto : PagedAndSortedResultRequestDto
     {
-        public string Filter { get; set; }
+        public string? Filter { get; set; }
     }
 }

@@ -47,6 +47,9 @@ public class TaskyBlazorModule : AbpModule
     {
         var environment = context.Services.GetSingletonInstance<IWebAssemblyHostEnvironment>();
         var builder = context.Services.GetSingletonInstance<WebAssemblyHostBuilder>();
+
+
+
         ConfigureAuthentication(builder);
         ConfigureHttpClient(context, environment);
         ConfigureBlazorise(context);
@@ -77,6 +80,7 @@ public class TaskyBlazorModule : AbpModule
         context.Services
             .AddBootstrap5Providers()
             .AddFontAwesomeIcons();
+        //context.Services.AddBlazoredModal();
     }
 
     private static void ConfigureAuthentication(WebAssemblyHostBuilder builder)

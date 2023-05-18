@@ -17,7 +17,7 @@ namespace Tasky.Microservice.Shared.Dtos
 
         [Required]
         public RemittanceType Type { get; set; }
-        public string SerialNumber { get; set; }
+        public string? SerialNumber { get; set; }
 
         //[Required]
 
@@ -31,17 +31,17 @@ namespace Tasky.Microservice.Shared.Dtos
         public DateTime? ReleasedDate { get; set; }
         [Required]
         public Guid SenderBy { get; set; }
-        public string SenderName { get; set; }
+        public string? SenderName { get; set; }
         public Guid? ReceiverBy { get; set; }
         [Required]
-        public string ReceiverFullName { get; set; }
-        public string ReceiverName { get; set; }
+        public string? ReceiverFullName { get; set; }
+        public string? ReceiverName { get; set; }
 
         [Required]
         public Guid CurrencyId { get; set; }
 
 
-        public string CurrencyName { get; set; }
+        public string? CurrencyName { get; set; }
         public Remittance_Status State { get; set; }
 
         //public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

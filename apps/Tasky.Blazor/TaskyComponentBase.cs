@@ -6,5 +6,6 @@ public abstract class TaskyComponentBase : AbpComponentBase
 {
     protected TaskyComponentBase()
     {
+        //LocalizationResource = typeof(TaskyResource);
     }
 }

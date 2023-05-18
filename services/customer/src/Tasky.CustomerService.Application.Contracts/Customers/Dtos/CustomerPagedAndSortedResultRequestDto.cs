@@ -9,18 +9,18 @@ namespace Tasky.CustomerService.Customers.Dtos
 {
     public class CustomerPagedAndSortedResultRequestDto : PagedAndSortedResultRequestDto
     {
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
 
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
 
-        public string FatherName { get; set; }
+        public string? FatherName { get; set; }
 
-        public string MotherName { get; set; }
+        public string? MotherName { get; set; }
         public DateTime BirthDate { get; set; }
 
 
-        public string Phone { get; set; }
-        public string Address { get; set; }
+        public string? Phone { get; set; }
+        public string? Address { get; set; }
 
         public Gender Gender { get; set; } = Gender.Male;
         public DateTime? LastModificationTime { get; set; }

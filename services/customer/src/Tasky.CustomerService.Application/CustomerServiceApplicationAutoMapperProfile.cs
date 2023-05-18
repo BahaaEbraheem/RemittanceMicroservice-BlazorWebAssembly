@@ -51,8 +51,9 @@ public class CustomerServiceApplicationAutoMapperProfile : Profile
       .ForMember(model => model.Id, option => option.Ignore());
 
         ;
+        CreateMap<CustomerDto, CreateUpdateCustomerDto>();
         CreateMap<CreateUpdateCustomerDto, CustomerDto>()
-            .ForMember(model => model.Id, option => option.Ignore());
+         .ForMember(model => model.Id, option => option.Ignore());
         //.ForMember(model => model.LastModifierId, option => option.Ignore())
         //     .ForMember(model => model.CreatorId, option => option.Ignore())
         //     .ForMember(model => model.CreationTime, option => option.Ignore())

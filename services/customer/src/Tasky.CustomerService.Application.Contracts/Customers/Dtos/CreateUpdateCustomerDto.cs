@@ -9,16 +9,16 @@ namespace Tasky.CustomerService.Customers.Dtos
     public class CreateUpdateCustomerDto : IValidatableObject
     {
         [Required]
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
         [Required]
 
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
         [Required]
 
-        public string FatherName { get; set; }
+        public string? FatherName { get; set; }
         [Required]
 
-        public string MotherName { get; set; }
+        public string? MotherName { get; set; }
         [Required]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -26,9 +26,9 @@ namespace Tasky.CustomerService.Customers.Dtos
 
         [Required]
 
-        public string Phone { get; set; }
-
-        public string Address { get; set; }
+        public string? Phone { get; set; }
+            
+        public string? Address { get; set; }
         [Required]
 
         public Gender Gender { get; set; }

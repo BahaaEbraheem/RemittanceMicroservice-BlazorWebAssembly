@@ -10,11 +10,8 @@ using Volo.Abp.Validation;
 
 namespace Tasky.RemittanceService.Remittances;
 
-//[Area(RemittanceManagementRemoteServiceConsts.ModuleName)]
-//[RemoteService(Name = RemittanceManagementRemoteServiceConsts.RemoteServiceName)]
-//[Route("api/RemittanceManagement/remittance")]
-[RemoteService]
-[Area("remittanceService")]
+[Area(RemittanceServiceRemoteServiceConsts.ModuleName)]
+[RemoteService(Name = RemittanceServiceRemoteServiceConsts.RemoteServiceName)]
 [Route("api/remittanceService/remittance")]
 public class RemittanceController : RemittanceServiceController, IRemittanceAppService
 {
@@ -57,18 +54,16 @@ public class RemittanceController : RemittanceServiceController, IRemittanceAppS
     }
 
     [HttpGet]
-    [DisableValidation]
-    [Route("GetList")]
+    [Route("GetListAsync")]
     public virtual async Task<PagedResultDto<RemittanceDto>> GetListAsync(GetRemittanceListDto input)
     {
         return await _remittanceAppService.GetListAsync(input);
     }
     [HttpGet]
-    [DisableValidation]
-    [Route("GetListRemittancesForCreator")]
-    public virtual async Task<PagedResultDto<RemittanceDto>> GetListRemittancesForCreator(GetRemittanceListPagedAndSortedResultRequestDto input)
+    [Route("GetListRemittancesForCreatorAsync")]
+    public virtual async Task<PagedResultDto<RemittanceDto>> GetListRemittancesForCreatorAsync(GetRemittanceListPagedAndSortedResultRequestDto input)
     {
-        return await _remittanceAppService.GetListRemittancesForCreator(input);
+        return await _remittanceAppService.GetListRemittancesForCreatorAsync(input);
     }
     [HttpGet]
     [Route("GetListRemittancesForSupervisor")]

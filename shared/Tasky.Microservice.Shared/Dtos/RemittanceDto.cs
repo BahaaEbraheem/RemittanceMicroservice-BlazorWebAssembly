@@ -14,7 +14,7 @@ namespace Tasky.Microservice.Shared.Dtos
         public double TotalAmount { get; set; }
 
         public RemittanceType Type { get; set; }
-        public string SerialNumber { get; set; }
+        public string? SerialNumber { get; set; }
 
         public Guid? ApprovedBy { get; set; }
 
@@ -24,14 +24,14 @@ namespace Tasky.Microservice.Shared.Dtos
 
         public Guid SenderBy { get; set; }
 
-        public string SenderName { get; set; }
+        public string? SenderName { get; set; }
 
         public Guid? ReceiverBy { get; set; }
-        public string ReceiverFullName { get; set; }
-        public string ReceiverName { get; set; }
+        public string? ReceiverFullName { get; set; }
+        public string? ReceiverName { get; set; }
 
         public Guid? CurrencyId { get; set; }
-        public string CurrencyName { get; set; }
+        public string? CurrencyName { get; set; }
 
 
         public Remittance_Status State { get; set; }
