@@ -12,6 +12,9 @@ using Tasky.Microservice.Shared.Dtos;
 using Tasky.CustomerService.Customers.Dtos;
 using Tasky.RemittanceService.Permissions;
 using static Tasky.Microservice.Shared.Enums.Enums;
+using Tasky.RemittanceService.Remittances;
+using static Tasky.RemittanceService.Permissions.RemittanceServicePermissions;
+using Volo.Abp.ObjectMapping;
 
 namespace Tasky.Blazor.Pages.Remittances
 {
@@ -312,7 +315,7 @@ namespace Tasky.Blazor.Pages.Remittances
 
         private void OpenCreateRemittanceModal()
         {
-            //CreateValidationsRef.ClearAll();
+            CreateValidationsRef.ClearAll();
 
             NewRemittance = new CreateUpdateRemittanceDto();
             CreateRemittanceModal.Show();
@@ -350,8 +353,10 @@ namespace Tasky.Blazor.Pages.Remittances
 
         private async Task CreateRemittanceAsync()
         {
-            //if (await CreateValidationsRef.ValidateAll())
-            //{
+            var x = NewRemittance.ReceiverFullName;
+
+            if (await CreateValidationsRef.ValidateAll())
+            {
                 if (NewRemittance.SenderBy.Equals(null))
                 {
                     await Message.Error(L["please Fill Sender Customer"]);
@@ -372,10 +377,11 @@ namespace Tasky.Blazor.Pages.Remittances
                     await Message.Error(L["please Choose Currency Remittance"]);
                     return;
                 }
+                
                 await RemittanceAppService.CreateAsync(NewRemittance);
                 await GetRemittancesAsync(getRemittanceListPagedAndSortedResultRequestDto);
                 await CreateRemittanceModal.Hide();
-            //}
+            }
         }
         private async Task UpdateRemittanceToReadyAsync(RemittanceDto Remittance)
         {

@@ -34,7 +34,7 @@ namespace Tasky.Microservice.Shared.Dtos
         public string? SenderName { get; set; }
         public Guid? ReceiverBy { get; set; }
         [Required]
-        public string? ReceiverFullName { get; set; }
+        public string ReceiverFullName { get; set; }
         public string? ReceiverName { get; set; }
 
         [Required]
