@@ -37,9 +37,9 @@ namespace Tasky.Blazor.Pages.Remittances
 
         private string SelectedCurrency { get; set; }
 
-        private CreateRemittanceDto NewRemittance { get; set; }
+        private CreateUpdateRemittanceDto NewRemittance { get; set; }
         private Guid? EditingRemittanceId { get; set; }
-        private UpdateRemittanceDto EditingRemittance { get; set; }
+        private CreateUpdateRemittanceDto EditingRemittance { get; set; }
         private CreateUpdateCustomerDto NewCustomer { get; set; }
         private Modal CreateSearchCustomerModal { get; set; }
         private Modal ReleaseRemittanceModal { get; set; }
@@ -64,8 +64,8 @@ namespace Tasky.Blazor.Pages.Remittances
         public Remittances()
         {
             NewCustomer = new CreateUpdateCustomerDto();
-            NewRemittance = new CreateRemittanceDto();
-            EditingRemittance = new UpdateRemittanceDto();
+            NewRemittance = new CreateUpdateRemittanceDto();
+            EditingRemittance = new CreateUpdateRemittanceDto();
         }
 
         protected override async Task OnInitializedAsync()
@@ -231,7 +231,7 @@ namespace Tasky.Blazor.Pages.Remittances
             TotalCount = (int)result.TotalCount;
         }
 
-        private async Task PassCustomer(CustomerDto customerDto, CreateRemittanceDto newRemittance, UpdateRemittanceDto editingRemittance)
+        private async Task PassCustomer(CustomerDto customerDto, CreateUpdateRemittanceDto newRemittance, CreateUpdateRemittanceDto editingRemittance)
         {
            
             var checkAge = DateTime.Now.Year - customerDto.BirthDate.Year;
@@ -314,7 +314,7 @@ namespace Tasky.Blazor.Pages.Remittances
         {
             //CreateValidationsRef.ClearAll();
 
-            NewRemittance = new CreateRemittanceDto();
+            NewRemittance = new CreateUpdateRemittanceDto();
             CreateRemittanceModal.Show();
         }
 
@@ -327,7 +327,7 @@ namespace Tasky.Blazor.Pages.Remittances
         {
             EditValidationsRef.ClearAll();
             EditingRemittanceId = remittance.Id;
-            EditingRemittance = ObjectMapper.Map<RemittanceDto, UpdateRemittanceDto>(remittance);
+            EditingRemittance = ObjectMapper.Map<RemittanceDto, CreateUpdateRemittanceDto>(remittance);
             EditRemittanceModal.Show();
         }
 
@@ -384,7 +384,7 @@ namespace Tasky.Blazor.Pages.Remittances
 
         }
 
-        private async Task UpdateRemittanceAsync(UpdateRemittanceDto editingRemittance)
+        private async Task UpdateRemittanceAsync(CreateUpdateRemittanceDto editingRemittance)
         {
 
             //if (await EditValidationsRef.ValidateAll())

@@ -73,7 +73,7 @@ public class RemittanceAppService : RemittanceServiceAppService, IRemittanceAppS
     }
     [Authorize(RemittanceServicePermissions.Remittances.Create)]
 
-    public async Task<RemittanceDto> CreateAsync(CreateRemittanceDto input)
+    public async Task<RemittanceDto> CreateAsync(CreateUpdateRemittanceDto input)
     {
         try
         {
@@ -96,7 +96,7 @@ public class RemittanceAppService : RemittanceServiceAppService, IRemittanceAppS
 
                 if (!input.CurrencyId.Equals(null) && input.Type == RemittanceType.Internal)
                 {
-                    var currency = await _currencyAppService.GetAsync(input.CurrencyId);
+                    var currency = await _currencyAppService.GetAsync((Guid)input.CurrencyId);
                     if (currency == null || currency.Name != "Syrian Pound")
                     {
                         throw new UserFriendlyException("The Currency Must Be Syrian Pound");
@@ -104,7 +104,7 @@ public class RemittanceAppService : RemittanceServiceAppService, IRemittanceAppS
                 }
                 else if (!input.CurrencyId.Equals(null) && input.Type == RemittanceType.External)
                 {
-                    var currency = await _currencyAppService.GetAsync(input.CurrencyId);
+                    var currency = await _currencyAppService.GetAsync((Guid)input.CurrencyId);
                     if (currency == null || currency.Name == "Syrian Pound")
                     {
                         throw new UserFriendlyException("The Currency Should Not Be Syrian Pound");
@@ -123,7 +123,7 @@ public class RemittanceAppService : RemittanceServiceAppService, IRemittanceAppS
                  input.Amount, input.Type,
                  input.ReceiverFullName,
                  input.CreationTime,
-                 input.CurrencyId,
+                 (Guid)input.CurrencyId,
                  input.SenderBy
                   );
                 await _remittanceRepository.InsertAsync(remittance);
@@ -192,7 +192,7 @@ public class RemittanceAppService : RemittanceServiceAppService, IRemittanceAppS
     }
 
     [Authorize(RemittanceServicePermissions.Remittances.Update)]
-    public async Task UpdateAsync(Guid id, UpdateRemittanceDto input)
+    public async Task UpdateAsync(Guid id, CreateUpdateRemittanceDto input)
     {
         try
         {
@@ -222,7 +222,7 @@ public class RemittanceAppService : RemittanceServiceAppService, IRemittanceAppS
                     //Check Type And Currency 
                     if (!input.CurrencyId.Equals(null) && input.Type == RemittanceType.Internal)
                     {
-                        var currency = await _currencyAppService.GetAsync(input.CurrencyId);
+                        var currency = await _currencyAppService.GetAsync((Guid)input.CurrencyId);
                         if (currency == null || currency.Name != "Syrian Pound")
                         {
                             throw new UserFriendlyException("The Currency Must Be Syrian Pound Exeption");
@@ -230,7 +230,7 @@ public class RemittanceAppService : RemittanceServiceAppService, IRemittanceAppS
                     }
                     else if (!input.CurrencyId.Equals(null) && input.Type == RemittanceType.External)
                     {
-                        var currency = await _currencyAppService.GetAsync(input.CurrencyId);
+                        var currency = await _currencyAppService.GetAsync((Guid)input.CurrencyId);
                         if (currency == null || currency.Name == "Syrian Pound")
                         {
                             throw new UserFriendlyException("The Currency Should Not Be Syrian Pound");
@@ -244,7 +244,7 @@ public class RemittanceAppService : RemittanceServiceAppService, IRemittanceAppS
                     var remittance = await _remittanceRepository.GetAsync(id);
                     var CheckRemittanceIfApproved = await _remittanceManager.UpdateAsync(remittance,
                         input.Amount, input.Type,
-                        input.ReceiverFullName, input.CurrencyId);
+                        input.ReceiverFullName, (Guid)input.CurrencyId);
 
                     remittance.Amount = input.Amount;
                     remittance.Type = input.Type;

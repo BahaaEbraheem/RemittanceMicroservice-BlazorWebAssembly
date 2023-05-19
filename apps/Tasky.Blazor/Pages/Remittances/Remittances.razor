@@ -295,7 +295,7 @@
                 <Field>
                     <FieldLabel>@L["Gender"]</FieldLabel>
                     <Select TValue="Gender" @bind-SelectedValue="@NewCustomer.Gender">
-                        <SelectItem TValue="Guid" Value="Guid.Empty">@L["What's your Gender"]</SelectItem>
+                        <SelectItem>@L["What's your Gender"]</SelectItem>
                         @foreach (int GenderValue in Enum.GetValues(typeof(Gender)))
                         {
                             <SelectItem TValue="Gender" Value="@((Gender) GenderValue)">
@@ -345,11 +345,11 @@
                 <Field>
                     <FieldLabel>@L["SenderBy"]</FieldLabel>
                     <TextEdit @bind-value="@NewRemittance.SenderName" Placeholder="Please choose Sender Customer" ReadOnly></TextEdit>
-                    <NumericEdit @bind-Value="@NewRemittance.SenderBy">
+                  @*  <NumericEdit @bind-Value="@NewRemittance.SenderBy">
                         <Feedback>
                             <ValidationError />
                         </Feedback>
-                    </NumericEdit>
+                    </NumericEdit>*@
                     @*  <TextEdit  @bind-value="@NewRemittance.SenderBy">
                     </TextEdit>*@
                     <Button Color="Color.Primary" Clicked="()=>OpenCreateSearchCustomerModal(NewRemittance.SerialNumber)">.....</Button>
@@ -361,7 +361,7 @@
 
 
                     <Select TValue="RemittanceType" @onchange="ChangeCurrencyByRemittanceType" @bind-SelectedValue="@NewRemittance.Type">
-                        <SelectItem TValue="Guid" Value="Guid.Empty">@L["ChooseInternalOrExternal?"]</SelectItem>
+                        <SelectItem>@L["ChooseInternalOrExternal?"]</SelectItem>
 
                         @foreach (int RemittanceTypeValue in Enum.GetValues(typeof(RemittanceType)))
                         {
@@ -378,12 +378,12 @@
                     <FieldLabel>@L["Currency"]</FieldLabel>
 
 
-                    <Select TValue="Guid" @bind-SelectedValue="@NewRemittance.CurrencyId">
-                        <SelectItem TValue="Guid" Value="Guid.Empty">@L["PickAnCurrency"]</SelectItem>
+                    <Select TValue="Guid?" @bind-SelectedValue="@NewRemittance.CurrencyId">
+                        <SelectItem>@L["PickAnCurrency"]</SelectItem>
 
                         @foreach (var currency in currencyList)
                         {
-                            <SelectItem TValue="Guid" Value="@currency.Id">
+                            <SelectItem TValue="Guid?" Value="@currency.Id">
                                 @currency.Name
                             </SelectItem>
 
@@ -441,10 +441,9 @@
                     </Validation>
                     <Field>
                         <FieldLabel>@L["SenderBy"]</FieldLabel>
-                        <TextEdit @bind-value="@EditingRemittance.SenderName" ReadOnly />
-
-                        <TextEdit hidden @bind-value="@EditingRemittance.SenderBy">
-                        </TextEdit>
+                        <TextEdit @bind-value="@EditingRemittance.SenderName" ReadOnly></TextEdit>
+                   @*     <NumericEdit hidden @bind-value="@EditingRemittance.SenderBy">
+                        </NumericEdit>*@
                         <Button Color="Color.Primary" Clicked="()=>OpenCreateSearchCustomerModal(EditingRemittance.SerialNumber)">.....</Button>
                     </Field>
 
@@ -466,10 +465,10 @@
                         <Field>
                             <FieldLabel>@L["Currency"]</FieldLabel>
 
-                            <Select TValue="Guid" @bind-SelectedValue="@EditingRemittance.CurrencyId">
+                            <Select TValue="Guid?" @bind-SelectedValue="@EditingRemittance.CurrencyId">
                                 @foreach (var currency in currencyList)
                                 {
-                                    <SelectItem TValue="Guid" Value="@currency.Id">
+                                    <SelectItem TValue="Guid?" Value="@currency.Id">
                                         @currency.Name
                                     </SelectItem>
                                 }

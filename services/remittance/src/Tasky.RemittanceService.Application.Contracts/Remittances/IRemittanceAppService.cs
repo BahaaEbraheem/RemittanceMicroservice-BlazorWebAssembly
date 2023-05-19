@@ -22,9 +22,9 @@ namespace Tasky.RemittanceService.Remittances
         Task<PagedResultDto<RemittanceDto>> GetListRemittancesStatusAsync(GetRemittanceListPagedAndSortedResultRequestDto input);
 
 
-        Task<RemittanceDto> CreateAsync(CreateRemittanceDto input);
+        Task<RemittanceDto> CreateAsync(CreateUpdateRemittanceDto input);
 
-        Task UpdateAsync(Guid id, UpdateRemittanceDto input);
+        Task UpdateAsync(Guid id, CreateUpdateRemittanceDto input);
 
         Task DeleteAsync(Guid id);
 

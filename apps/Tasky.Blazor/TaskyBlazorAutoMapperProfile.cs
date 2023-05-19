@@ -29,10 +29,10 @@ public class TaskyBlazorAutoMapperProfile : Profile
         //CreateMap<RemittanceStatusDto, CreateUpdateRemittanceStatusDto>();
 
 
-        CreateMap<RemittanceDto, CreateRemittanceDto>();
-        CreateMap<CreateRemittanceDto, RemittanceDto>();
-        CreateMap<RemittanceDto, UpdateRemittanceDto>();
-        CreateMap<UpdateRemittanceDto, RemittanceDto>();
+        CreateMap<RemittanceDto, CreateUpdateRemittanceDto>();
+        CreateMap<CreateUpdateRemittanceDto, RemittanceDto>();
+        //CreateMap<RemittanceDto, CreateUpdateRemittanceDto>();
+        //CreateMap<UpdateRemittanceDto, RemittanceDto>();
 
 
 

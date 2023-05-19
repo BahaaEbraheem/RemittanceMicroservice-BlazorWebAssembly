@@ -1,4 +1,4 @@
-﻿@page "/approvedremittances"
+﻿@*@page "/approvedremittances"
 @using Tasky.CustomerService.Customers;
 @using Tasky.CustomerService.Customers.Dtos;
 @using Tasky.Microservice.Shared.Dtos;
@@ -161,7 +161,7 @@
                             <Select TValue="Guid" @bind-SelectedValue="@EditingRemittance.CurrencyId" Disabled>
                                 @foreach (var currency in currencyList)
                                 {
-                                            <SelectItem TValue="Guid" Value="@currency.Id">
+                                            <SelectItem TValue="Guid?" Value="@currency.Id">
                                         @currency.Name
                                             </SelectItem>
                                 }
@@ -387,4 +387,4 @@
             </ModalFooter>
         </Form>
     </ModalContent>
-</Modal>
+</Modal>*@

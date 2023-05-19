@@ -7,7 +7,7 @@ namespace Tasky.Microservice.Shared.Dtos
 {
     public class CurrencyLookupDto : EntityDto<Guid>
     {
-        public new Guid Id { get; set; }
+        public new Guid? Id { get; set; }
 
         public string Name { get; set; }
         public string Symbol { get; set; }

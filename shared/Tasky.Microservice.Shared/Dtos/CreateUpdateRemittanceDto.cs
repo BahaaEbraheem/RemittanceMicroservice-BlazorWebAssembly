@@ -10,7 +10,7 @@ using static Tasky.Microservice.Shared.Enums.Enums;
 
 namespace Tasky.Microservice.Shared.Dtos
 {
-    public class CreateRemittanceDto /*: IValidatableObject*/
+    public class CreateUpdateRemittanceDto /*: IValidatableObject*/
     {
         [Required]
         public double Amount { get; set; }
@@ -38,7 +38,7 @@ namespace Tasky.Microservice.Shared.Dtos
         public string? ReceiverName { get; set; }
 
         [Required]
-        public Guid CurrencyId { get; set; }
+        public Guid? CurrencyId { get; set; }
 
 
         public string? CurrencyName { get; set; }

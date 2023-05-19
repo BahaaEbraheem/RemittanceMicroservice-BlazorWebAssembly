@@ -23,7 +23,7 @@ public class RemittanceController : RemittanceServiceController, IRemittanceAppS
     }
     [HttpPost]
     [Route("CreateAsync")]
-    public async Task<RemittanceDto> CreateAsync(CreateRemittanceDto input)
+    public async Task<RemittanceDto> CreateAsync(CreateUpdateRemittanceDto input)
     {
         return await _remittanceAppService.CreateAsync(input);
     }
@@ -106,7 +106,7 @@ public class RemittanceController : RemittanceServiceController, IRemittanceAppS
     }
     [HttpPut]
     [Route("UpdateAsync")]
-    public async Task UpdateAsync(Guid id, UpdateRemittanceDto input)
+    public async Task UpdateAsync(Guid id, CreateUpdateRemittanceDto input)
     {
         await _remittanceAppService.UpdateAsync(id, input);
     }

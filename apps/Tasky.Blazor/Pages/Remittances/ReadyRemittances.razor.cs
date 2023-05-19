@@ -35,9 +35,9 @@ namespace Tasky.Blazor.Pages.Remittances
         private string SelectedCurrency { get; set; }
         GetRemittanceListPagedAndSortedResultRequestDto getRemittanceListPagedAndSortedResultRequestDto
    = new GetRemittanceListPagedAndSortedResultRequestDto();
-        private CreateRemittanceDto NewRemittance { get; set; }
+        private CreateUpdateRemittanceDto NewRemittance { get; set; }
         private Guid EditingRemittanceId { get; set; }
-        private UpdateRemittanceDto EditingRemittance { get; set; }
+        private CreateUpdateRemittanceDto EditingRemittance { get; set; }
         private CreateUpdateCustomerDto NewCustomer { get; set; }
         private Modal CreateSearchCustomerModal { get; set; }
         private Modal ReleaseRemittanceModal { get; set; }
@@ -56,8 +56,8 @@ namespace Tasky.Blazor.Pages.Remittances
         public ReadyRemittances()
         {
             NewCustomer = new CreateUpdateCustomerDto();
-            NewRemittance = new CreateRemittanceDto();
-            EditingRemittance = new UpdateRemittanceDto();
+            NewRemittance = new CreateUpdateRemittanceDto();
+            EditingRemittance = new CreateUpdateRemittanceDto();
         }
 
         protected override async Task OnInitializedAsync()
