@@ -40,40 +40,6 @@ public class CurrencyServiceDataSeederContributor
 
     }
 
-    // private async Task SeedRolesAsync()
-    // {
-
-    //     if (await _roleRepository.GetCountAsync() > 1)
-    //     {
-    //         return;
-    //     }
-    //     await _roleRepository.InsertAsync(
-    //        new IdentityRole
-    //        (
-    //          _guidGenerator.Create(),
-    //           "Creator"
-    //        ),
-    //        autoSave: true
-    //    );
-    //     await _roleRepository.InsertAsync(
-    //        new IdentityRole
-    //        (
-    //          _guidGenerator.Create(),
-    //           "Supervisor"
-    //        ),
-    //        autoSave: true
-    //    );
-    //     await _roleRepository.InsertAsync(
-    //    new IdentityRole
-    //    (
-    //      _guidGenerator.Create(),
-    //       "Releaser"
-    //    ),
-    //    autoSave: true
-    //);
-
-    // }
-
     private async Task SeedCurrenciesAsync()
     {
         if (await _currencyRepository.GetCountAsync() > 0)

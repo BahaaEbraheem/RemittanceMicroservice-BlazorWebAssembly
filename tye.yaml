@@ -51,3 +51,8 @@ services:
   bindings:
     - protocol: https
       port: 7007
+- name: tasky-amlservice-httpapi-host
+  project: services/aml/host/Tasky.AmlService.HttpApi.Host/Tasky.AmlService.HttpApi.Host.csproj
+  bindings:
+    - protocol: https
+      port: 7008

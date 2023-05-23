@@ -188,6 +188,7 @@ public class CurrencyServiceHttpApiHostModule : AbpModule
 
             var configuration = context.GetConfiguration();
             options.OAuthClientId(configuration["AuthServer:SwaggerClientId"]);
+            options.OAuthClientSecret(configuration["AuthServer:SwaggerClientSecret"]);
             options.OAuthScopes("CurrencyService");
         });
         app.UseAuditing();

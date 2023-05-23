@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using Tasky.AmlService;
 using Tasky.CurrencyService;
 using Tasky.CustomerService;
 using Tasky.RemittanceService;
@@ -18,7 +19,8 @@ namespace Tasky.Administration;
     typeof(AbpAutoMapperModule),
    typeof(CurrencyServiceHttpApiClientModule),
    typeof(CustomerServiceHttpApiClientModule),
-   typeof(RemittanceServiceHttpApiClientModule)
+   typeof(RemittanceServiceHttpApiClientModule),
+   typeof(AmlServiceHttpApiClientModule)
 
 )]
 [DependsOn(typeof(AbpPermissionManagementApplicationModule))]

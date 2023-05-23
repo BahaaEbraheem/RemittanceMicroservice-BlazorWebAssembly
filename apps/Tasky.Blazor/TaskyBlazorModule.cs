@@ -22,6 +22,7 @@ using Volo.Abp.Http.Client.IdentityModel;
 using Tasky.CustomerService;
 using Tasky.RemittanceService;
 using Autofac.Core;
+using Tasky.AmlService;
 
 namespace Tasky.Blazor;
 
@@ -37,6 +38,9 @@ namespace Tasky.Blazor;
     typeof(RemittanceServiceHttpApiClientModule),
     typeof(CurrencyServiceHttpApiClientModule),
     typeof(CustomerServiceHttpApiClientModule),
+
+    typeof(AmlServiceApplicationContractsModule),
+    typeof(AmlServiceHttpApiClientModule),
     typeof(AbpHttpClientIdentityModelModule)
 
 
@@ -102,6 +106,7 @@ public class TaskyBlazorModule : AbpModule
             options.ProviderOptions.DefaultScopes.Add("CurrencyService");
             options.ProviderOptions.DefaultScopes.Add("CustomerService");
             options.ProviderOptions.DefaultScopes.Add("RemittanceService");
+            options.ProviderOptions.DefaultScopes.Add("AmlService");
         });
     }
 

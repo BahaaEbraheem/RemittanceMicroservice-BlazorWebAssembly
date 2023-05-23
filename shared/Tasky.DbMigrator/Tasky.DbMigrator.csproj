@@ -44,6 +44,8 @@
     <ItemGroup>
         <ProjectReference Include="..\..\services\administration\src\Tasky.Administration.Application.Contracts\Tasky.Administration.Application.Contracts.csproj" />
         <ProjectReference Include="..\..\services\administration\src\Tasky.Administration.EntityFrameworkCore\Tasky.Administration.EntityFrameworkCore.csproj" />
+        <ProjectReference Include="..\..\services\aml\src\Tasky.AmlService.Application.Contracts\Tasky.AmlService.Application.Contracts.csproj" />
+        <ProjectReference Include="..\..\services\aml\src\Tasky.AmlService.EntityFrameworkCore\Tasky.AmlService.EntityFrameworkCore.csproj" />
         <ProjectReference Include="..\..\services\currency\src\Tasky.CurrencyService.Application.Contracts\Tasky.CurrencyService.Application.Contracts.csproj" />
         <ProjectReference Include="..\..\services\currency\src\Tasky.CurrencyService.EntityFrameworkCore\Tasky.CurrencyService.EntityFrameworkCore.csproj" />
         <ProjectReference Include="..\..\services\customer\src\Tasky.CustomerService.Application.Contracts\Tasky.CustomerService.Application.Contracts.csproj" />

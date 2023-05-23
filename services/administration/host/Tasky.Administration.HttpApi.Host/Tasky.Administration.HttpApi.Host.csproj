@@ -13,6 +13,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\..\..\shared\Tasky.Hosting.Shared\Tasky.Hosting.Shared.csproj" />
+        <ProjectReference Include="..\..\..\aml\src\Tasky.AmlService.HttpApi\Tasky.AmlService.HttpApi.csproj" />
         <ProjectReference Include="..\..\..\currency\src\Tasky.CurrencyService.HttpApi\Tasky.CurrencyService.HttpApi.csproj" />
         <ProjectReference Include="..\..\..\customer\src\Tasky.CustomerService.HttpApi\Tasky.CustomerService.HttpApi.csproj" />
         <ProjectReference Include="..\..\..\identity\src\Tasky.IdentityService.Application.Contracts\Tasky.IdentityService.Application.Contracts.csproj" />

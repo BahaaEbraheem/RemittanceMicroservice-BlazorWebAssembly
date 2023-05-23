@@ -7,7 +7,7 @@ using static Tasky.Microservice.Shared.Enums.Enums;
 
 namespace Tasky.Microservice.Shared.Etos
 {
-    public class RemittanceEto
+    public class RemittanceEto:IEntityDto<Guid>
     {
         public Guid Id { get; set; }
         public Guid RemittanceId { get; set; }

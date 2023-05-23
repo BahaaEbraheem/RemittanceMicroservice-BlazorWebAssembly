@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Logging;
 using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
 using Tasky.Administration.EntityFrameworkCore;
+using Tasky.AmlService;
 using Tasky.CurrencyService;
 using Tasky.CustomerService;
 using Tasky.Hosting.Shared;
@@ -36,6 +37,7 @@ namespace Tasky.Administration;
     typeof(CurrencyServiceHttpApiModule),
     typeof(CustomerServiceHttpApiModule),
     typeof(RemittanceServiceHttpApiModule),
+    typeof(AmlServiceHttpApiModule),
     typeof(AbpIdentityDomainModule),
     typeof(SaaSApplicationContractsModule),
     typeof(AbpHttpClientIdentityModelModule)

@@ -1,0 +1,79 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {},
+      "host": {}
+    }
+  },
+  "packages": {
+    "Tasky.AmlService.Domain.Shared": {
+      "path": "src/Tasky.AmlService.Domain.Shared/Tasky.AmlService.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "Tasky.AmlService.Domain": {
+      "path": "src/Tasky.AmlService.Domain/Tasky.AmlService.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "Tasky.AmlService.Application.Contracts": {
+      "path": "src/Tasky.AmlService.Application.Contracts/Tasky.AmlService.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "Tasky.AmlService.Application": {
+      "path": "src/Tasky.AmlService.Application/Tasky.AmlService.Application.abppkg.json",
+      "folder": "src"
+    },
+    "Tasky.AmlService.EntityFrameworkCore": {
+      "path": "src/Tasky.AmlService.EntityFrameworkCore/Tasky.AmlService.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "Tasky.AmlService.MongoDB": {
+      "path": "src/Tasky.AmlService.MongoDB/Tasky.AmlService.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "Tasky.AmlService.HttpApi": {
+      "path": "src/Tasky.AmlService.HttpApi/Tasky.AmlService.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "Tasky.AmlService.HttpApi.Client": {
+      "path": "src/Tasky.AmlService.HttpApi.Client/Tasky.AmlService.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "Tasky.AmlService.TestBase": {
+      "path": "test/Tasky.AmlService.TestBase/Tasky.AmlService.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "Tasky.AmlService.EntityFrameworkCore.Tests": {
+      "path": "test/Tasky.AmlService.EntityFrameworkCore.Tests/Tasky.AmlService.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Tasky.AmlService.MongoDB.Tests": {
+      "path": "test/Tasky.AmlService.MongoDB.Tests/Tasky.AmlService.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Tasky.AmlService.Domain.Tests": {
+      "path": "test/Tasky.AmlService.Domain.Tests/Tasky.AmlService.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Tasky.AmlService.Application.Tests": {
+      "path": "test/Tasky.AmlService.Application.Tests/Tasky.AmlService.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Tasky.AmlService.HttpApi.Host": {
+      "path": "host/Tasky.AmlService.HttpApi.Host/Tasky.AmlService.HttpApi.Host.abppkg.json",
+      "folder": "host"
+    },
+    "Tasky.AmlService.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/Tasky.AmlService.HttpApi.Client.ConsoleTestApp/Tasky.AmlService.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    },
+    "Tasky.AmlService.AuthServer": {
+      "path": "host/Tasky.AmlService.AuthServer/Tasky.AmlService.AuthServer.abppkg.json",
+      "folder": "host"
+    },
+    "Tasky.AmlService.Host.Shared": {
+      "path": "host/Tasky.AmlService.Host.Shared/Tasky.AmlService.Host.Shared.abppkg.json",
+      "folder": "host"
+    }
+  }
+}

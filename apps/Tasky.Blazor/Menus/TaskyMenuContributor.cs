@@ -3,6 +3,8 @@ using System.Security.Principal;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Tasky.AmlService.Localization;
+using Tasky.AmlService.Permissions;
 using Tasky.CurrencyService.Localization;
 using Tasky.CustomerService.Localization;
 using Tasky.RemittanceService.Localization;
@@ -37,132 +39,68 @@ public class TaskyMenuContributor : IMenuContributor
         }
     }
 
-    //private Task ConfigureMainMenuAsync(MenuConfigurationContext context)
-    //{
-    //    //var l = context.GetLocalizer<CurrencyServiceResource>();
-    //    context.Menu.Items.Insert(
-    //        0,
-    //        new ApplicationMenuItem(
-    //            TaskyMenus.Home,
-    //            "Home",
-    //            "/",
-    //            icon: "fas fa-home"
-    //        )
-    //    );
-    //    context.Menu.AddItem(new ApplicationMenuItem(TaskyMenus.Currencies, displayName: "Currencies",url: "/currencies"));
-    //    context.Menu.AddItem(new ApplicationMenuItem(TaskyMenus.Customers, displayName: "Customers", url: "/customers"));
-
-    //    var administration = context.Menu.GetAdministration();
-    //    Console.WriteLine(administration);
-    //    administration.SetSubItemOrder(TenantManagementMenuNames.GroupName, 1);
-
-    //    administration.SetSubItemOrder(IdentityMenuNames.GroupName, 2);
-    //    administration.SetSubItemOrder(SettingManagementMenus.GroupName, 3);
-
-    //    return Task.CompletedTask;
-    //}
-    private Task ConfigureMainMenuAsync(MenuConfigurationContext context)
+    private async Task ConfigureMainMenuAsync(MenuConfigurationContext context)
     {
         var administration = context.Menu.GetAdministration();
         var l = context.GetLocalizer<CurrencyServiceResource>();
         var l1 = context.GetLocalizer<CustomerServiceResource>();
         var l2 = context.GetLocalizer<RemittanceServiceResource>();
+        var l3 = context.GetLocalizer<AmlServiceResource>();
 
         Console.WriteLine(administration);
         administration.SetSubItemOrder(TenantManagementMenuNames.GroupName, 1);
-
         administration.SetSubItemOrder(IdentityMenuNames.GroupName, 2);
         administration.SetSubItemOrder(SettingManagementMenus.GroupName, 3);
+         
 
 
 
-        var TaskyMenu = new ApplicationMenuItem(
-       TaskyMenus.Home,
-        "Statics",
-        icon: "fa fa-book"
-         );
+        context.Menu.Items.Insert(0, new ApplicationMenuItem(TaskyMenus.Home,"Home","/",icon: "fas fa-home",order: 0));
+
+        var TaskyMenu = new ApplicationMenuItem("MicroseviceStatics","MicroseviceStatics",icon: "fa fa-globe");
+        if (context.IsGrantedAsync(RemittanceServicePermissions.Remittances.Default).Result)
+        {
+            TaskyMenu.AddItem(new ApplicationMenuItem(TaskyMenus.Customers, "Customers", url: "/customers", icon: "fa fa-users"))
+
+                           .AddItem(new ApplicationMenuItem(TaskyMenus.Currencies, "Currencies", url: "/currencies", icon: "fa fa-money"));
+        }
 
         context.Menu.AddItem(TaskyMenu);
 
         //CHECK the PERMISSION
-        if (context.IsGrantedAsync(RemittanceServicePermissions.Remittances.Default).Result)
+      
+   
+
+        if (await context.IsGrantedAsync(RemittanceServicePermissions.Remittances.Default))
         {
-            TaskyMenu.AddItem(
-            new ApplicationMenuItem(
-                TaskyMenus.Customers,
-              "Customers",
-                url: "/customers"
-            )
-        ).AddItem(
-            new ApplicationMenuItem(
-                TaskyMenus.Currencies,
-                "Currencies",
-                url: "/currencies"
-            )
-        );
+            var rootMenuItem = new ApplicationMenuItem("RemittanceService", "RemittanceService");
+            if (await context.IsGrantedAsync(RemittanceServicePermissions.Remittances.Create))
+            {
+                rootMenuItem.AddItem(new ApplicationMenuItem("Remittances", "Remittances", "/remittances"));
+            }
+            if (await context.IsGrantedAsync(RemittanceServicePermissions.Remittances.Approved))
+            {
+                rootMenuItem.AddItem(new ApplicationMenuItem("Remittances", "RemittanceForSupervisor", "/readyremittances"));
+            }
+            if (await context.IsGrantedAsync(RemittanceServicePermissions.Remittances.Released))
+            {
+                rootMenuItem.AddItem(new ApplicationMenuItem("Remittances", "RemittanceForReleaser", "/approvedremittances"));
+            }
+
+            rootMenuItem.AddItem(new ApplicationMenuItem("Remittances", "RemittanceStatusForAll", "/remittancesstatus"));
+            context.Menu.AddItem(rootMenuItem);
 
 
-            context.Menu.Items.Insert(
-               0,
-               new ApplicationMenuItem(
-                   TaskyMenus.RemittancesStatus,
-                   "RemittancesStatus",
-                   url: "/remittancesstatus",
-                   icon: "fas fa-home",
-                   order: 0
-               )
-           );
+
+
+            var rootMenuItemAml = new ApplicationMenuItem("AmlService", l["Menu:AmlService"]);
+            if (await context.IsGrantedAsync(AmlServicePermissions.AmlRemittances.Check))
+            {
+                rootMenuItem.AddItem(new ApplicationMenuItem("AmlRemittances", "AmlRemittances", "/amlremittances"));
+            }
+            context.Menu.AddItem(rootMenuItemAml);
         }
-        context.Menu.Items.Insert(
-          0,
-          new ApplicationMenuItem(
-              TaskyMenus.Home,
-              "Home",
-              "/",
-              icon: "fas fa-home",
-              order: 0
-          )
-      );
-        if (context.IsGrantedAsync(RemittanceServicePermissions.Remittances.Create).Result)
-        {
-            context.Menu.Items.Insert(
-   0,
-   new ApplicationMenuItem(
-                TaskyMenus.Remittances,
-                "Remittances",
-                url: "/remittances",
-       icon: "fas fa-home",
-       order: 0
-                  )
-                 );
-        }
-        if (context.IsGrantedAsync(RemittanceServicePermissions.Remittances.Approved).Result)
-        {
-            context.Menu.Items.Insert(
-   0,
-   new ApplicationMenuItem(
-       TaskyMenus.ReadyRemittances,
-       "ReadyRemittances",
-       url: "/readyremittances",
-       icon: "fas fa-home",
-       order: 0
-                  )
-                 );
-        }
-        if (context.IsGrantedAsync(RemittanceServicePermissions.Remittances.Released).Result)
-        {
-            context.Menu.Items.Insert(
-   0,
-   new ApplicationMenuItem(
-       TaskyMenus.ApprovedRemittances,
-       "ApprovedRemittances",
-       url: "/approvedremittances",
-       icon: "fas fa-home",
-       order: 0
-                  )
-                 );
-        }
-        return Task.CompletedTask;
+
     }
     private Task ConfigureUserMenuAsync(MenuConfigurationContext context)
     {

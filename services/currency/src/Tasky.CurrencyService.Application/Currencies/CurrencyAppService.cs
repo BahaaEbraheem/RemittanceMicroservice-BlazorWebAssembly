@@ -26,7 +26,7 @@ namespace Tasky.CurrencyService.Currencies
     [Authorize(CurrencyServicePermissions.Currencies.Default)]
     public class CurrencyAppService  :
         CrudAppService<
-               Currency, //The Currency entity
+            Currency, //The Currency entity
             CurrencyDto, //Used to show Currencies
             Guid, //Primary key of the Currency entity
             CurrencyPagedAndSortedResultRequestDto, //Used for paging/sorting

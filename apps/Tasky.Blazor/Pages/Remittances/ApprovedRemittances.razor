@@ -1,4 +1,4 @@
-﻿@*@page "/approvedremittances"
+﻿@page "/approvedremittances"
 @using Tasky.CustomerService.Customers;
 @using Tasky.CustomerService.Customers.Dtos;
 @using Tasky.Microservice.Shared.Dtos;
@@ -14,6 +14,10 @@
 @using Microsoft.JSInterop
 @using Microsoft.Extensions.Localization
 @using Volo.Abp.DependencyInjection
+
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@using Microsoft.AspNetCore.Authorization
+@using Volo.Abp.BlazoriseUI;
 @using static Tasky.Microservice.Shared.Enums.Enums;
 @inherits TaskyComponentBase
 @attribute [Dependency(ReplaceServices = true)]
@@ -132,15 +136,15 @@
                           </Validation>
                     <Field>
                         <FieldLabel>@L["SenderBy"]</FieldLabel>
-                        <TextEdit @bind-value="@EditingRemittance.SenderName" Disabled />
-                        <TextEdit hidden @bind-value="@EditingRemittance.SenderBy">
-                        </TextEdit>
+                        <TextEdit @bind-Text="@EditingRemittance.SenderName" Disabled />
+                     @*   <TextEdit hidden @bind-value="@EditingRemittance.SenderBy">
+                        </TextEdit>*@
                     </Field>
                      <Field>
                         <FieldLabel>@L["ReceiverBy"]</FieldLabel>
-                        <TextEdit @bind-value="@EditingRemittance.ReceiverName" Placeholder="Please choose Receiver Customer" Disabled ></TextEdit>
-                        <TextEdit hidden @bind-value="@EditingRemittance.ReceiverBy">
-                        </TextEdit>
+                        <TextEdit @bind-Text="@EditingRemittance.ReceiverName" Placeholder="Please choose Receiver Customer" Disabled ></TextEdit>
+                      @*  <TextEdit hidden @bind-value="@EditingRemittance.ReceiverBy">
+                        </TextEdit>*@
                         <Button Color="Color.Primary" Clicked="OpenCreateSearchCustomerModalForReleaser">.....</Button>
                     </Field>
                         <Field>
@@ -158,7 +162,7 @@
                         <Field>
                             <FieldLabel>@L["Currency"]</FieldLabel>
 
-                            <Select TValue="Guid" @bind-SelectedValue="@EditingRemittance.CurrencyId" Disabled>
+                            <Select TValue="Guid?" @bind-SelectedValue="@EditingRemittance.CurrencyId" Disabled>
                                 @foreach (var currency in currencyList)
                                 {
                                             <SelectItem TValue="Guid?" Value="@currency.Id">
@@ -204,9 +208,7 @@
         <ModalTitle>@L["Customers"]</ModalTitle>
         <CloseButton Clicked="CloseCreateSearchCustomerModal" />
     </ModalHeader>
-    <ModalContent>
 
-        <Form>
 
             <DataGrid TItem="CustomerDto"
                       Data="CustomerList"
@@ -224,20 +226,11 @@
                                     Sortable="true"
                                     Caption="@L["Actions"]">
                         <DisplayTemplate>
-                            <Dropdown>
-                                <DropdownToggle Color="Color.Success">
-                                    @L["Actions"]
-                                </DropdownToggle>
-                                <DropdownMenu>
-                                    <DropdownItem Clicked="
-                         () =>PassCustomer(context,NewRemittance,EditingRemittance)">
-                                        @L["Pass"]
-                                    </DropdownItem>
-
-
-
-                                </DropdownMenu>
-                            </Dropdown>
+                            <Button Color="Color.Success"
+                                    Clicked="() =>PassCustomer(context,NewRemittance,EditingRemittance)">
+                                @L["Pass"]
+                            </Button>
+              
                         </DisplayTemplate>
                     </DataGridColumn>
 
@@ -272,10 +265,12 @@
                     @L["NewCustomer"]
                 </Button>
             </ModalFooter>
-        </Form>
-    </ModalContent>
+
 
 </Modal>
+
+
+
 <Modal @ref="CreateCustomerModal" >
     <ModalContent >
         <Form>
@@ -361,7 +356,7 @@
                         <Field>
                             <FieldLabel>@L["Gender"]</FieldLabel>
                             <Select TValue="Gender" @bind-SelectedValue="@NewCustomer.Gender">
-                                <SelectItem TValue="Guid" Value="Guid.Empty">@L["What's your Gender"]</SelectItem>
+                                <SelectItem>@L["What's your Gender"]</SelectItem>
                                 @foreach (int GenderValue in Enum.GetValues(typeof(Gender)))
                                 {
                                         <SelectItem TValue="Gender" Value="@((Gender) GenderValue)">
@@ -387,4 +382,4 @@
             </ModalFooter>
         </Form>
     </ModalContent>
-</Modal>*@
+</Modal>

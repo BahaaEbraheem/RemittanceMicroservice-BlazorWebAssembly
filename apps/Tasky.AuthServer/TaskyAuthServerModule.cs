@@ -33,6 +33,7 @@ using Microsoft.IdentityModel.Logging;
 using Tasky.CurrencyService.EntityFrameworkCore;
 using Tasky.CustomerService.EntityFrameworkCore;
 using Tasky.RemittanceService.EntityFrameworkCore;
+using Tasky.AmlService.EntityFrameworkCore;
 
 namespace Tasky;
 
@@ -51,6 +52,7 @@ namespace Tasky;
     typeof(CurrencyServiceEntityFrameworkCoreModule),
     typeof(CustomerServiceEntityFrameworkCoreModule),
     typeof(RemittanceServiceEntityFrameworkCoreModule),
+    typeof(AmlServiceEntityFrameworkCoreModule),
     typeof(TaskyMicroserviceModule),
     typeof(AbpAspNetCoreSerilogModule)
     )]

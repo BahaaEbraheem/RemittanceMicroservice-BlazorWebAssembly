@@ -11,11 +11,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
     <PackageReference Include="IdentityModel" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="7.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.1" />
     <PackageReference Include="Volo.Abp.Autofac" Version="7.0.2" />
     <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" Version="7.0.2" />
@@ -30,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\shared\Tasky.Hosting.Shared\Tasky.Hosting.Shared.csproj" />
     <ProjectReference Include="..\..\src\Tasky.CurrencyService.HttpApi\Tasky.CurrencyService.HttpApi.csproj" />
     <ProjectReference Include="..\..\src\Tasky.CurrencyService.Application\Tasky.CurrencyService.Application.csproj" />
     <ProjectReference Include="..\..\src\Tasky.CurrencyService.EntityFrameworkCore\Tasky.CurrencyService.EntityFrameworkCore.csproj" />

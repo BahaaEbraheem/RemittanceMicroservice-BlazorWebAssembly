@@ -36,10 +36,11 @@ using Volo.Abp.Http.Client.IdentityModel.Web;
 using Volo.Abp.Http.Client.IdentityModel;
 using Volo.Abp.Identity;
 using Volo.Abp.Http.Client.Web;
+using Volo.Abp.EventBus.RabbitMq;
 
 namespace Tasky.RemittanceService;
 [DependsOn(
-typeof(RemittanceServiceApplicationModule),
+    typeof(RemittanceServiceApplicationModule),
     typeof(RemittanceServiceEntityFrameworkCoreModule),
     typeof(RemittanceServiceHttpApiModule),
     typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
@@ -55,7 +56,8 @@ typeof(RemittanceServiceApplicationModule),
     typeof(AbpHttpClientIdentityModelModule),
     typeof(AbpHttpClientWebModule),
     typeof(AbpHttpClientIdentityModelWebModule),
-    typeof(AbpIdentityHttpApiClientModule)
+    typeof(AbpIdentityHttpApiClientModule),
+    typeof(AbpEventBusRabbitMqModule)
     )]
 public class RemittanceServiceHttpApiHostModule : AbpModule
 {
@@ -190,6 +192,7 @@ public class RemittanceServiceHttpApiHostModule : AbpModule
 
             var configuration = context.GetConfiguration();
             options.OAuthClientId(configuration["AuthServer:SwaggerClientId"]);
+            options.OAuthClientSecret(configuration["AuthServer:SwaggerClientSecret"]);
             options.OAuthScopes("RemittanceService");
         });
         app.UseAuditing();

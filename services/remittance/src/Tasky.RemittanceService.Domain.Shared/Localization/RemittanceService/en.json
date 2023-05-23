@@ -25,7 +25,7 @@
     "AmessageConfirmingThatTheRemittanceIsReady": "Are you sure to Ready the Remittance '{0}'?",
 
 
-    "Permission:RemittanceService": "Remittance Management",
+    "Permission:RemittanceService": "Remittance Service",
     "Permission:Remittances": "Remittances",
     "Permission:Edit": "Edit",
     "Permission:Delete": "Delete",
@@ -36,11 +36,11 @@
     "Permission:CheckAml": "CheckAml",
 
 
-    "Menu:RemittanceService": "Remittance Management",
+    "Menu:RemittanceService": "Remittance Service",
     "Menu:RemittanceForSupervisor": "Supervisor Remittances",
     "Menu:RemittanceForReleaser": "Releaser Remittances",
     "Menu:RemittanceStatusForAll": "Remittances Status",
-    "RemittanceService": "Remittance Management",
+    "RemittanceService": "Remittance Service",
     "Remittances": "Remittances",
     "Menu:Remittances": "Created Remittances",
 

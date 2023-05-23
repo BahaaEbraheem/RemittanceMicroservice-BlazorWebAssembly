@@ -1,0 +1,101 @@
+﻿@page "/amlremittances"
+@namespace Tasky.Blazor.Pages.Aml_Remittance
+@using Microsoft.AspNetCore.Components.Authorization;
+@using Tasky.AmlService.Samples;
+@using Tasky.Microservice.Shared.Dtos;
+@using Tasky.Microservice.Shared.Etos;
+@using Tasky.AmlService.Localization;
+@using Volo.Abp.AspNetCore.Components
+@using Volo.Abp.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Web
+@using Volo.Abp.Application.Dtos
+@using Microsoft.AspNetCore.Components.Forms
+@using Volo.Abp.Domain.Entities
+@using Blazorise
+@using Microsoft.JSInterop
+@using Microsoft.Extensions.Localization
+@using static Tasky.Microservice.Shared.Enums.Enums;
+@using Volo.Abp.DependencyInjection
+
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@using Microsoft.AspNetCore.Authorization
+@using Volo.Abp.BlazoriseUI;
+
+@inherits TaskyComponentBase
+@inject AbpBlazorMessageLocalizerHelper<AmlServiceResource> LH
+@inject IStringLocalizer<AmlServiceResource> L
+@inject ISampleAppService SampleAppService
+@inject NavigationManager NavigationManager
+
+<Card>
+    <CardHeader>
+        <Row Class="justify-content-between">
+            <Column ColumnSize="ColumnSize.IsAuto">
+                <h2>@L["Aml Remittances"]</h2>
+            </Column>
+        </Row>
+    </CardHeader>
+
+    <CardBody>
+        <DataGrid TItem="RemittanceEto"
+                  Data="AmlRemittanceList"
+                  Filterable
+                  FilterMethod="DataGridFilterMethod.StartsWith"
+                  Responsive
+                  ReadData="OnDataGridReadAsync"
+                  TotalItems="TotalCount"
+                  ShowPager="true"
+                  PageSize="PageSize"
+                  Sortable="true">
+
+            <DataGridColumns>
+                <DataGridColumn Width="150px"
+                                TItem="RemittanceEto"
+                                Field="@nameof(RemittanceEto.Id)"
+                                Sortable="true"
+                                Caption="@L["Actions"]">
+                    <DisplayTemplate>
+
+                        <Button Color="Color.Success"
+                                Clicked="() =>CheckAML(context.Id)">
+                            @L["CheckAML"]
+                        </Button>
+                      
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="RemittanceEto"
+                                Field="@nameof(RemittanceEto.SerialNumber)"
+                                Caption="@L["SerialNumber"]"></DataGridColumn>
+                <DataGridColumn TItem="RemittanceEto"
+                                Field="@nameof(RemittanceEto.Amount)"
+                                Caption="@L["Amount"]"></DataGridColumn>
+                <DataGridColumn TItem="RemittanceEto"
+                                Field="@nameof(RemittanceEto.FirstName)"
+                                Caption="@L["FirstName"]"></DataGridColumn>
+                <DataGridColumn TItem="RemittanceEto"
+                                Field="@nameof(RemittanceEto.FatherName)"
+                                Caption="@L["FatherName"]"></DataGridColumn>
+                <DataGridColumn TItem="RemittanceEto"
+                                Field="@nameof(RemittanceEto.LastName)"
+                                Caption="@L["LastName"]"></DataGridColumn>
+
+                <DataGridColumn TItem="RemittanceEto"
+                                Field="@nameof(RemittanceEto.CreationTime)"
+                                Caption="@L["CreationTime"]">
+                    <DisplayTemplate>
+                        @context.CreationTime.ToString()
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="RemittanceEto"
+                                Field="@nameof(RemittanceEto.State)"
+                                Caption="@L["State"]">
+                    <DisplayTemplate>
+
+                        @L[$"Enum:Remittance_Status:{(int)context.State}"]
+                    </DisplayTemplate>
+                </DataGridColumn>
+
+            </DataGridColumns>
+        </DataGrid>
+        </CardBody>
+        </Card>

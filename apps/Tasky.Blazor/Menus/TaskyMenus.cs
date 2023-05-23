@@ -10,6 +10,7 @@ public class TaskyMenus
     public const string ReadyRemittances = Prefix + ".ReadyRemittances";
     public const string ApprovedRemittances = Prefix + ".ApprovedRemittances";
     public const string RemittancesStatus = Prefix + ".RemittancesStatus";
+    public const string AmlRemittances = Prefix + ".AmlRemittances";
     //Add your menu items here...
 
 }

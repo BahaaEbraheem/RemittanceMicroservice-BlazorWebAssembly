@@ -1,3 +1,4 @@
+using Tasky.AmlService;
 using Tasky.CurrencyService;
 using Tasky.CustomerService;
 using Tasky.RemittanceService;
@@ -16,7 +17,8 @@ namespace Tasky.Administration;
     typeof(AbpAuthorizationModule),
     typeof(CurrencyServiceApplicationContractsModule),
     typeof(CustomerServiceApplicationContractsModule),
-    typeof(RemittanceServiceApplicationContractsModule)
+    typeof(RemittanceServiceApplicationContractsModule),
+    typeof(AmlServiceApplicationContractsModule)
 
 )]
 [DependsOn(typeof(AbpPermissionManagementApplicationContractsModule))]

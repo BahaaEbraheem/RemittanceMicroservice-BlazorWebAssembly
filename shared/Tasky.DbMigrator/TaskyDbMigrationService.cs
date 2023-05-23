@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Tasky.Administration.EntityFrameworkCore;
+using Tasky.AmlService.EntityFrameworkCore;
 using Tasky.CurrencyService.EntityFrameworkCore;
 using Tasky.CustomerService.EntityFrameworkCore;
 using Tasky.IdentityService.EntityFrameworkCore;
@@ -102,6 +103,7 @@ public class TaskyDbMigrationService : ITransientDependency
             await MigrateDatabaseAsync<CurrencyServiceDbContext>(cancellationToken);
             await MigrateDatabaseAsync<CustomerServiceDbContext>(cancellationToken);
             await MigrateDatabaseAsync<RemittanceServiceDbContext>(cancellationToken);
+            await MigrateDatabaseAsync<AmlServiceDbContext>(cancellationToken);
 
             await uow.CompleteAsync(cancellationToken);
         }

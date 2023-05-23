@@ -1,0 +1,17 @@
+{
+  "culture": "en",
+  "texts": {
+    "MyAccount": "My account",
+    "SamplePageMessage": "A sample page for the AmlService module",
+    "AmlService:00001": "Customer Aml Wanted : {customerName}",
+    "Permission:AmlService": "Aml Service",
+    "Menu:AmlService": "Aml Service",
+    "Permission:AmlRemittance": "Aml Remittance",
+    "Permission:Check": "Check",
+    "Enum:Remittance_Status:1": "Draft",
+    "Enum:Remittance_Status:2": "Ready",
+    "Enum:Remittance_Status:3": "CheckedAML",
+    "Enum:Remittance_Status:4": "Approved",
+    "Enum:Remittance_Status:5": "Release"
+  }
+}

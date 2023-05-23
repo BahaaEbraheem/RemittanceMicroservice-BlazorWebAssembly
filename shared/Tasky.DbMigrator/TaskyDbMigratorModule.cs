@@ -1,5 +1,7 @@
 ﻿using Tasky.Administration;
 using Tasky.Administration.EntityFrameworkCore;
+using Tasky.AmlService;
+using Tasky.AmlService.EntityFrameworkCore;
 using Tasky.CurrencyService;
 using Tasky.CurrencyService.EntityFrameworkCore;
 using Tasky.CustomerService;
@@ -29,7 +31,9 @@ namespace Tasky.DbMigrator;
     typeof(CustomerServiceEntityFrameworkCoreModule),
     typeof(CustomerServiceApplicationContractsModule),
     typeof(RemittanceServiceEntityFrameworkCoreModule),
-    typeof(RemittanceServiceApplicationContractsModule)
+    typeof(RemittanceServiceApplicationContractsModule),
+    typeof(AmlServiceEntityFrameworkCoreModule),
+    typeof(AmlServiceApplicationContractsModule)
 )]
 public class TaskyDbMigratorModule : AbpModule
 {
