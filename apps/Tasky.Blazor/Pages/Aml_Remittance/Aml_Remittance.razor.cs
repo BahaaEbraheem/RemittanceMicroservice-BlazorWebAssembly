@@ -64,7 +64,6 @@ namespace Tasky.Blazor.Pages.Aml_Remittance
            );
             AmlRemittanceList = result.Items;
             TotalCount = (int)result.TotalCount;
-
         }
 
 

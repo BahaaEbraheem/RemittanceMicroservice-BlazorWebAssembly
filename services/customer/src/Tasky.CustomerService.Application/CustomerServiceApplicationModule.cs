@@ -2,6 +2,7 @@
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
 using Volo.Abp.Application;
+using Tasky.RemittanceService;
 
 namespace Tasky.CustomerService;
 
@@ -9,7 +10,8 @@ namespace Tasky.CustomerService;
     typeof(CustomerServiceDomainModule),
     typeof(CustomerServiceApplicationContractsModule),
     typeof(AbpDddApplicationModule),
-    typeof(AbpAutoMapperModule)
+    typeof(AbpAutoMapperModule),
+    typeof(RemittanceServiceHttpApiClientModule)
     )]
 public class CustomerServiceApplicationModule : AbpModule
 {

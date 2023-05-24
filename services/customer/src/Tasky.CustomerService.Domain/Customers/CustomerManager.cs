@@ -16,17 +16,15 @@ namespace Tasky.CustomerService.Customers
     public class CustomerManager :DomainService
     {
         private readonly ICustomerRepository _customerRepository;
-        //private readonly IRemittanceAppService _remittanceRepository;
         private readonly IObjectMapper _objectMapper;
 
 
         public CustomerManager(ICustomerRepository customerRepository
             , IObjectMapper objectMapper
-            //,IRemittanceAppService remittanceRepository
+           
             )
         {
             _customerRepository = customerRepository;
-            //_remittanceRepository = remittanceRepository;
             _objectMapper = objectMapper;
         }
 
@@ -48,21 +46,7 @@ namespace Tasky.CustomerService.Customers
             return await _customerRepository.GetTotalCountAsync(_objectMapper.Map<CustomerDto, Customer>(filter));
         }
 
-        public async Task IsCustomerUsedBeforInRemittance(Guid id)
-        {
-            Check.NotNull(id, nameof(id));
-            //var remittancequeryable = await _remittanceRepository.GetListAsync(new GetRemittanceListDto());
-            //var remittance = remittancequeryable.Items.Where(a => (a.SenderBy == id || a.ReceiverBy == id)).FirstOrDefault();
-            //if (remittance != null)
-            //{
-            //    var firstName = _CustomerRepository.GetAsync(id).Result.FirstName;
-            //    var lastName = _CustomerRepository.GetAsync(id).Result.LastName;
-            //    var customerName = firstName + " " + lastName;
-            //    throw new UserFriendlyException("this Customer Used Befor In Remittance");
-            //}
-            await Task.CompletedTask;
-        }
-
+ 
 
 
     }

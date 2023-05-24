@@ -55,7 +55,7 @@ public class TaskyMenuContributor : IMenuContributor
 
 
 
-        context.Menu.Items.Insert(0, new ApplicationMenuItem(TaskyMenus.Home,"Home","/",icon: "fas fa-home",order: 0));
+        context.Menu.Items.Insert(0, new ApplicationMenuItem(TaskyMenus.Home,"Home","/",icon: "fa fa-home",order: 0));
 
         var TaskyMenu = new ApplicationMenuItem("MicroseviceStatics","MicroseviceStatics",icon: "fa fa-globe");
         if (context.IsGrantedAsync(RemittanceServicePermissions.Remittances.Default).Result)
@@ -80,14 +80,14 @@ public class TaskyMenuContributor : IMenuContributor
             }
             if (await context.IsGrantedAsync(RemittanceServicePermissions.Remittances.Approved))
             {
-                rootMenuItem.AddItem(new ApplicationMenuItem("Remittances", "RemittanceForSupervisor", "/readyremittances"));
+                rootMenuItem.AddItem(new ApplicationMenuItem("Remittances", "ForSupervisor", "/readyremittances"));
             }
             if (await context.IsGrantedAsync(RemittanceServicePermissions.Remittances.Released))
             {
-                rootMenuItem.AddItem(new ApplicationMenuItem("Remittances", "RemittanceForReleaser", "/approvedremittances"));
+                rootMenuItem.AddItem(new ApplicationMenuItem("Remittances", "ForReleaser", "/approvedremittances"));
             }
 
-            rootMenuItem.AddItem(new ApplicationMenuItem("Remittances", "RemittanceStatusForAll", "/remittancesstatus"));
+            rootMenuItem.AddItem(new ApplicationMenuItem("Remittances", "StatusForAll", "/remittancesstatus"));
             context.Menu.AddItem(rootMenuItem);
 
 
@@ -96,7 +96,7 @@ public class TaskyMenuContributor : IMenuContributor
             var rootMenuItemAml = new ApplicationMenuItem("AmlService", l["Menu:AmlService"]);
             if (await context.IsGrantedAsync(AmlServicePermissions.AmlRemittances.Check))
             {
-                rootMenuItem.AddItem(new ApplicationMenuItem("AmlRemittances", "AmlRemittances", "/amlremittances"));
+                rootMenuItem.AddItem(new ApplicationMenuItem("AmlRemittances", "ForAmlChecker", "/amlremittances"));
             }
             context.Menu.AddItem(rootMenuItemAml);
         }

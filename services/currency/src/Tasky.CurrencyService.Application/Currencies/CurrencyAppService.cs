@@ -19,6 +19,7 @@ using Volo.Abp.Authorization.Permissions;
 using Tasky.CurrencyService.Permissions;
 using Volo.Abp.Features;
 using Tasky.CurrencyService.Features;
+using Tasky.RemittanceService.Remittances;
 //using Currency.Remittances;
 
 namespace Tasky.CurrencyService.Currencies
@@ -34,13 +35,13 @@ namespace Tasky.CurrencyService.Currencies
         ICurrencyAppService //implement the ICurrencyAppService
     {
         private readonly ICurrencyRepository _currencyRepository;
-        //private readonly IRemittanceAppService _remittanceAppService;
+        private readonly IRemittanceAppService _remittanceAppService;
         private readonly IPermissionChecker _permissionChecker;
         private readonly CurrencyManager _currencyManager;
         public CurrencyAppService(
 
             ICurrencyRepository currencyRepository,
-            //IRemittanceAppService remittanceAppService,
+            IRemittanceAppService remittanceAppService,
             IPermissionChecker permissionChecker,
             CurrencyManager currencyManager)
     : base(currencyRepository)
@@ -48,7 +49,7 @@ namespace Tasky.CurrencyService.Currencies
             _permissionChecker = permissionChecker;
             _currencyRepository = currencyRepository;
             _currencyManager = currencyManager;
-            //_remittanceAppService = remittanceAppService;
+            _remittanceAppService = remittanceAppService;
         }
         public override Task<CurrencyDto> GetAsync(Guid id)
         {
@@ -122,13 +123,13 @@ namespace Tasky.CurrencyService.Currencies
         public override async Task DeleteAsync(Guid id)
         {
             //check if this currency using by any remittance
-            //var remittancequeryable = await _remittanceAppService.GetAllAsync();
-            //var remittance = remittancequeryable.Where(a => a.CurrencyId == id).FirstOrDefault();
-            //if (remittance != null)
-            //{
-            //    string remittanceSerial = remittance.SerialNumber;
-            //    throw new UserFriendlyException("Currency Used By Saving Remittance");
-            //}
+            var remittancequeryable = await _remittanceAppService.GetAllAsync();
+            var remittance = remittancequeryable.Where(a => a.CurrencyId == id).FirstOrDefault();
+            if (remittance != null)
+            {
+                string remittanceSerial = remittance.SerialNumber;
+                throw new UserFriendlyException("Currency Used By Saving Remittance");
+            }
             await base.DeleteAsync(id);
         }
 

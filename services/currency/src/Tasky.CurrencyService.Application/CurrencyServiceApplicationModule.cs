@@ -2,6 +2,7 @@
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
 using Volo.Abp.Application;
+using Tasky.RemittanceService;
 
 namespace Tasky.CurrencyService;
 
@@ -9,7 +10,8 @@ namespace Tasky.CurrencyService;
     typeof(CurrencyServiceDomainModule),
     typeof(CurrencyServiceApplicationContractsModule),
     typeof(AbpDddApplicationModule),
-    typeof(AbpAutoMapperModule)
+    typeof(AbpAutoMapperModule),
+    typeof(RemittanceServiceHttpApiClientModule)
     )]
 public class CurrencyServiceApplicationModule : AbpModule
 {
