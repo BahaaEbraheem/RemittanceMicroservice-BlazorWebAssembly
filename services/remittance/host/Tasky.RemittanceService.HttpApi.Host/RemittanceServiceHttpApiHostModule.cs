@@ -37,6 +37,11 @@ using Volo.Abp.Http.Client.IdentityModel;
 using Volo.Abp.Identity;
 using Volo.Abp.Http.Client.Web;
 using Volo.Abp.EventBus.RabbitMq;
+using Volo.Abp.EventBus.Distributed;
+using Volo.Abp.EntityFrameworkCore.DistributedEvents;
+using Volo.Abp.Domain.Entities.Events.Distributed;
+using Tasky.Microservice.Shared.Etos;
+using Tasky.RemittanceService.Remittances;
 
 namespace Tasky.RemittanceService;
 [DependsOn(
@@ -71,8 +76,20 @@ public class RemittanceServiceHttpApiHostModule : AbpModule
         {
             options.UseSqlServer();
         });
+        //Configure<AbpDistributedEntityEventOptions>(options =>
+        //{
+        //    options.AutoEventSelectors.Add<Remittance>();
+        //    options.EtoMappings.Add<Remittance, RemittanceEto>();
+        //});
+        Configure<AbpDistributedEventBusOptions>(options =>
+        {
+           
+            options.Outboxes.Configure(config =>
+            {
+                config.UseDbContext<RemittanceServiceDbContext>();
+            });
+        });
 
-   
 
         if (hostingEnvironment.IsDevelopment())
         {

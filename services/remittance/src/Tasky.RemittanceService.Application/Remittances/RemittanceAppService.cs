@@ -265,7 +265,6 @@ public class RemittanceAppService : RemittanceServiceAppService, IRemittanceAppS
 
     }
 
-
     [Authorize(RemittanceServicePermissions.Remittances.Ready)]
 
     public async Task SetReady(RemittanceDto input)
@@ -287,21 +286,22 @@ public class RemittanceAppService : RemittanceServiceAppService, IRemittanceAppS
                     await _remittanceStatusRepository.InsertAsync(remittanceStatus);
                     var customer = await _customerAppService.GetAsync(input.SenderBy);
 
-                    await _distributedEventBus.PublishAsync<RemittanceEto>(eventData: new RemittanceEto
-                    {
-                        RemittanceId = createdRemittance.Id,
-                        SerialNumber = createdRemittance.SerialNumber,
-                        Type = createdRemittance.Type,
-                        SenderBy = createdRemittance.SenderBy,
-                        Amount = createdRemittance.Amount,
-                        CurrencyId = createdRemittance.CurrencyId,
-                        State = remittanceStatus.State,
+                    await _distributedEventBus.PublishAsync<RemittanceEto>(
+                        eventData: new RemittanceEto
+                        {
+                            RemittanceId = createdRemittance.Id,
+                            SerialNumber = createdRemittance.SerialNumber,
+                            Type = createdRemittance.Type,
+                            SenderBy = createdRemittance.SenderBy,
+                            Amount = createdRemittance.Amount,
+                            CurrencyId = createdRemittance.CurrencyId,
+                            State = remittanceStatus.State,
 
-                        FirstName = customer.FirstName,
-                        FatherName = customer.FatherName,
-                        LastName = customer.LastName,
-                        MotherName = customer.MotherName,
-                    });
+                            FirstName = customer.FirstName,
+                            FatherName = customer.FatherName,
+                            LastName = customer.LastName,
+                            MotherName = customer.MotherName,
+                        }, useOutbox: true);
                 }
             }
         }
