@@ -16,6 +16,7 @@ public class AmlServiceApplicationAutoMapperProfile : Profile
                 .ForMember(model => model.ExtraProperties, option => option.Ignore())
                 .ForMember(model => model.ConcurrencyStamp, option => option.Ignore());
 
-        CreateMap<AmlRemittance, RemittanceEto>();
+        CreateMap<AmlRemittance, RemittanceEto>()
+            .ForMember(model => model.Properties, option => option.Ignore());
     }
 }

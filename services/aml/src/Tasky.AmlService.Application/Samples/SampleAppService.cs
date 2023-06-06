@@ -15,6 +15,7 @@ using Volo.Abp.Application.Services;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EventBus.Distributed;
+using Volo.Abp.Uow;
 using Volo.Abp.Users;
 using static Tasky.Microservice.Shared.Enums.Enums;
 
@@ -25,6 +26,7 @@ namespace Tasky.AmlService.Samples;
 
 public class SampleAppService : AmlServiceAppService, ISampleAppService, ITransientDependency
 {
+    private readonly IUnitOfWorkManager _unitOfWorkManager;
 
     private readonly AmlRemittanceManager _amlRemittanceManager;
     private readonly IAmlPersonRepository _amlPersonRepository;
@@ -32,6 +34,7 @@ public class SampleAppService : AmlServiceAppService, ISampleAppService, ITransi
     private readonly IDistributedEventBus _distributedEventBus;
 
     public SampleAppService(
+        IUnitOfWorkManager unitOfWorkManager,
         AmlRemittanceManager amlRemittanceManager,
         IAmlRemittanceRepository amlRemittanceRepository,
         IDistributedEventBus distributedEventBus)
@@ -40,7 +43,7 @@ public class SampleAppService : AmlServiceAppService, ISampleAppService, ITransi
         _amlRemittanceManager = amlRemittanceManager;
         _amlRemittanceRepository = amlRemittanceRepository;
         _distributedEventBus = distributedEventBus;
-
+        _unitOfWorkManager=unitOfWorkManager;
     }
 
 
@@ -98,8 +101,11 @@ public class SampleAppService : AmlServiceAppService, ISampleAppService, ITransi
     {
         try
         {
+     
             if (id != null)
             {
+                var abpUnitOfWorkOptions = new AbpUnitOfWorkOptions { IsTransactional = true };
+                using var uow = _unitOfWorkManager.Begin(abpUnitOfWorkOptions, true);
                 var remittance = await _amlRemittanceManager.GetAsync(id);
 
                 if (remittance != null && remittance.State == Remittance_Status.Ready)
@@ -113,14 +119,18 @@ public class SampleAppService : AmlServiceAppService, ISampleAppService, ITransi
 
                     remittance.State = Remittance_Status.CheckedAML;
 
-                    await _distributedEventBus.PublishAsync<RemittanceAfterCheckedAmlEto>(eventData: new RemittanceAfterCheckedAmlEto
+                    await _distributedEventBus.PublishAsync<RemittanceAfterCheckedAmlEto>(
+                        eventData: new RemittanceAfterCheckedAmlEto
                     {
                         RemittanceId = remittance.RemittanceId,
                     });
                     await _amlRemittanceManager.UpdateAsync(remittance);
 
                 }
+                await uow.CompleteAsync();
+
             }
+
         }
 
         catch (Exception)

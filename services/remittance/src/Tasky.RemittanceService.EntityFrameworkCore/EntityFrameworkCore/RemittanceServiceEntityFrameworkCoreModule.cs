@@ -22,11 +22,17 @@ public class RemittanceServiceEntityFrameworkCoreModule : AbpModule
 
         Configure<AbpDistributedEventBusOptions>(options =>
         {
+
             options.Outboxes.Configure(config =>
             {
                 config.UseDbContext<RemittanceServiceDbContext>();
             });
+            options.Inboxes.Configure(config =>
+            {
+                config.UseDbContext<RemittanceServiceDbContext>();
+            });
         });
+
         context.Services.AddAbpDbContext<RemittanceServiceDbContext>(options =>
         {
             options.AddRepository<Remittance, EfCoreRemittanceRepository>();

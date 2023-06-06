@@ -12,6 +12,7 @@ using Volo.Abp.Domain.Repositories;
 using Volo.Abp.EventBus.Distributed;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.ObjectMapping;
+using Volo.Abp.Uow;
 using IObjectMapper = Volo.Abp.ObjectMapping.IObjectMapper;
 
 namespace Tasky.RemittanceService.AmlHandler
@@ -29,6 +30,8 @@ namespace Tasky.RemittanceService.AmlHandler
             _remittanceAppService = remittanceAppService;
         }
 
+
+        [UnitOfWork]
         public async Task HandleEventAsync(RemittanceAfterCheckedAmlEto eventData)
         {
             await _remittanceAppService.SetAmlChecked(eventData.RemittanceId);

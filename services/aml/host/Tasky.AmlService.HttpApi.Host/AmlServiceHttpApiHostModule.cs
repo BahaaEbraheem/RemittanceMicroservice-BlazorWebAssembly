@@ -37,6 +37,8 @@ using Volo.Abp.Http.Client.IdentityModel;
 using Volo.Abp.Http.Client.IdentityModel.Web;
 using Volo.Abp.Identity;
 using Volo.Abp.Http.Client.Web;
+using Volo.Abp.EventBus.Distributed;
+using Volo.Abp.EntityFrameworkCore.DistributedEvents;
 
 namespace Tasky.AmlService;
 
@@ -75,7 +77,17 @@ public class AmlServiceHttpApiHostModule : AbpModule
             options.UseSqlServer();
         });
 
-  
+        Configure<AbpDistributedEventBusOptions>(options =>
+        {
+            options.Outboxes.Configure(config =>
+            {
+                config.UseDbContext<AmlServiceDbContext>();
+            });
+            options.Inboxes.Configure(config =>
+            {
+                config.UseDbContext<AmlServiceDbContext>();
+            });
+        });
 
         if (hostingEnvironment.IsDevelopment())
         {
