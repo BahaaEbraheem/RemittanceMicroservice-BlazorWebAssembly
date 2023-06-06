@@ -163,46 +163,6 @@ namespace Tasky.RemittanceService.Migrations
                     b.ToTable("RemittanceStatus", (string)null);
                 });
 
-            modelBuilder.Entity("Volo.Abp.EntityFrameworkCore.DistributedEvents.IncomingEventRecord", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("CreationTime");
-
-                    b.Property<byte[]>("EventData")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("EventName")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("ExtraProperties")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("ExtraProperties");
-
-                    b.Property<string>("MessageId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("Processed")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ProcessedTime")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MessageId");
-
-                    b.HasIndex("Processed", "CreationTime");
-
-                    b.ToTable("AbpEventInbox", (string)null);
-                });
-
             modelBuilder.Entity("Volo.Abp.EntityFrameworkCore.DistributedEvents.OutgoingEventRecord", b =>
                 {
                     b.Property<Guid>("Id")

@@ -3,20 +3,18 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Entities.Events.Distributed;
 using static Tasky.Microservice.Shared.Enums.Enums;
 
 namespace Tasky.Microservice.Shared.Etos
 {
-    [Serializable]
-    public class RemittanceEto:EtoBase
+    public class RemittanceEto:IEntityDto<Guid>
     {
         public Guid Id { get; set; }
         public Guid RemittanceId { get; set; }
         public double Amount { get; set; }
 
         public RemittanceType Type { get; set; }
-        public string? SerialNumber { get; set; }
+        public string SerialNumber { get; set; }
 
         public Guid SenderBy { get; set; }
         public Guid? CurrencyId { get; set; }
@@ -24,13 +22,13 @@ namespace Tasky.Microservice.Shared.Etos
 
 
         [Display(Name = "First Name")]
-        public string? FirstName { get; set; }
+        public string FirstName { get; set; }
         [Display(Name = "Last Name")]
-        public string? LastName { get; set; }
+        public string LastName { get; set; }
         [Display(Name = "Father Name")]
-        public string? FatherName { get; set; }
+        public string FatherName { get; set; }
         [Display(Name = "Mother Name")]
-        public string? MotherName { get; set; }
+        public string MotherName { get; set; }
 
         public DateTime? LastModificationTime { get; set; }
 

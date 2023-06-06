@@ -28,8 +28,6 @@ using Tasky.RemittanceService.Status;
 using Tasky.CurrencyService.Currencies;
 using Tasky.CustomerService.Customers;
 using Tasky.CustomerService.Customers.Dtos;
-using Volo.Abp.Uow;
-using Microsoft.Extensions.Logging;
 //using AmlManagement.Permissions;
 
 namespace Tasky.RemittanceService.Remittances;
@@ -37,7 +35,6 @@ namespace Tasky.RemittanceService.Remittances;
 
 public class RemittanceAppService : RemittanceServiceAppService, IRemittanceAppService, ITransientDependency
 {
-    private readonly IUnitOfWorkManager _unitOfWorkManager;
     private readonly IRemittanceRepository _remittanceRepository;
     private readonly RemitanceStatusManager _remittanceStatusManager;
     private readonly IRemittanceStatusAppService _remittanceStatusAppService;
@@ -49,7 +46,6 @@ public class RemittanceAppService : RemittanceServiceAppService, IRemittanceAppS
     private readonly ICurrentUser _currentUser;
     private readonly IDistributedEventBus _distributedEventBus;
     public RemittanceAppService(
-        IUnitOfWorkManager unitOfWorkManager,
         IDistributedEventBus distributedEventBus,
         ICurrentUser currentUser,
         IPermissionChecker permissionChecker,
@@ -61,7 +57,7 @@ public class RemittanceAppService : RemittanceServiceAppService, IRemittanceAppS
         ICurrencyAppService currencyAppService,
         RemitanceStatusManager remittanceStatusManager)
     {
-        _unitOfWorkManager= unitOfWorkManager;
+
         _distributedEventBus = distributedEventBus;
         _currentUser = currentUser;
         _permissionChecker = permissionChecker;
@@ -275,11 +271,9 @@ public class RemittanceAppService : RemittanceServiceAppService, IRemittanceAppS
     {
         try
         {
-            var abpUnitOfWorkOptions = new AbpUnitOfWorkOptions { IsTransactional = true };
-            using var uow = _unitOfWorkManager.Begin(abpUnitOfWorkOptions, true);
-
             if (input != null)
             {
+
 
                 var remittanceStatus = await _remittanceStatusManager.UpdateAsync(input.Id);
                 if (remittanceStatus != null && remittanceStatus.State == Remittance_Status.Draft)
@@ -289,27 +283,27 @@ public class RemittanceAppService : RemittanceServiceAppService, IRemittanceAppS
                     remittance.LastModifierId = CurrentUser.Id;
                     remittance.LastModificationTime = DateTime.Now;
                     var createdRemittance = await _remittanceRepository.UpdateAsync(remittance);
-                    var customer = await _customerAppService.GetAsync(input.SenderBy);
-                    await _distributedEventBus.PublishAsync<RemittanceEto>(
-                       eventData: new RemittanceEto
-                       {
-                           RemittanceId = createdRemittance.Id,
-                           SerialNumber = createdRemittance.SerialNumber,
-                           Type = createdRemittance.Type,
-                           SenderBy = createdRemittance.SenderBy,
-                           Amount = createdRemittance.Amount,
-                           CurrencyId = createdRemittance.CurrencyId,
-                           State = Remittance_Status.Ready,
-
-                           FirstName = customer.FirstName,
-                           FatherName = customer.FatherName,
-                           LastName = customer.LastName,
-                           MotherName = customer.MotherName,
-                       },useOutbox:true);
                     await _remittanceStatusRepository.InsertAsync(remittanceStatus);
+                    var customer = await _customerAppService.GetAsync(input.SenderBy);
+
+                    await _distributedEventBus.PublishAsync<RemittanceEto>(
+                        eventData: new RemittanceEto
+                        {
+                            RemittanceId = createdRemittance.Id,
+                            SerialNumber = createdRemittance.SerialNumber,
+                            Type = createdRemittance.Type,
+                            SenderBy = createdRemittance.SenderBy,
+                            Amount = createdRemittance.Amount,
+                            CurrencyId = createdRemittance.CurrencyId,
+                            State = remittanceStatus.State,
+
+                            FirstName = customer.FirstName,
+                            FatherName = customer.FatherName,
+                            LastName = customer.LastName,
+                            MotherName = customer.MotherName,
+                        }, useOutbox: true);
                 }
             }
-            await uow.CompleteAsync();
         }
         catch (Exception)
         {

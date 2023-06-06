@@ -76,15 +76,15 @@ public class RemittanceServiceHttpApiHostModule : AbpModule
         {
             options.UseSqlServer();
         });
-  
+        //Configure<AbpDistributedEntityEventOptions>(options =>
+        //{
+        //    options.AutoEventSelectors.Add<Remittance>();
+        //    options.EtoMappings.Add<Remittance, RemittanceEto>();
+        //});
         Configure<AbpDistributedEventBusOptions>(options =>
         {
            
             options.Outboxes.Configure(config =>
-            {
-                config.UseDbContext<RemittanceServiceDbContext>();
-            });
-            options.Inboxes.Configure(config =>
             {
                 config.UseDbContext<RemittanceServiceDbContext>();
             });
