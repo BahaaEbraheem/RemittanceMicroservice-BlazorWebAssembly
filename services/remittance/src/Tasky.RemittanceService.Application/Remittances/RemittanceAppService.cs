@@ -28,6 +28,7 @@ using Tasky.RemittanceService.Status;
 using Tasky.CurrencyService.Currencies;
 using Tasky.CustomerService.Customers;
 using Tasky.CustomerService.Customers.Dtos;
+using Volo.Abp.Uow;
 //using AmlManagement.Permissions;
 
 namespace Tasky.RemittanceService.Remittances;
@@ -274,6 +275,8 @@ public class RemittanceAppService : RemittanceServiceAppService, IRemittanceAppS
             if (input != null)
             {
 
+                //var abpUnitOfWorkOptions = new AbpUnitOfWorkOptions { IsTransactional = true };
+                //using var uow = _unitOfWorkManager.Begin(abpUnitOfWorkOptions, true);
 
                 var remittanceStatus = await _remittanceStatusManager.UpdateAsync(input.Id);
                 if (remittanceStatus != null && remittanceStatus.State == Remittance_Status.Draft)
@@ -303,6 +306,8 @@ public class RemittanceAppService : RemittanceServiceAppService, IRemittanceAppS
                             MotherName = customer.MotherName,
                         }, useOutbox: true);
                 }
+                //await uow.CompleteAsync();
+
             }
         }
         catch (Exception)
