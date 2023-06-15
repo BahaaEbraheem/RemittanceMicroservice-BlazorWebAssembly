@@ -37,6 +37,9 @@ using Volo.Abp.Http.Client.IdentityModel;
 using Volo.Abp.Http.Client.IdentityModel.Web;
 using Volo.Abp.Identity;
 using Volo.Abp.Http.Client.Web;
+using Volo.Abp.Domain.Entities.Events.Distributed;
+using Volo.Abp.EventBus.Distributed;
+using Volo.Abp.EntityFrameworkCore.DistributedEvents;
 
 namespace Tasky.AmlService;
 
@@ -73,9 +76,20 @@ public class AmlServiceHttpApiHostModule : AbpModule
         Configure<AbpDbContextOptions>(options =>
         {
             options.UseSqlServer();
+
+        });
+        Configure<AbpDistributedEventBusOptions>(options =>
+        {
+            options.Outboxes.Configure(config =>
+            {
+                config.UseDbContext<AmlServiceDbContext>();
+            });
+            options.Inboxes.Configure(config =>
+            {
+                config.UseDbContext<AmlServiceDbContext>();
+            });
         });
 
-  
 
         if (hostingEnvironment.IsDevelopment())
         {
@@ -189,6 +203,7 @@ public class AmlServiceHttpApiHostModule : AbpModule
         app.UseAbpRequestLocalization();
         app.UseAuthorization();
         app.UseSwagger();
+        app.UseUnitOfWork();
         app.UseAbpSwaggerUI(options =>
         {
             options.SwaggerEndpoint("/swagger/v1/swagger.json", "Support APP API");

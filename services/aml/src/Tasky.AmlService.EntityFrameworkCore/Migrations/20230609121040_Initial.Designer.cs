@@ -5,16 +5,16 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Tasky.RemittanceService.EntityFrameworkCore;
+using Tasky.AmlService.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
 
 #nullable disable
 
-namespace Tasky.RemittanceService.Migrations
+namespace Tasky.AmlService.Migrations
 {
-    [DbContext(typeof(RemittanceServiceDbContext))]
-    [Migration("20230605082549_Added_Event_Outbox")]
-    partial class AddedEventOutbox
+    [DbContext(typeof(AmlServiceDbContext))]
+    [Migration("20230609121040_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,19 +27,79 @@ namespace Tasky.RemittanceService.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Tasky.RemittanceService.Remittances.Remittance", b =>
+            modelBuilder.Entity("Tasky.AmlService.Aml_Person.AmlPerson", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<string>("FatherName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MotherName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AmlPersons", (string)null);
+                });
+
+            modelBuilder.Entity("Tasky.AmlService.Aml_Remittance.AmlRemittance", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("Amount")
                         .HasColumnType("float");
-
-                    b.Property<Guid?>("ApprovedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ApprovedDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -70,6 +130,14 @@ namespace Tasky.RemittanceService.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties");
 
+                    b.Property<string>("FatherName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
@@ -84,41 +152,36 @@ namespace Tasky.RemittanceService.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("LastModifierId");
 
-                    b.Property<Guid?>("ReceiverBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ReceiverFullName")
+                    b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("ReleasedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("MotherName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("ReleasedDate")
-                        .HasColumnType("datetime2");
+                    b.Property<Guid>("RemittanceId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("SenderBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("SerialNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("TotalAmount")
-                        .HasColumnType("float");
+                    b.Property<int>("State")
+                        .HasColumnType("int");
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SerialNumber")
-                        .IsUnique();
-
-                    b.ToTable("Remittances", (string)null);
+                    b.ToTable("AmlRemittances", (string)null);
                 });
 
-            modelBuilder.Entity("Tasky.RemittanceService.Status.RemittanceStatus", b =>
+            modelBuilder.Entity("Volo.Abp.EntityFrameworkCore.DistributedEvents.IncomingEventRecord", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
@@ -127,43 +190,28 @@ namespace Tasky.RemittanceService.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("CreationTime");
 
-                    b.Property<Guid?>("CreatorId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("CreatorId");
+                    b.Property<byte[]>("EventData")
+                        .HasColumnType("varbinary(max)");
 
-                    b.Property<Guid?>("DeleterId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("DeleterId");
+                    b.Property<string>("EventName")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("DeletionTime");
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
 
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false)
-                        .HasColumnName("IsDeleted");
+                    b.Property<string>("MessageId")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("LastModificationTime");
+                    b.Property<bool>("Processed")
+                        .HasColumnType("bit");
 
-                    b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("LastModifierId");
-
-                    b.Property<Guid>("RemittanceId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("State")
-                        .HasColumnType("int");
+                    b.Property<DateTime?>("ProcessedTime")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RemittanceId");
-
-                    b.ToTable("RemittanceStatus", (string)null);
+                    b.ToTable("IncomingEvents");
                 });
 
             modelBuilder.Entity("Volo.Abp.EntityFrameworkCore.DistributedEvents.OutgoingEventRecord", b =>
@@ -193,20 +241,6 @@ namespace Tasky.RemittanceService.Migrations
                     b.HasIndex("CreationTime");
 
                     b.ToTable("AbpEventOutbox", (string)null);
-                });
-
-            modelBuilder.Entity("Tasky.RemittanceService.Status.RemittanceStatus", b =>
-                {
-                    b.HasOne("Tasky.RemittanceService.Remittances.Remittance", null)
-                        .WithMany("Status")
-                        .HasForeignKey("RemittanceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Tasky.RemittanceService.Remittances.Remittance", b =>
-                {
-                    b.Navigation("Status");
                 });
 #pragma warning restore 612, 618
         }

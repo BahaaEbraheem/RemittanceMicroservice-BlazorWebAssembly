@@ -1,4 +1,4 @@
-﻿﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +37,7 @@ namespace Tasky.RemittanceService.Remittances;
 public class RemittanceAppService : RemittanceServiceAppService, IRemittanceAppService, ITransientDependency
 {
     private readonly IRemittanceRepository _remittanceRepository;
+    private readonly UnitOfWorkManager _unitOfWorkManager;
     private readonly RemitanceStatusManager _remittanceStatusManager;
     private readonly IRemittanceStatusAppService _remittanceStatusAppService;
     private readonly RemittanceManager _remittanceManager;
@@ -47,6 +48,7 @@ public class RemittanceAppService : RemittanceServiceAppService, IRemittanceAppS
     private readonly ICurrentUser _currentUser;
     private readonly IDistributedEventBus _distributedEventBus;
     public RemittanceAppService(
+        UnitOfWorkManager unitOfWorkManager,
         IDistributedEventBus distributedEventBus,
         ICurrentUser currentUser,
         IPermissionChecker permissionChecker,
@@ -58,7 +60,7 @@ public class RemittanceAppService : RemittanceServiceAppService, IRemittanceAppS
         ICurrencyAppService currencyAppService,
         RemitanceStatusManager remittanceStatusManager)
     {
-
+        _unitOfWorkManager = unitOfWorkManager;
         _distributedEventBus = distributedEventBus;
         _currentUser = currentUser;
         _permissionChecker = permissionChecker;
@@ -270,45 +272,51 @@ public class RemittanceAppService : RemittanceServiceAppService, IRemittanceAppS
 
     public async Task SetReady(RemittanceDto input)
     {
+
         try
         {
+            //var abpUnitOfWorkOptions = new AbpUnitOfWorkOptions { IsTransactional = true };
+            //using var uow = _unitOfWorkManager.Begin(abpUnitOfWorkOptions, true);
+
             if (input != null)
             {
-
-                //var abpUnitOfWorkOptions = new AbpUnitOfWorkOptions { IsTransactional = true };
-                //using var uow = _unitOfWorkManager.Begin(abpUnitOfWorkOptions, true);
-
-                var remittanceStatus = await _remittanceStatusManager.UpdateAsync(input.Id);
-                if (remittanceStatus != null && remittanceStatus.State == Remittance_Status.Draft)
+                using (var uow = UnitOfWorkManager.Begin(requiresNew: true, isTransactional: false))
                 {
-                    var remittance = await _remittanceRepository.GetAsync(input.Id);
-                    remittanceStatus.State = Remittance_Status.Ready;
-                    remittance.LastModifierId = CurrentUser.Id;
-                    remittance.LastModificationTime = DateTime.Now;
-                    var createdRemittance = await _remittanceRepository.UpdateAsync(remittance);
-                    await _remittanceStatusRepository.InsertAsync(remittanceStatus);
-                    var customer = await _customerAppService.GetAsync(input.SenderBy);
 
-                    await _distributedEventBus.PublishAsync<RemittanceEto>(
-                        eventData: new RemittanceEto
-                        {
-                            RemittanceId = createdRemittance.Id,
-                            SerialNumber = createdRemittance.SerialNumber,
-                            Type = createdRemittance.Type,
-                            SenderBy = createdRemittance.SenderBy,
-                            Amount = createdRemittance.Amount,
-                            CurrencyId = createdRemittance.CurrencyId,
-                            State = remittanceStatus.State,
+                    var remittanceStatus = await _remittanceStatusManager.UpdateAsync(input.Id);
+                    if (remittanceStatus != null && remittanceStatus.State == Remittance_Status.Draft)
+                    {
+                        var remittance = await _remittanceRepository.GetAsync(input.Id);
+                        remittanceStatus.State = Remittance_Status.Ready;
+                        remittance.LastModifierId = CurrentUser.Id;
+                        remittance.LastModificationTime = DateTime.Now;
+                        var createdRemittance = await _remittanceRepository.UpdateAsync(remittance);
+                        var customer = await _customerAppService.GetAsync(input.SenderBy);
+                        await _remittanceStatusRepository.InsertAsync(remittanceStatus);
 
-                            FirstName = customer.FirstName,
-                            FatherName = customer.FatherName,
-                            LastName = customer.LastName,
-                            MotherName = customer.MotherName,
-                        }, useOutbox: true);
+
+                        await _distributedEventBus.PublishAsync<RemittanceEto>(
+                       eventData: new RemittanceEto
+                       {
+                           RemittanceId = createdRemittance.Id,
+                           SerialNumber = createdRemittance.SerialNumber,
+                           Type = createdRemittance.Type,
+                           SenderBy = createdRemittance.SenderBy,
+                           Amount = createdRemittance.Amount,
+                           CurrencyId = createdRemittance.CurrencyId,
+                           State = remittanceStatus.State,
+
+                           FirstName = customer.FirstName,
+                           FatherName = customer.FatherName,
+                           LastName = customer.LastName,
+                           MotherName = customer.MotherName,
+                       });
+                    }
+
+                    await uow.CompleteAsync();
                 }
-                //await uow.CompleteAsync();
-
             }
+
         }
         catch (Exception)
         {
@@ -412,10 +420,10 @@ public class RemittanceAppService : RemittanceServiceAppService, IRemittanceAppS
 
     public async Task<ListResultDto<CurrencyLookupDto>> GetCurrencyLookupAsync()
     {
-        var currencies =await _currencyAppService.GetAllAsync();
+        var currencies = await _currencyAppService.GetAllAsync();
 
         return new ListResultDto<CurrencyLookupDto>(
-            ObjectMapper.Map<List<CurrencyDto>, List<CurrencyLookupDto>>( currencies)
+            ObjectMapper.Map<List<CurrencyDto>, List<CurrencyLookupDto>>(currencies)
         );
     }
 
@@ -536,7 +544,7 @@ public class RemittanceAppService : RemittanceServiceAppService, IRemittanceAppS
         //Get the IQueryable<remittance> from the repository
         var remittancequeryable = _remittanceRepository.GetQueryableAsync().Result
             .WhereIf(!input.ReceiverFullName.IsNullOrWhiteSpace(), x => x.ReceiverFullName.Contains(input.ReceiverFullName))
-            .WhereIf(!input.Amount.Equals(0), x => x.Amount.ToString().Contains( input.Amount.ToString()))
+            .WhereIf(!input.Amount.Equals(0), x => x.Amount.ToString().Contains(input.Amount.ToString()))
             .WhereIf(!input.TotalAmount.Equals(0), x => x.TotalAmount.ToString().Contains(input.TotalAmount.ToString()))
             .WhereIf(!input.SerialNumber.IsNullOrWhiteSpace(), x => x.SerialNumber.Contains(input.SerialNumber))
 

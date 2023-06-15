@@ -15,6 +15,7 @@ using Volo.Abp.Application.Services;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EventBus.Distributed;
+using Volo.Abp.Uow;
 using Volo.Abp.Users;
 using static Tasky.Microservice.Shared.Enums.Enums;
 
@@ -25,6 +26,7 @@ namespace Tasky.AmlService.Samples;
 
 public class SampleAppService : AmlServiceAppService, ISampleAppService, ITransientDependency
 {
+    private readonly UnitOfWorkManager _unitOfWorkManager;
 
     private readonly AmlRemittanceManager _amlRemittanceManager;
     private readonly IAmlPersonRepository _amlPersonRepository;
@@ -32,6 +34,7 @@ public class SampleAppService : AmlServiceAppService, ISampleAppService, ITransi
     private readonly IDistributedEventBus _distributedEventBus;
 
     public SampleAppService(
+        UnitOfWorkManager unitOfWorkManager,
         AmlRemittanceManager amlRemittanceManager,
         IAmlRemittanceRepository amlRemittanceRepository,
         IDistributedEventBus distributedEventBus)
@@ -40,7 +43,7 @@ public class SampleAppService : AmlServiceAppService, ISampleAppService, ITransi
         _amlRemittanceManager = amlRemittanceManager;
         _amlRemittanceRepository = amlRemittanceRepository;
         _distributedEventBus = distributedEventBus;
-
+        _unitOfWorkManager=unitOfWorkManager;
     }
 
 
@@ -112,13 +115,19 @@ public class SampleAppService : AmlServiceAppService, ISampleAppService, ITransi
                     }
 
                     remittance.State = Remittance_Status.CheckedAML;
+                    using (var uow = UnitOfWorkManager.Begin(requiresNew: true, isTransactional: false))
+                    {
 
-                    await _distributedEventBus.PublishAsync<RemittanceAfterCheckedAmlEto>(eventData: new RemittanceAfterCheckedAmlEto
+                        await _distributedEventBus.PublishAsync<RemittanceAfterCheckedAmlEto>(eventData: new RemittanceAfterCheckedAmlEto
                     {
                         RemittanceId = remittance.RemittanceId,
                     });
-                    await _amlRemittanceManager.UpdateAsync(remittance);
-
+                
+                        await _amlRemittanceManager.UpdateAsync(remittance);
+                 
+                        
+                        await uow.CompleteAsync();
+                    }
                 }
             }
         }

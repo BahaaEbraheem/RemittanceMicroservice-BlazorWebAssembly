@@ -22,7 +22,9 @@ namespace Tasky.Hosting.Shared;
     typeof(AbpSwashbuckleModule),
     typeof(AbpEventBusRabbitMqModule),
     typeof(AbpEntityFrameworkCoreModule),
-    typeof(AbpEntityFrameworkCoreSqlServerModule)
+    typeof(AbpEntityFrameworkCoreSqlServerModule),
+    typeof(AbpEventBusRabbitMqModule)
+
 )]
 public class TaskyHostingModule : AbpModule
 {

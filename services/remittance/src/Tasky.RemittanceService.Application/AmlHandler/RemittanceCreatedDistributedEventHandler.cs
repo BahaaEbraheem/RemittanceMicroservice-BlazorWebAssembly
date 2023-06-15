@@ -29,7 +29,7 @@ namespace Tasky.RemittanceService.AmlHandler
             _remittanceAppService = remittanceAppService;
         }
 
-        public async Task HandleEventAsync(RemittanceAfterCheckedAmlEto eventData)
+        public virtual async Task HandleEventAsync(RemittanceAfterCheckedAmlEto eventData)
         {
             await _remittanceAppService.SetAmlChecked(eventData.RemittanceId);
 

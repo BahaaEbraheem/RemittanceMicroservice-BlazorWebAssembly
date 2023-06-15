@@ -19,10 +19,25 @@ public class RemittanceServiceEntityFrameworkCoreModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
-
         Configure<AbpDistributedEventBusOptions>(options =>
         {
+            options.Outboxes.Configure("Default", config =>
+            {
+                config.UseDbContext<RemittanceServiceDbContext>();
+                config.IsSendingEnabled = true;
+                config.ImplementationType=config.ImplementationType;
+                config.Selector=config.Selector;
+            });
+          
+        });
+        Configure<AbpDistributedEventBusOptions>(options =>
+        {
+          
             options.Outboxes.Configure(config =>
+            {
+                config.UseDbContext<RemittanceServiceDbContext>();
+            });
+            options.Inboxes.Configure(config =>
             {
                 config.UseDbContext<RemittanceServiceDbContext>();
             });

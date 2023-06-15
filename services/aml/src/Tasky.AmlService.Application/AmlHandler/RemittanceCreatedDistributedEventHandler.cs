@@ -13,6 +13,7 @@ using Volo.Abp.Domain.Repositories;
 using Volo.Abp.EventBus.Distributed;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.ObjectMapping;
+using Volo.Abp.Uow;
 using IObjectMapper = Volo.Abp.ObjectMapping.IObjectMapper;
 
 namespace Tasky.AmlService.AmlHandler
@@ -33,7 +34,8 @@ namespace Tasky.AmlService.AmlHandler
             _amlRemittanceManager = amlRemittanceManager;
         }
 
-        public async Task HandleEventAsync(RemittanceEto eventData)
+        //[UnitOfWork]
+        public virtual async Task HandleEventAsync(RemittanceEto eventData)
         {
 
             await _amlRemittanceManager.CreateAsync(_ObjectMapper.Map<RemittanceEto, AmlRemittance>(eventData));

@@ -8,7 +8,7 @@ using Volo.Abp.EntityFrameworkCore.DistributedEvents;
 namespace Tasky.RemittanceService.EntityFrameworkCore;
 
 [ConnectionStringName(RemittanceServiceDbProperties.ConnectionStringName)]
-public class RemittanceServiceDbContext : AbpDbContext<RemittanceServiceDbContext>, IRemittanceServiceDbContext, IHasEventOutbox
+public class RemittanceServiceDbContext : AbpDbContext<RemittanceServiceDbContext>, IRemittanceServiceDbContext, IHasEventOutbox, IHasEventInbox
 {
     /* Add DbSet for each Aggregate Root here. Example:
      * public DbSet<Question> Questions { get; set; }
@@ -16,6 +16,7 @@ public class RemittanceServiceDbContext : AbpDbContext<RemittanceServiceDbContex
     public DbSet<Remittance> Remittances { get; set; }
     public DbSet<RemittanceStatus> RemittanceStatus { get; set; }
     public DbSet<OutgoingEventRecord> OutgoingEvents { get; set ; }
+    public DbSet<IncomingEventRecord> IncomingEvents { get; set ; }
 
     public RemittanceServiceDbContext(DbContextOptions<RemittanceServiceDbContext> options)
         : base(options)
@@ -29,5 +30,6 @@ public class RemittanceServiceDbContext : AbpDbContext<RemittanceServiceDbContex
 
         builder.ConfigureRemittanceService();
         builder.ConfigureEventOutbox();
+        builder.ConfigureEventInbox();
     }
 }

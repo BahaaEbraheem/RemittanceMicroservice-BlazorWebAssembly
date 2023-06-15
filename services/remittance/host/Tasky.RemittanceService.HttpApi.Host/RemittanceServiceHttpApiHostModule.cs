@@ -76,11 +76,7 @@ public class RemittanceServiceHttpApiHostModule : AbpModule
         {
             options.UseSqlServer();
         });
-        //Configure<AbpDistributedEntityEventOptions>(options =>
-        //{
-        //    options.AutoEventSelectors.Add<Remittance>();
-        //    options.EtoMappings.Add<Remittance, RemittanceEto>();
-        //});
+
         Configure<AbpDistributedEventBusOptions>(options =>
         {
            
@@ -88,8 +84,11 @@ public class RemittanceServiceHttpApiHostModule : AbpModule
             {
                 config.UseDbContext<RemittanceServiceDbContext>();
             });
+            options.Inboxes.Configure(config =>
+            {
+                config.UseDbContext<RemittanceServiceDbContext>();
+            });
         });
-
 
         if (hostingEnvironment.IsDevelopment())
         {
@@ -203,6 +202,7 @@ public class RemittanceServiceHttpApiHostModule : AbpModule
         app.UseAbpRequestLocalization();
         app.UseAuthorization();
         app.UseSwagger();
+        app.UseUnitOfWork();
         app.UseAbpSwaggerUI(options =>
         {
             options.SwaggerEndpoint("/swagger/v1/swagger.json", "Support APP API");
