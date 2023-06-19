@@ -37,12 +37,16 @@ using Tasky.CurrencyService;
 using Tasky.CurrencyService.Currencies;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Data;
+using Volo.Abp.Http.Client;
+using Polly;
+using Volo.Abp.EventBus.RabbitMq;
+using System.Net.Http;
 
 namespace Tasky.CurrencyService;
 
 [DependsOn(
-typeof(CurrencyServiceApplicationModule),
-typeof(CurrencyServiceEntityFrameworkCoreModule),
+    typeof(CurrencyServiceApplicationModule),
+    typeof(CurrencyServiceEntityFrameworkCoreModule),
     typeof(CurrencyServiceHttpApiModule),
     typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
     typeof(AbpAutofacModule),
@@ -53,10 +57,39 @@ typeof(CurrencyServiceEntityFrameworkCoreModule),
     typeof(AbpSettingManagementEntityFrameworkCoreModule),
     typeof(AbpTenantManagementEntityFrameworkCoreModule),
     typeof(AbpAspNetCoreSerilogModule),
-    typeof(AbpSwashbuckleModule)
+    typeof(AbpSwashbuckleModule),
+    typeof(AbpEventBusRabbitMqModule)
+
     )]
 public class CurrencyServiceHttpApiHostModule : AbpModule
 {
+    public override void PreConfigureServices(ServiceConfigurationContext context)
+    {
+        PreConfigure<AbpHttpClientBuilderOptions>(options =>
+        {
+            options.ProxyClientBuildActions.Add((remoteServiceName, clientBuilder) =>
+            {
+                clientBuilder.AddTransientHttpErrorPolicy(policyBuilder =>
+                    policyBuilder.WaitAndRetryAsync(
+                        3,
+                        i => TimeSpan.FromSeconds(Math.Pow(2, i))
+                    )
+
+                );
+                clientBuilder.AddTransientHttpErrorPolicy(policyBuilder =>
+                    policyBuilder.CircuitBreakerAsync(
+                     handledEventsAllowedBeforeBreaking: 2,
+                     durationOfBreak: TimeSpan.FromSeconds(10), (exception, duration) =>
+                     {
+                         Console.WriteLine("Circuit breaker tripped");
+                     },
+                     () => Console.WriteLine("Circuit breaker reset")));
+ 
+            });
+
+        });
+    }
+
 
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
@@ -87,7 +120,7 @@ public class CurrencyServiceHttpApiHostModule : AbpModule
             },
             options =>
             {
-                options.SwaggerDoc("v1", new OpenApiInfo {Title = "CurrencyService API", Version = "v1"});
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "CurrencyService API", Version = "v1" });
                 options.DocInclusionPredicate((docName, description) => true);
                 options.CustomSchemaIds(type => type.FullName);
             });
@@ -176,9 +209,9 @@ public class CurrencyServiceHttpApiHostModule : AbpModule
         app.UseRouting();
         app.UseCors();
         app.UseAuthentication();
-       
-            app.UseMultiTenancy();
-        
+
+        app.UseMultiTenancy();
+
         app.UseAbpRequestLocalization();
         app.UseAuthorization();
         app.UseSwagger();
